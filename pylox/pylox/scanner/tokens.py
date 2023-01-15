@@ -6,10 +6,10 @@ from ..prelude import *
 class Token:
 	token_type: 'TokenType'
 	lexeme: str
+	line: int
 
 	# Python representation of lox types
-	literal_val: Any
-	line: int
+	literal_val: Any = None
 
 class TokenType(Enum):
 
