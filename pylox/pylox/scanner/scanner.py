@@ -38,10 +38,6 @@ class Scanner:
 		if self.position < len(self.source):
 			return self.source[self.position]
 	
-	def peek(self) -> str:
-		rv = self.peek_opt()
-		assert rv != None, "Cannot peak"
-		return rv
 
 	def take(self, count: int = 1) -> str:
 		rv = self.source[self.position:self.position+count]
@@ -69,13 +65,13 @@ class Scanner:
 	
 	def consume_digits(self) -> str:
 		rv = ""
-		while self.peek().isnumeric():
+		while (a:=self.peek_opt()) != None and a.isnumeric():
 			rv += self.take()
 		return rv
 
 	def consume_string(self) -> str:
 		rv = self.take() # First "
-		while (a:=self.peek()) != None and a != '"' :
+		while (a:=self.peek_opt()) != None and a != '"' :
 			if a == "\n":
 				self.line += 1
 			rv += self.take()
@@ -101,7 +97,7 @@ class Scanner:
 		line_no = self.line
 
 		# Single character
-		if self.peek() in one_char_map:
+		if self.peek_opt() in one_char_map:
 			char = self.take()
 			return Token(
 				one_char_map[char],
@@ -109,7 +105,7 @@ class Scanner:
 				line_no
 			)
 
-		match self.peek():
+		match self.peek_opt():
 			# Either one or two characters (peek next)
 			case '!':
 				if self.peek_next() == '=':
@@ -153,9 +149,9 @@ class Scanner:
 				else:
 					return Token(TokenType.SLASH, self.take(1), line_no)
 				
-			case _ as char if char.isnumeric():
+			case _ as char if char != None and char.isnumeric():
 				rv = self.consume_digits()
-				if self.peek() == "." and (n:=self.peek_next()) != None and n.isnumeric():
+				if self.peek_opt() == "." and (n:=self.peek_next()) != None and n.isnumeric():
 					rv += self.take()
 					rv += self.consume_digits()
 				return Token(TokenType.NUMBER, rv, line_no, eval(rv))
@@ -164,7 +160,7 @@ class Scanner:
 				rv = self.consume_string()
 				return Token(TokenType.STRING, rv, line_no, rv[1:-1])
 
-			case _ as char if char.isalpha() or  char == "_":
+			case _ as char if char != None and (char.isalpha() or  char == "_"):
 				lexeme = self.take()
 				while (a:=self.peek_opt()) != None and (a.isalnum() or a == "_"):
 					char = self.take()
