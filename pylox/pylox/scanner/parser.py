@@ -13,12 +13,28 @@ class Parser:
 	current: int = 0
 
 	def expression(self) -> BaseExpr:
-		return self.equality()
+		return self.assignment()
+
+	def assignment(self) -> BaseExpr:
+		if self.match(TokenType.IDENTIFIER) and self.match_next(TokenType.EQUAL):
+			id_token = self.take()
+			self.take()
+			es = self.assignment()
+			return Assignment(id_token, es)
+		else:
+			return self.equality()
 	
+	def match_next(self, *args: TokenType):
+		return (a:=self.peek_next_opt()) != None and a.token_type in args
+
 	def peek_opt(self):
 		assert self.current < len(self.tokens)
 		if self.current < len(self.tokens):
 			return self.tokens[self.current]
+		return None
+	def peek_next_opt(self):
+		if self.current < len(self.tokens) -1:
+			return self.tokens[self.current+1]
 		return None
 	def peek(self):
 		assert self.current < len(self.tokens)
@@ -42,7 +58,6 @@ class Parser:
 		statements: List[Statement] = []
 		try:
 			while (tok:=self.peek_opt()) and tok.token_type != TokenType.EOF:
-				# print(self.peek_opt())
 				statements.append(self.declaration())
 			return statements
 		except ParseError:
@@ -64,7 +79,7 @@ class Parser:
 	def var_statement(self):
 		self.consume(TokenType.VAR, "Interpreter bug!")
 		identifier = self.consume(TokenType.IDENTIFIER, "Expected identifier in var block")
-		identifier = self.take()
+		# identifier = self.take()
 		if self.peek().token_type == TokenType.EQUAL:
 			self.take()
 			rv = Var(self.expression(), identifier)
@@ -83,7 +98,7 @@ class Parser:
 
 	def expression_statement(self):
 		rv = Expression(self.expression())
-		self.consume(TokenType.SEMICOLON, "Expected ; after print statement")
+		self.consume(TokenType.SEMICOLON, "Expected ; after Expression")
 		return rv
 	
 	def error(self, token: Token, msg: str):

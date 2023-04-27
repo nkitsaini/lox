@@ -54,6 +54,15 @@ class Variable(BaseExpr):
 	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_variable(self)
 
+@final
+@dataclass
+class Assignment(BaseExpr):
+	name: Token
+	expr: BaseExpr
+
+	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_assignment(self)
+
 
 class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -74,6 +83,10 @@ class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_variable(self, expr: 'Variable') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_assignment(self, expr: 'Assignment') -> _VisitorReturn:
 		raise NotImplementedError()
 
 	def visit_any(self, expr: BaseExpr) -> _VisitorReturn:

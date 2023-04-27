@@ -1,3 +1,5 @@
+from typing import Any
+from pylox.scanner.lexer import Assignment
 from .lexer import *
 from .tokens import TokenType
 from .. import lox
@@ -123,9 +125,18 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		# Think if redeclaration should be allowed
 		# if expr.name.lexeme in self.globals:
 		# 	raise LoxRuntimeError(expr.name, "Variable redclaration")
+		print(self.globals)
 		self.globals[expr.name.lexeme] = _UN_INITIALIZED
 		if expr.expression is not None:
 			self.globals[expr.name.lexeme] = expr.expression.run_against(self)
+	
+		print(self.globals)
+	def visit_assignment(self, expr: Assignment) -> Any:
+		name = expr.name.lexeme
+		if name not in self.globals:
+			raise LoxRuntimeError(expr.name, "Assignment to undefined variable: " + name)
+		
+		self.globals[name] = expr.expr.run_against(self)
 
 	def visit_variable(self, expr: Variable) -> Any:
 		if expr.name.lexeme not in self.globals:

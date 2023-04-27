@@ -8,6 +8,7 @@ def main():
 		"Literal": "value Any",
 		"Unary": "operator Token, right BaseExpr",
 		"Variable": "name Token",
+		"Assignment": "name Token, expr BaseExpr ",
 	}
 
 	statements = {

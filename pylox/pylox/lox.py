@@ -21,5 +21,10 @@ def runtime_error(error: 'LoxRuntimeError'):
 	print(colorama.Fore.RED + "[RUNTIME ERROR] " + colorama.Fore.RESET + f"{colorama.Fore.GREEN}Line {error.token.line+1} |{colorama.Fore.RESET} {error.args[0]}")
 
 def errorToken(token: 'Token', msg: str):
-	error(token.line, msg)
+	global had_error
+	had_error = True
+	
+	line = token.line
+	lexem = token.lexeme
+	print(colorama.Fore.RED + "[ERROR] " + colorama.Fore.RESET + f"{colorama.Fore.GREEN}Token: {lexem} | Line {line+1} |{colorama.Fore.RESET} {msg}")
 	
