@@ -1,5 +1,7 @@
 import textwrap
 
+import argparse
+from pathlib import Path
 def main():
 	TAB = "\t"
 	expressions = {
@@ -15,6 +17,7 @@ def main():
 		"Expression": "expression BaseExpr",
 		"Print": "expression BaseExpr",
 		"Var": "expression Optional[BaseExpr], name Token",
+		"Block": "statements List[Statement]",
 	}
 
 	header = textwrap.dedent("""\
@@ -125,7 +128,18 @@ def main():
 
 
 
-	print(out)
+	return out
+
+def write_lexer():
+	target_path = Path(__file__).parent.parent/"pylox/scanner/lexer.py"
+	target_path.write_text(main())
 
 if __name__ == "__main__":
-	main()
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--write', action=argparse.BooleanOptionalAction, default=False)
+	args = parser.parse_args()
+	if args.write:
+		write_lexer()
+		print("Done!")
+	else:
+		print(main())

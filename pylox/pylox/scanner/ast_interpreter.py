@@ -1,5 +1,5 @@
 from typing import Any
-from pylox.scanner.lexer import Assignment
+from pylox.scanner.lexer import Assignment, Block
 from .lexer import *
 from .tokens import TokenType
 from .. import lox
@@ -14,11 +14,47 @@ class LoxRuntimeError(Exception):
 class _UninitializedVar:
 	pass
 _UN_INITIALIZED = _UninitializedVar()
+
+@dataclass
+class Environment:
+	parent: 'Environment | None' = None
+	envs: Dict[str, Any] = field(default_factory=dict)
+
+	def define(self, variable: str):
+		self.envs[variable] = _UN_INITIALIZED
+
+	def set(self, variable: Token, value: Any) -> Any:
+		name = variable.lexeme
+		if name in self.envs:
+			self.envs[name] = value
+			return value
+		elif self.parent:
+			return self.parent.set(variable, value)
+		raise LoxRuntimeError(variable, f"Undefined variable: {name}")
+	
+	# def is_defined(self, variable: str) -> bool:
+	# 	return variable in self.envs
+
+	# def is_initialized(self, variable: str):
+	# 	return self.is_defined(variable) and self.envs[variable] is not _UN_INITIALIZED
+
+	def get(self, variable: Token) -> Any:
+		name = variable.lexeme
+		if name in self.envs:
+			if self.envs[name] is _UN_INITIALIZED:
+				raise LoxRuntimeError(variable, f"Uninitialized variable: {name}.")
+			return self.envs[name]
+		elif self.parent:
+			return self.parent.get(variable)
+		raise LoxRuntimeError(variable, f"Undefined variable: {name}")
+
+
+
 @final
 class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	def __init__(self) -> None:
 		super().__init__()
-		self.globals: Dict[str, Any] = {}
+		self.env = Environment()
 	
 	def visit_binary(self, expr: Binary):
 		l = self.visit_any(expr.left)
@@ -95,9 +131,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 				if isinstance(e, (int, float)):
 					return e * -1
 				else:
-					print("Runtime Error: Can't use - operator on non-numeric objects. Used on: ", e)
-					exit(1)
-				
+					raise LoxRuntimeError(expr.operator, "Can't use - operator on non-numeric objects.")
 			case TokenType.BANG:
 				e = self.visit_any(expr.right)
 				return not self.is_truthy(e)
@@ -107,7 +141,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	def interpret(self, statements: List[Statement]):
 		try:
 			for stmt in statements:
-				return self.visit_any(stmt)
+				self.visit_any(stmt)
 			# cc
 			# print(value)
 		except LoxRuntimeError as e:
@@ -125,38 +159,36 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		# Think if redeclaration should be allowed
 		# if expr.name.lexeme in self.globals:
 		# 	raise LoxRuntimeError(expr.name, "Variable redclaration")
-		print(self.globals)
-		self.globals[expr.name.lexeme] = _UN_INITIALIZED
-		if expr.expression is not None:
-			self.globals[expr.name.lexeme] = expr.expression.run_against(self)
-	
-		print(self.globals)
-	def visit_assignment(self, expr: Assignment) -> Any:
 		name = expr.name.lexeme
-		if name not in self.globals:
-			raise LoxRuntimeError(expr.name, "Assignment to undefined variable: " + name)
-		
-		self.globals[name] = expr.expr.run_against(self)
-		return self.globals[name]
+		self.env.define(name)
+		if expr.expression is not None:
+			self.env.set(expr.name, expr.expression.run_against(self))
+	
+	def visit_assignment(self, expr: Assignment) -> Any:
+		return self.env.set(expr.name, expr.expr.run_against(self))
 
 	def visit_variable(self, expr: Variable) -> Any:
-		if expr.name.lexeme not in self.globals:
-			raise LoxRuntimeError(expr.name, "Undefined variable")
-		if self.globals[expr.name.lexeme] is _UN_INITIALIZED:
-			raise LoxRuntimeError(expr.name, "Uninitialized variable")
-		return self.globals[expr.name.lexeme]
+		return self.env.get(expr.name)
 	
 	def printer(self, val: Any):
 		# In lox the true and false are lowercase
 		if val == True:
-			print('true')
+			lox.lox_print('true')
 		elif val == False:
-			print('false')
+			lox.lox_print('false')
 		else:
-			print(val)
+			lox.lox_print(val)
 	
 	def visit_print(self, expr: Print) -> None:
 		self.printer(expr.expression.run_against(self))
+	
+	def visit_block(self, expr: Block) -> None:
+		self.env = Environment(self.env)
+		try:
+			for statement in expr.statements:
+				self.visit_any(statement)
+		finally:
+			self.env = self.env.parent
 		
 
 if __name__ == "__main__":

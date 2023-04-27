@@ -1,4 +1,10 @@
 [tool.pdm]
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest-mock>=3.10.0",
+    "pytest>=7.3.1",
+    "syrupy>=4.0.2",
+]
 
 [project]
 name = "pylox"
@@ -16,6 +22,8 @@ license = {text = "MIT"}
 
 [tool.pdm.scripts]
 start = "python3 -m pylox"
+generate_lex = "python3 scripts/expression_generator.py --write"
+test = "pytest"
 
 [project.scripts]
 pylox = "pylox.__main__:main"

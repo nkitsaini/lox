@@ -70,8 +70,10 @@ class Parser:
 			return None
 	
 	def statement(self) -> Statement:
-		if (token:=self.peek_opt()) != None and token.token_type == TokenType.PRINT:
+		if self.match(TokenType.PRINT):
 			return self.print_statement()
+		if self.match(TokenType.LEFT_BRACE):
+			return self.block_statement()
 		else:
 			return self.expression_statement()
 	
@@ -101,6 +103,17 @@ class Parser:
 		rv = Print(self.expression())
 		self.consume(TokenType.SEMICOLON, "Expected ; after print statement")
 		return rv
+
+	def block_statement(self):
+		statements: List[Statement] = []
+
+		# TODO: how will nested work?
+		# I guess it'll work out-of-the-box due to delcaration call
+		while not self.match(TokenType.RIGHT_BRACE) and self.peek_opt() is not None:
+			statements.append(self.declaration())
+		
+		self.consume(TokenType.RIGHT_BRACE, "Expected closing brace for block statement")
+		return Block(statements)
 
 	def expression_statement(self):
 		rv = Expression(self.expression())

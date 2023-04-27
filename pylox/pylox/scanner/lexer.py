@@ -122,6 +122,14 @@ class Var(Statement):
 	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_var(self)
 
+@final
+@dataclass
+class Block(Statement):
+	statements: List[Statement]
+
+	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_block(self)
+
 
 class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -136,6 +144,9 @@ class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 	def visit_var(self, expr: 'Var') -> _VisitorReturn:
 		raise NotImplementedError()
 
+	@abc.abstractmethod
+	def visit_block(self, expr: 'Block') -> _VisitorReturn:
+		raise NotImplementedError()
 
 
 

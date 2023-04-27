@@ -1,0 +1,1259 @@
+# serializer version: 1
+# name: test_variable_assignments
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.1
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.10
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.11
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.12
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.13
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.14
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.15
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.16
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.17
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.18
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.19
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.2
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.20
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.21
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.22
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.23
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.24
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.25
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.26
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.27
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.28
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.29
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.3
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.30
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.31
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.32
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.33
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.34
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.35
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.36
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.37
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.38
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.39
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.4
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.40
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.41
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.42
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.43
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.44
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.45
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.46
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.47
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.48
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.49
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.5
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.50
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.51
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.52
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.53
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.54
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.55
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.56
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.57
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.58
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.59
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.6
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.60
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.61
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.62
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.63
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.64
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.65
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.66
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.67
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.68
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.69
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.7
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.70
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.71
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.72
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.73
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.74
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        'Expected ; after print statement',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.75
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.76
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.77
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.78
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        'Expected ; after print statement',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.79
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.8
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.80
+  _CallList([
+  ])
+# ---
+# name: test_variable_assignments.81
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.82
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        'Expected ; after print statement',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.83
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_variable_assignments.9
+  _CallList([
+  ])
+# ---
