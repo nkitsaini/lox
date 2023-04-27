@@ -137,6 +137,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 			raise LoxRuntimeError(expr.name, "Assignment to undefined variable: " + name)
 		
 		self.globals[name] = expr.expr.run_against(self)
+		return self.globals[name]
 
 	def visit_variable(self, expr: Variable) -> Any:
 		if expr.name.lexeme not in self.globals:

@@ -16,13 +16,17 @@ class Parser:
 		return self.assignment()
 
 	def assignment(self) -> BaseExpr:
-		if self.match(TokenType.IDENTIFIER) and self.match_next(TokenType.EQUAL):
-			id_token = self.take()
-			self.take()
-			es = self.assignment()
-			return Assignment(id_token, es)
-		else:
-			return self.equality()
+		expr = self.equality()
+		if self.match(TokenType.EQUAL):
+			equals = self.take()
+			value = self.assignment()
+			# More checks other then `Variable` will be added here
+			# To accomodate cases like: `my_set[1+2].value = 3`
+			if isinstance(expr, Variable):
+				r= Assignment(expr.name, value)
+				return r
+			self.error(equals, "Invalid Assignment target")
+		return expr
 	
 	def match_next(self, *args: TokenType):
 		return (a:=self.peek_next_opt()) != None and a.token_type in args
@@ -32,10 +36,12 @@ class Parser:
 		if self.current < len(self.tokens):
 			return self.tokens[self.current]
 		return None
+
 	def peek_next_opt(self):
 		if self.current < len(self.tokens) -1:
 			return self.tokens[self.current+1]
 		return None
+
 	def peek(self):
 		assert self.current < len(self.tokens)
 		return self.tokens[self.current]
