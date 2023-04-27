@@ -4,12 +4,20 @@ from .. import lox
 
 
 class LoxRuntimeError(Exception):
+
 	def __init__(self, token: Token, message: str) -> None:
 		super().__init__(message)
 		self.token = token
 
+class _UninitializedVar:
+	pass
+_UN_INITIALIZED = _UninitializedVar()
 @final
-class AstInterpreter(Visitor[Any]):
+class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
+	def __init__(self) -> None:
+		super().__init__()
+		self.globals: Dict[str, Any] = {}
+	
 	def visit_binary(self, expr: Binary):
 		l = self.visit_any(expr.left)
 		r = self.visit_any(expr.right)
@@ -94,14 +102,48 @@ class AstInterpreter(Visitor[Any]):
 			case _ as op:
 				raise RuntimeError(expr.operator, f"Bug in interpreter. Unexpected binary operator. {op}")
 
-	def interpret(self, expr: BaseExpr):
+	def interpret(self, statements: List[Statement]):
 		try:
-			value = self.visit_any(expr)
+			for stmt in statements:
+				return self.visit_any(stmt)
 			# cc
-			print(value)
+			# print(value)
 		except LoxRuntimeError as e:
 			lox.runtime_error(e)
+	
+	def visit_any(self, expr: BaseExpr | Statement) -> Any:
+		return expr.run_against(self)
+			
 
+	def visit_expression(self, expr: Expression) -> None:
+		expr.expression.run_against(self)
+		# return super().visit_expression(expr)
+	
+	def visit_var(self, expr: Var) -> None:
+		if expr.name.lexeme in self.globals:
+			raise LoxRuntimeError(expr.name, "Variable redclaration")
+		self.globals[expr.name.lexeme] = _UN_INITIALIZED
+		if expr.expression is not None:
+			self.globals[expr.name.lexeme] = expr.expression.run_against(self)
+
+	def visit_variable(self, expr: Variable) -> Any:
+		if expr.name.lexeme not in self.globals:
+			raise LoxRuntimeError(expr.name, "Undefined variable")
+		if self.globals[expr.name.lexeme] is _UN_INITIALIZED:
+			raise LoxRuntimeError(expr.name, "Uninitialized variable")
+		return self.globals[expr.name.lexeme]
+	
+	def printer(self, val: Any):
+		# In lox the true and false are lowercase
+		if val == True:
+			print('true')
+		elif val == False:
+			print('false')
+		else:
+			print(val)
+	
+	def visit_print(self, expr: Print) -> None:
+		self.printer(expr.expression.run_against(self))
 		
 
 if __name__ == "__main__":

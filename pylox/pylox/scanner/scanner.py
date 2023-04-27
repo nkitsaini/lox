@@ -176,6 +176,7 @@ class Scanner:
 					"class": TokenType.CLASS,
 					"else": TokenType.ELSE,
 					"false": TokenType.FALSE,
+					"true": TokenType.TRUE,
 					"fun": TokenType.FUN,
 					"for": TokenType.FOR,
 					"if": TokenType.IF,
@@ -185,13 +186,17 @@ class Scanner:
 					"return": TokenType.RETURN,
 					"super": TokenType.SUPER,
 					"this": TokenType.THIS,
-					"true": TokenType.TRUE,
 					"var": TokenType.VAR,
 					"while": TokenType.WHILE,
 				}
 
 				if lexeme in reserved_identifier:
-					return Token(reserved_identifier[lexeme], lexeme, line_no)
+					literal_val = None
+					if lexeme == "true":
+						literal_val = True
+					else:
+						literal_val = False
+					return Token(reserved_identifier[lexeme], lexeme, line_no, literal_val)
 				else:
 					return Token(TokenType.IDENTIFIER, lexeme, line_no)
 

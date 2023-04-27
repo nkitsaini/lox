@@ -16,9 +16,13 @@ class Parser:
 		return self.equality()
 	
 	def peek_opt(self):
+		assert self.current < len(self.tokens)
 		if self.current < len(self.tokens):
 			return self.tokens[self.current]
 		return None
+	def peek(self):
+		assert self.current < len(self.tokens)
+		return self.tokens[self.current]
 	
 	def match(self, *args: TokenType):
 		return (a:=self.peek_opt()) != None and a.token_type in args
@@ -28,15 +32,59 @@ class Parser:
 		return self.tokens[self.current - 1]
 
 	def consume(self, ty: TokenType, error: str):
-		if (token:=self.take()).token_type != ty:
+		token = self.take()
+		if token.token_type != ty:
 			raise self.error(token, error)
+		return token
+		
 	
 	def parse(self):
-
+		statements: List[Statement] = []
 		try:
-			return self.expression()
+			while (tok:=self.peek_opt()) and tok.token_type != TokenType.EOF:
+				# print(self.peek_opt())
+				statements.append(self.declaration())
+			return statements
 		except ParseError:
 			return None
+	
+	def statement(self) -> Statement:
+		if (token:=self.peek_opt()) != None and token.token_type == TokenType.PRINT:
+			return self.print_statement()
+		else:
+			return self.expression_statement()
+	
+	def declaration(self) -> Statement:
+		# Either var delaration or statement
+		if (token:=self.peek_opt()) != None and token.token_type == TokenType.VAR:
+			return self.var_statement()
+		else:
+			return self.statement()
+
+	def var_statement(self):
+		self.consume(TokenType.VAR, "Interpreter bug!")
+		identifier = self.consume(TokenType.IDENTIFIER, "Expected identifier in var block")
+		identifier = self.take()
+		if self.peek().token_type == TokenType.EQUAL:
+			self.take()
+			rv = Var(self.expression(), identifier)
+			self.consume(TokenType.SEMICOLON, "Semicolon expected in variable declaration")
+			return rv
+		elif self.peek().token_type == TokenType.SEMICOLON:
+			self.take()
+			return Var(None, identifier)
+		else:
+			raise self.error(self.take(), "Unexpected token in var declaration")
+	def print_statement(self):
+		self.consume(TokenType.PRINT, "This is interpreter bug!")
+		rv = Print(self.expression())
+		self.consume(TokenType.SEMICOLON, "Expected ; after print statement")
+		return rv
+
+	def expression_statement(self):
+		rv = Expression(self.expression())
+		self.consume(TokenType.SEMICOLON, "Expected ; after print statement")
+		return rv
 	
 	def error(self, token: Token, msg: str):
 		lox.errorToken(token, msg)
@@ -57,7 +105,6 @@ class Parser:
 				return
 		
 
-		
 	
 	def equality(self) -> BaseExpr:
 		expr = self.comparison()
@@ -109,5 +156,7 @@ class Parser:
 			return rv
 		elif self.match(TokenType.NUMBER, TokenType.STRING, TokenType.NIL, TokenType.TRUE, TokenType.FALSE):
 			return lexer.Literal(self.take().literal_val)
+		elif self.match(TokenType.IDENTIFIER):
+			return lexer.Variable(self.take())
 		token = self.take()
 		raise self.error(token, f"Expected to find literal or group but found {token.lexeme}")

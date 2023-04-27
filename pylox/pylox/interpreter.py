@@ -9,16 +9,18 @@ from . import lox
 
 @dataclass
 class Runner:
+	interpreter: AstInterpreter = field(default_factory=AstInterpreter)
 	def run(self, source: str):
 		scanner = Scanner(source)
 		tokens = scanner.scan_tokens();
-		expression = Parser(tokens).parse()
+		# print(tokens)
+		statements = Parser(tokens).parse()
 		if lox.had_error:
 			return
-		assert expression is not None
+		assert statements is not None
+		pprint(statements)
 		
-		
-		AstInterpreter().interpret(expression)
+		self.interpreter.interpret(statements)
 
 	def run_file(self, file_path: str):
 		self.run(Path(file_path).read_text())

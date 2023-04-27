@@ -2,7 +2,7 @@ from .lexer import *
 
 
 @final
-class AstPrinter(Visitor[str]):
+class AstPrinter(ExprVisitor[str]):
 	def visit_binary(self, expr: Binary) -> str:
 		return f"{expr.operator.lexeme} ({expr.left.run_against(self)}) ({expr.right.run_against(self)})"
 	
