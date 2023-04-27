@@ -18,7 +18,6 @@ class Runner:
 		if lox.had_error:
 			return
 		assert statements is not None
-		pprint(statements)
 		
 		self.interpreter.interpret(statements)
 

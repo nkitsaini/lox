@@ -120,8 +120,9 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		# return super().visit_expression(expr)
 	
 	def visit_var(self, expr: Var) -> None:
-		if expr.name.lexeme in self.globals:
-			raise LoxRuntimeError(expr.name, "Variable redclaration")
+		# Think if redeclaration should be allowed
+		# if expr.name.lexeme in self.globals:
+		# 	raise LoxRuntimeError(expr.name, "Variable redclaration")
 		self.globals[expr.name.lexeme] = _UN_INITIALIZED
 		if expr.expression is not None:
 			self.globals[expr.name.lexeme] = expr.expression.run_against(self)
