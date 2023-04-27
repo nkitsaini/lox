@@ -7,7 +7,9 @@ description = ""
 authors = [
     {name = "Ankit Saini", email = "nnkitsaini@gmail.com"},
 ]
-dependencies = []
+dependencies = [
+    "colorama>=0.4.6",
+]
 requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}

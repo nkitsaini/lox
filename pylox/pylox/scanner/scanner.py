@@ -1,4 +1,5 @@
 from .tokens import TokenType, Token
+from .. import lox
 from ..prelude import *
 
 
@@ -19,7 +20,7 @@ class Scanner:
 			self.consume_empty()
 
 		tokens.append(
-			Token(TokenType.EOF, '', 2),
+			Token(TokenType.EOF, '', self.line),
 		)
 
 		return tokens
@@ -75,6 +76,9 @@ class Scanner:
 			if a == "\n":
 				self.line += 1
 			rv += self.take()
+		if self.peek_opt() != '"':
+			lox.error(self.line, "Unterminated String")
+			return rv
 		rv += self.take() # End "
 		return rv
 	
@@ -142,7 +146,8 @@ class Scanner:
 						self.take()
 
 					if self.peek_next() == None:
-						raise Exception(f"Unclosed multiline comment, starting at: {line_no + 1}")
+						lox.error(line_no, "Unterminated multiline comment")
+						return
 					self.take() # take *
 					self.take() # take /
 					return None
@@ -191,4 +196,5 @@ class Scanner:
 					return Token(TokenType.IDENTIFIER, lexeme, line_no)
 
 			case _:
-				raise Exception(f"Unknown Token at line: {line_no + 1}")
+				
+				lox.error(line_no, "Unexpected token: " + self.take())

@@ -1,26 +1,31 @@
 from .prelude import *
 import argparse
 from .scanner.scanner import Scanner
+from .scanner.parser import Parser
+# from .scanner.ast_printer import AstPrinter
+from .scanner.ast_interpreter import AstInterpreter
+from . import lox
 
 
 @dataclass
 class Runner:
-	had_error: bool = False
-
-	def error(self, line: int, msg: str):
-		self.had_error = True
-		print(f"Line {line} | {msg}")
-
 	def run(self, source: str):
 		scanner = Scanner(source)
 		tokens = scanner.scan_tokens();
-		for token in tokens:
-			print(token)
+		expression = Parser(tokens).parse()
+		if lox.had_error:
+			return
+		assert expression is not None
+		
+		
+		AstInterpreter().interpret(expression)
 
 	def run_file(self, file_path: str):
 		self.run(Path(file_path).read_text())
-		if self.had_error:
+		if lox.had_error:
 			exit(65)
+		if lox.had_runtime_error:
+			exit(70)
 	
 	def run_prompt(self):
 		while True:
@@ -28,7 +33,7 @@ class Runner:
 				line = input("> ")
 				self.run(line)
 
-				self.had_error = False
+				lox.had_error = False
 			except EOFError:
 				break
 
