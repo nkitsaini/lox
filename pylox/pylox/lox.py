@@ -31,3 +31,10 @@ def errorToken(token: 'Token', msg: str):
 # To make easily testable
 def lox_print(val: Any):
 	print(val)
+
+# To be used in tests
+def reset__():
+	global had_error
+	global had_runtime_error
+	had_error = False
+	had_runtime_error = False

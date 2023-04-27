@@ -54,7 +54,7 @@ class Environment:
 class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	def __init__(self) -> None:
 		super().__init__()
-		self.env = Environment()
+		self.env: Environment = Environment()
 	
 	def visit_binary(self, expr: Binary):
 		l = self.visit_any(expr.left)
@@ -142,8 +142,6 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		try:
 			for stmt in statements:
 				self.visit_any(stmt)
-			# cc
-			# print(value)
 		except LoxRuntimeError as e:
 			lox.runtime_error(e)
 	
@@ -188,6 +186,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 			for statement in expr.statements:
 				self.visit_any(statement)
 		finally:
+			assert self.env.parent != None
 			self.env = self.env.parent
 		
 

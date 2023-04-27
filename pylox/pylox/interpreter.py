@@ -13,10 +13,8 @@ class Runner:
 	def run(self, source: str):
 		scanner = Scanner(source)
 		tokens = scanner.scan_tokens();
-		# print(tokens)
 		statements = Parser(tokens).parse()
 		if lox.had_error:
-			# print("err")
 			return
 		assert statements is not None
 		

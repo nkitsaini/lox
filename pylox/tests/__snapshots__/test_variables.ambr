@@ -1,68 +1,41 @@
 # serializer version: 1
-# name: test_variable_assignments
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n]
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.1
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].1
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.10
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].10
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.11
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].11
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.12
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].12
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.13
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].13
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.14
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].14
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.15
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].15
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.16
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].16
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.17
-  _CallList([
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: a.'),
-      ),
-      dict({
-      }),
-    ),
-  ])
-# ---
-# name: test_variable_assignments.18
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.19
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.2
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.20
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.21
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].17
   _CallList([
     _Call(
       tuple(
@@ -71,28 +44,25 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: b.'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
-# name: test_variable_assignments.22
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].18
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.23
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].19
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.24
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].2
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.25
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].20
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].21
   _CallList([
     _Call(
       tuple(
@@ -108,28 +78,21 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
-# name: test_variable_assignments.26
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].22
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.27
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].23
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.28
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].24
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.29
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].25
   _CallList([
     _Call(
       tuple(
@@ -152,32 +115,21 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
-# name: test_variable_assignments.3
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].26
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.30
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].27
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.31
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].28
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.32
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.33
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].29
   _CallList([
     _Call(
       tuple(
@@ -209,19 +161,23 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.34
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].3
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.35
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].30
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.36
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].31
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.37
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].32
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].33
   _CallList([
     _Call(
       tuple(
@@ -253,11 +209,55 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.38
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].34
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.39
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].35
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].36
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].37
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].38
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].39
   _CallList([
     _Call(
       tuple(
@@ -268,73 +268,15 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.4
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].4
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.40
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].40
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.41
-  _CallList([
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: a.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: b.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-  ])
-# ---
-# name: test_variable_assignments.42
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.43
-  _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-  ])
-# ---
-# name: test_variable_assignments.44
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.45
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].41
   _CallList([
     _Call(
       tuple(
@@ -364,20 +306,13 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
-# name: test_variable_assignments.46
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].42
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.47
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].43
   _CallList([
     _Call(
       tuple(
@@ -395,11 +330,76 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.48
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].44
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.49
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].45
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].46
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].47
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].48
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].49
   _CallList([
     _Call(
       tuple(
@@ -445,15 +445,15 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.5
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].5
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.50
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].50
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.51
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].51
   _CallList([
     _Call(
       tuple(
@@ -471,11 +471,11 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.52
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].52
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.53
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].53
   _CallList([
     _Call(
       tuple(
@@ -521,11 +521,11 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.54
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].54
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.55
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].55
   _CallList([
     _Call(
       tuple(
@@ -543,11 +543,11 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.56
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].56
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.57
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].57
   _CallList([
     _Call(
       tuple(
@@ -593,11 +593,11 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.58
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].58
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.59
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].59
   _CallList([
     _Call(
       tuple(
@@ -622,101 +622,15 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.6
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].6
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.60
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].60
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.61
-  _CallList([
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: a.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: b.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-  ])
-# ---
-# name: test_variable_assignments.62
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.63
-  _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-  ])
-# ---
-# name: test_variable_assignments.64
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.65
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].61
   _CallList([
     _Call(
       tuple(
@@ -760,20 +674,13 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
-# name: test_variable_assignments.66
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].62
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.67
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].63
   _CallList([
     _Call(
       tuple(
@@ -805,11 +712,11 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.68
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].64
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.69
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].65
   _CallList([
     _Call(
       tuple(
@@ -860,24 +767,13 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
-# name: test_variable_assignments.7
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].66
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.70
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.71
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].67
   _CallList([
     _Call(
       tuple(
@@ -909,11 +805,11 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.72
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].68
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.73
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].69
   _CallList([
     _Call(
       tuple(
@@ -973,7 +869,111 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.74
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].7
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].70
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].71
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].72
+  _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].73
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].74
   _CallList([
     _Call(
       tuple(
@@ -985,7 +985,7 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.75
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].75
   _CallList([
     _Call(
       tuple(
@@ -1017,11 +1017,11 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.76
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].76
   _CallList([
   ])
 # ---
-# name: test_variable_assignments.77
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].77
   _CallList([
     _Call(
       tuple(
@@ -1081,127 +1081,7 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.78
-  _CallList([
-    _Call(
-      tuple(
-        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
-        'Expected ; after print statement',
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
-        'Expected ; after Expression',
-      ),
-      dict({
-      }),
-    ),
-  ])
-# ---
-# name: test_variable_assignments.79
-  _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-  ])
-# ---
-# name: test_variable_assignments.8
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.80
-  _CallList([
-  ])
-# ---
-# name: test_variable_assignments.81
-  _CallList([
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: a.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: b.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-  ])
-# ---
-# name: test_variable_assignments.82
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].78
   _CallList([
     _Call(
       tuple(
@@ -1221,7 +1101,7 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.83
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].79
   _CallList([
     _Call(
       tuple(
@@ -1253,7 +1133,90 @@
     ),
   ])
 # ---
-# name: test_variable_assignments.9
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].8
   _CallList([
+  ])
+# ---
+# name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].9
+  _CallList([
+  ])
+# ---
+# name: test_script[\nvar a = "global a";\nvar b = "global b";\nvar c = "global c";\n{\n  var a = "outer a";\n  var b = "outer b";\n  {\n    var a = "inner a";\n    print a;\n    print b;\n    print c;\n  }\n  print a;\n  print b;\n  print c;\n}\nprint a;\nprint b;\nprint c;\n]
+  _CallList([
+  ])
+# ---
+# name: test_script[\nvar a = "global a";\nvar b = "global b";\nvar c = "global c";\n{\n  var a = "outer a";\n  var b = "outer b";\n  {\n    var a = "inner a";\n    print a;\n    print b;\n    print c;\n  }\n  print a;\n  print b;\n  print c;\n}\nprint a;\nprint b;\nprint c;\n].1
+  _CallList([
+  ])
+# ---
+# name: test_script[\nvar a = "global a";\nvar b = "global b";\nvar c = "global c";\n{\n  var a = "outer a";\n  var b = "outer b";\n  {\n    var a = "inner a";\n    print a;\n    print b;\n    print c;\n  }\n  print a;\n  print b;\n  print c;\n}\nprint a;\nprint b;\nprint c;\n].2
+  _CallList([
+  ])
+# ---
+# name: test_script[\nvar a = "global a";\nvar b = "global b";\nvar c = "global c";\n{\n  var a = "outer a";\n  var b = "outer b";\n  {\n    var a = "inner a";\n    print a;\n    print b;\n    print c;\n  }\n  print a;\n  print b;\n  print c;\n}\nprint a;\nprint b;\nprint c;\n].3
+  _CallList([
+    _Call(
+      tuple(
+        'inner a',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'outer b',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global c',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'outer a',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'outer b',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global c',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global a',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global b',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global c',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---

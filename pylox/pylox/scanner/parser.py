@@ -98,6 +98,7 @@ class Parser:
 			return Var(None, identifier)
 		else:
 			raise self.error(self.take(), "Unexpected token in var declaration")
+
 	def print_statement(self):
 		self.consume(TokenType.PRINT, "This is interpreter bug!")
 		rv = Print(self.expression())
@@ -105,6 +106,7 @@ class Parser:
 		return rv
 
 	def block_statement(self):
+		self.take()
 		statements: List[Statement] = []
 
 		# TODO: how will nested work?
