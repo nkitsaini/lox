@@ -104,15 +104,15 @@ class Parser:
 			return self.break_statement()
 		if self.match(TokenType.RETURN):
 			return self.return_statement()
-		if self.match(TokenType.FUN):
-			return self.function_statement()
 		else:
 			return self.expression_statement()
 	
 	def declaration(self) -> Statement:
 		# Either var delaration or statement
-		if (token:=self.peek_opt()) != None and token.token_type == TokenType.VAR:
+		if self.match(TokenType.VAR):
 			return self.var_statement()
+		elif self.match(TokenType.FUN):
+			return self.function_statement()
 		else:
 			return self.statement()
 

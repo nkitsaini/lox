@@ -34,6 +34,7 @@ class LoxCallable(abc.ABC):
 	def arity(self) -> int:
 		raise NotImplementedError()
 
+@final
 class UserCallable(LoxCallable):
 	def __init__(self, fn: Function) -> None:
 		self.fn = fn
@@ -58,12 +59,23 @@ class UserCallable(LoxCallable):
 	def arity(self) -> int:
 		return len(self.fn.arguments)
 	
-class ClockCallable(LoxCallable):
+class NativeLoxCallable(LoxCallable, abc.ABC):
+	@classmethod
+	@abc.abstractmethod
+	def name(cls) -> str:
+		raise NotImplementedError()
+@final
+class ClockCallable(NativeLoxCallable):
 	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
 		return time.time()
 
 	def arity(self) -> int:
 		return 0
+	
+	@classmethod
+	def name(cls) -> str:
+		return "clock"
+	
 
 
 @dataclass
@@ -107,7 +119,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	def __init__(self) -> None:
 		super().__init__()
 		self.global_env = Environment()
-		self.global_env.declare("clock", ClockCallable())
+		self.global_env.declare(ClockCallable.name(), ClockCallable())
 		self.env: Environment = self.global_env
 	
 	def visit_binary(self, expr: Binary):
@@ -266,6 +278,8 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 			lox.lox_print('true')
 		elif val is False:
 			lox.lox_print('false')
+		elif isinstance(val, NativeLoxCallable):
+			lox.lox_print(f'<NativeLoxFunction: {val.name()}>')
 		else:
 			lox.lox_print(val)
 	
