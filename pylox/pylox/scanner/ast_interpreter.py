@@ -1,6 +1,7 @@
 from typing import Any
 from pylox.scanner.lexer import Assignment, Block, If
 from .lexer import *
+import time
 from .tokens import TokenType
 from .. import lox
 
@@ -21,7 +22,49 @@ class FunctionReturn(Exception):
 
 class _UninitializedVar:
 	pass
+
 _UN_INITIALIZED = _UninitializedVar()
+
+class LoxCallable(abc.ABC):
+	@abc.abstractmethod
+	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def arity(self) -> int:
+		raise NotImplementedError()
+
+class UserCallable(LoxCallable):
+	def __init__(self, fn: Function) -> None:
+		self.fn = fn
+	
+	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
+		new_env = Environment()
+		for lexeme, val_expr in zip(self.fn.arguments, arguments):
+			new_env.define(lexeme.lexeme)
+			new_env.set(lexeme, val_expr)
+		
+		new_env.parent = interpreter.env
+		interpreter.env = new_env
+
+		try:
+			interpreter.visit_any(self.fn.body)
+		except FunctionReturn as r:
+			return r.return_val
+		finally:
+			assert interpreter.env.parent is not None
+			interpreter.env = interpreter.env.parent
+
+	def arity(self) -> int:
+		return len(self.fn.arguments)
+	
+class ClockCallable(LoxCallable):
+	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
+		return time.time()
+
+	def arity(self) -> int:
+		return 0
+
 
 @dataclass
 class Environment:
@@ -30,6 +73,8 @@ class Environment:
 
 	def define(self, variable: str):
 		self.envs[variable] = _UN_INITIALIZED
+	def declare(self, variable: str, value: Any):
+		self.envs[variable] = value
 
 	def set(self, variable: Token, value: Any) -> Any:
 		name = variable.lexeme
@@ -61,7 +106,9 @@ class Environment:
 class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	def __init__(self) -> None:
 		super().__init__()
-		self.env: Environment = Environment()
+		self.global_env = Environment()
+		self.global_env.declare("clock", ClockCallable())
+		self.env: Environment = self.global_env
 	
 	def visit_binary(self, expr: Binary):
 		l = self.visit_any(expr.left)
@@ -110,25 +157,26 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 
 	def visit_call(self, expr: Call):
 		function_ref = self.visit_any(expr.callee)
-		if not isinstance(function_ref, Function):
+		if not isinstance(function_ref, LoxCallable):
 			raise LoxRuntimeError(function_ref, "Value is not a callable: " + str(function_ref))
-		if len(function_ref.arguments) != len(expr.arguments):
-			raise LoxRuntimeError(expr.paren, f"Expected {len(function_ref.arguments)} arguments to be passed. Found {len(expr.arguments)}")
-		new_env = Environment()
-		for lexeme, val_expr in zip(function_ref.arguments, expr.arguments):
-			new_env.define(lexeme.lexeme)
-			new_env.set(lexeme, self.visit_any(val_expr))
+		if function_ref.arity() != len(expr.arguments):
+			raise LoxRuntimeError(expr.paren, f"Expected {function_ref.arity()} arguments to be passed. Found {len(expr.arguments)}")
+		# new_env = Environment()
+		# for lexeme, val_expr in zip(function_ref.arguments, expr.arguments):
+		# 	new_env.define(lexeme.lexeme)
+		# 	new_env.set(lexeme, self.visit_any(val_expr))
 		
-		new_env.parent = self.env
-		self.env = new_env
+		# new_env.parent = self.env
+		# self.env = new_env
 
-		try:
-			self.visit_any(function_ref.body)
-		except FunctionReturn as r:
-			return r.return_val
-		finally:
-			assert self.env.parent is not None
-			self.env = self.env.parent
+		return function_ref.call(self, [self.visit_any(ex) for ex in expr.arguments])
+		# try:
+		# 	self.visit_any(function_ref.body)
+		# except FunctionReturn as r:
+		# 	return r.return_val
+		# finally:
+		# 	assert self.env.parent is not None
+		# 	self.env = self.env.parent
 
 	def visit_literal(self, expr: Literal):
 		return expr.value
@@ -248,7 +296,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 
 	def visit_function(self, expr: Function):
 		self.env.define(expr.name.lexeme)
-		self.env.set(expr.name, expr)
+		self.env.set(expr.name, UserCallable(expr))
 
 	
 	def visit_break(self, expr: Break):

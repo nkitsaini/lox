@@ -1,4 +1,27 @@
 # serializer version: 1
+# name: test_clock_script
+  _CallList([
+  ])
+# ---
+# name: test_clock_script.1
+  _CallList([
+  ])
+# ---
+# name: test_clock_script.2
+  _CallList([
+  ])
+# ---
+# name: test_clock_script.3
+  _CallList([
+    _Call(
+      tuple(
+        1356998400.0,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
 # name: test_script[for_loop.lox]
   _CallList([
   ])

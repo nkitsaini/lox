@@ -1,5 +1,6 @@
 from pylox import lox
 from pylox.interpreter import Runner
+import freezegun
 from typing import TYPE_CHECKING, Any
 import pytest
 from pathlib import Path
@@ -21,6 +22,19 @@ def test_script(script: str, mocker: 'MockerFixture', snapshot: Any):
 	token_spy = mocker.spy(lox, 'errorToken')
 	print_spy = mocker.spy(lox, 'lox_print')
 	runner.run((SCRIPT_PATH/script).read_text())
+	assert error_spy.call_args_list  == snapshot
+	assert runtime_spy.call_args_list  == snapshot
+	assert token_spy.call_args_list  == snapshot
+	assert print_spy.call_args_list  == snapshot
+		
+@freezegun.freeze_time("2013-01-01")
+def test_clock_script(mocker: 'MockerFixture', snapshot: Any):
+	runner = Runner()
+	error_spy = mocker.spy(lox, 'error')
+	runtime_spy = mocker.spy(lox, 'runtime_error')
+	token_spy = mocker.spy(lox, 'errorToken')
+	print_spy = mocker.spy(lox, 'lox_print')
+	runner.run('clock();')
 	assert error_spy.call_args_list  == snapshot
 	assert runtime_spy.call_args_list  == snapshot
 	assert token_spy.call_args_list  == snapshot
