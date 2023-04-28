@@ -99,6 +99,14 @@ nil or 1 or "yes";
 "yes" or 0 or 1;
 """
 
+while_loop = """
+var i = 1;
+while (i < 5) {
+	print i;
+	i = i +1;
+}
+"""
+
 @pytest.fixture(autouse=True)
 def run_around_tests():
     lox.reset__()
@@ -118,7 +126,7 @@ def test_repl(script: str, mocker: 'MockerFixture', snapshot: Any):
 		assert token_spy.call_args_list  == snapshot
 		assert print_spy.call_args_list  == snapshot
 		
-@pytest.mark.parametrize("script", [scoping, if_conditional])
+@pytest.mark.parametrize("script", [scoping, if_conditional, while_loop])
 def test_script(script: str, mocker: 'MockerFixture', snapshot: Any):
 	runner = Runner()
 	error_spy = mocker.spy(lox, 'error')

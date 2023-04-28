@@ -154,6 +154,15 @@ class If(Statement):
 	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_if(self)
 
+@final
+@dataclass
+class While(Statement):
+	condition: BaseExpr
+	inner: Statement
+
+	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_while(self)
+
 
 class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -174,6 +183,10 @@ class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_if(self, expr: 'If') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_while(self, expr: 'While') -> _VisitorReturn:
 		raise NotImplementedError()
 
 

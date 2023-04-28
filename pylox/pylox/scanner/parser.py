@@ -94,6 +94,8 @@ class Parser:
 			return self.block_statement()
 		if self.match(TokenType.IF):
 			return self.if_statement()
+		if self.match(TokenType.WHILE):
+			return self.while_statement()
 		else:
 			return self.expression_statement()
 	
@@ -150,6 +152,15 @@ class Parser:
 			self.take()
 			else_inner = self.statement()
 		return If(condition, inner, else_inner)
+
+	def while_statement(self):
+		self.take() # while
+		self.consume(TokenType.LEFT_PARAN, "`while` should be followed by `(`")
+		condition = self.expression()
+		self.consume(TokenType.RIGHT_PARAN, "Unclosed `while` parans `)`")
+		inner = self.statement()
+
+		return While(condition, inner)
 
 	def expression_statement(self):
 		rv = Expression(self.expression())

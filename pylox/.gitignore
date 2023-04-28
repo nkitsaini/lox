@@ -1,3 +1,4 @@
 .pdm-python
 .venv
 **/__pycache__
+scratch.lox

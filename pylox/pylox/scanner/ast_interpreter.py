@@ -204,12 +204,16 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 			assert self.env.parent != None
 			self.env = self.env.parent
 	
-	def visit_if(self, expr: If) -> None:
+	def visit_if(self, expr: If):
 		if (self.is_truthy(self.visit_any(expr.condition))):
 			return self.visit_any(expr.inner)
 		elif expr.else_inner is not None:
 			return self.visit_any(expr.else_inner)
 		
+	def visit_while(self, expr: While) -> None:
+		while self.visit_any(expr.condition):
+			self.visit_any(expr.inner)
+
 
 if __name__ == "__main__":
 	interpreter = AstInterpreter()
