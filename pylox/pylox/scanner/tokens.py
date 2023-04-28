@@ -14,10 +14,10 @@ class Token:
 class TokenType(Enum):
 
 	# Single Character Tokens
-	LEFT_PARAN = auto()
-	RIGHT_PARAN = auto()
-	LEFT_BRACE = auto()
-	RIGHT_BRACE = auto()
+	LEFT_PARAN = auto() # (
+	RIGHT_PARAN = auto() # )
+	LEFT_BRACE = auto() # {
+	RIGHT_BRACE = auto() # }
 	COMMA = auto()
 	DOT = auto()
 	MINUS = auto()

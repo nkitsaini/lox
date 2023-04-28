@@ -74,6 +74,8 @@ class Parser:
 			return self.print_statement()
 		if self.match(TokenType.LEFT_BRACE):
 			return self.block_statement()
+		if self.match(TokenType.IF):
+			return self.if_statement()
 		else:
 			return self.expression_statement()
 	
@@ -116,6 +118,20 @@ class Parser:
 		
 		self.consume(TokenType.RIGHT_BRACE, "Expected closing brace for block statement")
 		return Block(statements)
+
+
+	def if_statement(self):
+		self.take() # if
+		self.consume(TokenType.LEFT_PARAN, "`if` should be followed by `(`")
+		condition = self.expression()
+		self.consume(TokenType.RIGHT_PARAN, "Unclosed `if` parans `)`")
+		inner = self.statement()
+
+		else_inner = None
+		if (self.match(TokenType.ELSE)):
+			self.take()
+			else_inner = self.statement()
+		return If(condition, inner, else_inner)
 
 	def expression_statement(self):
 		rv = Expression(self.expression())

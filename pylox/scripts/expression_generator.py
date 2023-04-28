@@ -18,6 +18,7 @@ def main():
 		"Print": "expression BaseExpr",
 		"Var": "expression Optional[BaseExpr], name Token",
 		"Block": "statements List[Statement]",
+		"If": "condition BaseExpr, inner Statement, else_inner Optional[Statement]",
 	}
 
 	header = textwrap.dedent("""\

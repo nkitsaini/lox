@@ -1220,3 +1220,47 @@
     ),
   ])
 # ---
+# name: test_script[\nvar a =3;\nvar b =7;\nif (true) {\n\tprint a;\n} else {\n\tprint b;\n}\nif (false) {\n\tprint a;\n} else {\n\tprint b;\n}\n\nif (true) {\n\tprint b;\n}\nif (1) {\n\tprint b;\n}\nif (false) {\n\tprint b;\n}\n\n]
+  _CallList([
+  ])
+# ---
+# name: test_script[\nvar a =3;\nvar b =7;\nif (true) {\n\tprint a;\n} else {\n\tprint b;\n}\nif (false) {\n\tprint a;\n} else {\n\tprint b;\n}\n\nif (true) {\n\tprint b;\n}\nif (1) {\n\tprint b;\n}\nif (false) {\n\tprint b;\n}\n\n].1
+  _CallList([
+  ])
+# ---
+# name: test_script[\nvar a =3;\nvar b =7;\nif (true) {\n\tprint a;\n} else {\n\tprint b;\n}\nif (false) {\n\tprint a;\n} else {\n\tprint b;\n}\n\nif (true) {\n\tprint b;\n}\nif (1) {\n\tprint b;\n}\nif (false) {\n\tprint b;\n}\n\n].2
+  _CallList([
+  ])
+# ---
+# name: test_script[\nvar a =3;\nvar b =7;\nif (true) {\n\tprint a;\n} else {\n\tprint b;\n}\nif (false) {\n\tprint a;\n} else {\n\tprint b;\n}\n\nif (true) {\n\tprint b;\n}\nif (1) {\n\tprint b;\n}\nif (false) {\n\tprint b;\n}\n\n].3
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        7,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        7,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        7,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---

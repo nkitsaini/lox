@@ -130,6 +130,16 @@ class Block(Statement):
 	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_block(self)
 
+@final
+@dataclass
+class If(Statement):
+	condition: BaseExpr
+	inner: Statement
+	else_inner: Optional[Statement]
+
+	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_if(self)
+
 
 class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -146,6 +156,10 @@ class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_block(self, expr: 'Block') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_if(self, expr: 'If') -> _VisitorReturn:
 		raise NotImplementedError()
 
 

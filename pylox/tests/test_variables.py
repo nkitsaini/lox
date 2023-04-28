@@ -51,6 +51,31 @@ print b;
 print c;
 """
 
+if_conditional = """
+var a =3;
+var b =7;
+if (true) {
+	print a;
+} else {
+	print b;
+}
+if (false) {
+	print a;
+} else {
+	print b;
+}
+
+if (true) {
+	print b;
+}
+if (1) {
+	print b;
+}
+if (false) {
+	print b;
+}
+
+"""
 @pytest.fixture(autouse=True)
 def run_around_tests():
     lox.reset__()
@@ -70,7 +95,7 @@ def test_repl(script: str, mocker: 'MockerFixture', snapshot: Any):
 		assert token_spy.call_args_list  == snapshot
 		assert print_spy.call_args_list  == snapshot
 		
-@pytest.mark.parametrize("script", [scoping])
+@pytest.mark.parametrize("script", [scoping, if_conditional])
 def test_script(script: str, mocker: 'MockerFixture', snapshot: Any):
 	runner = Runner()
 	error_spy = mocker.spy(lox, 'error')

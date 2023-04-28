@@ -5,6 +5,9 @@ test = [
     "pytest>=7.3.1",
     "syrupy>=4.0.2",
 ]
+dev = [
+    "pdbpp>=0.10.3",
+]
 
 [project]
 name = "pylox"

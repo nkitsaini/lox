@@ -1,5 +1,5 @@
 from typing import Any
-from pylox.scanner.lexer import Assignment, Block
+from pylox.scanner.lexer import Assignment, Block, If
 from .lexer import *
 from .tokens import TokenType
 from .. import lox
@@ -140,8 +140,10 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 
 	def interpret(self, statements: List[Statement]):
 		try:
+			rv = None
 			for stmt in statements:
-				self.visit_any(stmt)
+				rv = self.visit_any(stmt)
+			return rv
 		except LoxRuntimeError as e:
 			lox.runtime_error(e)
 	
@@ -149,8 +151,8 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		return expr.run_against(self)
 			
 
-	def visit_expression(self, expr: Expression) -> None:
-		expr.expression.run_against(self)
+	def visit_expression(self, expr: Expression) -> Any:
+		return expr.expression.run_against(self)
 		# return super().visit_expression(expr)
 	
 	def visit_var(self, expr: Var) -> None:
@@ -170,9 +172,9 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	
 	def printer(self, val: Any):
 		# In lox the true and false are lowercase
-		if val == True:
+		if val is True:
 			lox.lox_print('true')
-		elif val == False:
+		elif val is False:
 			lox.lox_print('false')
 		else:
 			lox.lox_print(val)
@@ -188,6 +190,12 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		finally:
 			assert self.env.parent != None
 			self.env = self.env.parent
+	
+	def visit_if(self, expr: If) -> None:
+		if (self.is_truthy(self.visit_any(expr.condition))):
+			return self.visit_any(expr.inner)
+		elif expr.else_inner is not None:
+			return self.visit_any(expr.else_inner)
 		
 
 if __name__ == "__main__":
