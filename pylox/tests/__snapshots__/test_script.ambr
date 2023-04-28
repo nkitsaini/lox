@@ -164,5 +164,33 @@
       dict({
       }),
     ),
+    _Call(
+      tuple(
+        5,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        1,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        6,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        6,
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
