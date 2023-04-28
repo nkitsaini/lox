@@ -185,6 +185,99 @@
     ),
   ])
 # ---
+# name: test_script[functions_fibonacci_series.lox]
+  _CallList([
+  ])
+# ---
+# name: test_script[functions_fibonacci_series.lox].1
+  _CallList([
+  ])
+# ---
+# name: test_script[functions_fibonacci_series.lox].2
+  _CallList([
+  ])
+# ---
+# name: test_script[functions_fibonacci_series.lox].3
+  _CallList([
+    _Call(
+      tuple(
+        0,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        1,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        1,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        2,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        5,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        8,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        13,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        21,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        34,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        55,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
 # name: test_script[if_conditional.lox]
   _CallList([
   ])

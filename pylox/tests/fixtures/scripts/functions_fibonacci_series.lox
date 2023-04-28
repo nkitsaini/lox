@@ -1,0 +1,9 @@
+fun calc_fibonacci(a) {
+	if (a<2) {
+		return a;
+	}
+	return calc_fibonacci(a-1) + calc_fibonacci(a-2);
+}
+for (var i=0; i <= 10; i = i +1 ) {
+	print calc_fibonacci(i);
+}
