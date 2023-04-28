@@ -94,6 +94,9 @@ true and true;
 2 and 1;
 1 and 1;
 2 and false;
+nil or 0 or 1;
+nil or 1 or "yes";
+"yes" or 0 or 1;
 """
 
 @pytest.fixture(autouse=True)
