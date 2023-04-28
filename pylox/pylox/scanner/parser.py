@@ -96,6 +96,8 @@ class Parser:
 			return self.if_statement()
 		if self.match(TokenType.WHILE):
 			return self.while_statement()
+		if self.match(TokenType.FOR):
+			return self.for_statement()
 		else:
 			return self.expression_statement()
 	
@@ -161,6 +163,48 @@ class Parser:
 		inner = self.statement()
 
 		return While(condition, inner)
+
+	def for_statement(self):
+		self.take() # for
+		self.consume(TokenType.LEFT_PARAN, "`for` should be followed by `(`")
+		initializer: Optional[Statement] = None
+		if (self.match(TokenType.SEMICOLON)):
+			self.take()
+		elif (self.match(TokenType.VAR)):
+			initializer = self.var_statement()
+		else:
+			initializer = self.expression_statement()
+		
+
+		condition: Optional[BaseExpr] = None
+		if (not self.match(TokenType.SEMICOLON)):
+			condition = self.expression()
+		
+		self.consume(TokenType.SEMICOLON, "Expected semicolon after condition")
+		increment: Optional[BaseExpr] = None
+		if (not self.match(TokenType.RIGHT_PARAN)):
+			increment = self.expression()
+		
+		self.consume(TokenType.RIGHT_PARAN, "Expected ) after step in for loop")
+
+		body = self.statement()
+		rv = body
+		if increment:
+			rv = Block([rv, Expression(increment)])
+		if condition:
+			rv = While(condition, rv)
+		if initializer:
+			rv = Block([initializer, rv])
+		return rv
+
+
+		
+		
+		# condition = self.expression()
+		# self.consume(TokenType.RIGHT_PARAN, "Unclosed `for` parans `)`")
+		# inner = self.statement()
+
+		# return While(condition, inner)
 
 	def expression_statement(self):
 		rv = Expression(self.expression())
@@ -230,7 +274,7 @@ class Parser:
 			return self.primary()
 
 	def primary(self) -> BaseExpr:
-		if self.match(TokenType.LEFT_PARAN):
+		if self.match(TokenType.RIGHT_PARAN):
 			self.take()
 			rv = Grouping(self.expression())
 			self.consume(TokenType.RIGHT_PARAN, "Expected ')' After expression") # consuming ending brace

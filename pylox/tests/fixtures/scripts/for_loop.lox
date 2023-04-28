@@ -1,0 +1,12 @@
+for(var i=1; i <= 5; i = i + 1) {
+	print i;
+}
+var i;
+for(i=3; i <= 5; i = i + 1) {
+	print i;
+}
+
+for(var j=1; j <= 5; j = j + 1) {
+	print j;
+}
+print j; // should fail due to scoping
