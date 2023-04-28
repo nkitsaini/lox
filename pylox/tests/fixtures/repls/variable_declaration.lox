@@ -1,0 +1,19 @@
+var a;
+var b;
+var c;
+print a;
+print b;
+print c;
+print d;
+a=b=3;
+print a;
+print b;
+print c;
+print d;
+a=b+1;
+print a;
+print b;
+print c;
+print d;
+print d
+a=3

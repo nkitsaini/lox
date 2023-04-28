@@ -1,0 +1,2966 @@
+# serializer version: 1
+# name: test_repl[boolean_control_flow.lox]
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].1
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].10
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].11
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].12
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].13
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].14
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].15
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].16
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].17
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].18
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].19
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].2
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].20
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].21
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].22
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].23
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].24
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].25
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].26
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].27
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].28
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].29
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].3
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].30
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].31
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].32
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].33
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].34
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].35
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].36
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].37
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].38
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].39
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].4
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].40
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].41
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].42
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].43
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].44
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].45
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].46
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].47
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].48
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].49
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].5
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].50
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].51
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].52
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].53
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].54
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].55
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].56
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].57
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].58
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].59
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].6
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].60
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].61
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].62
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].63
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].64
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].65
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].66
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].67
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].68
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].69
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].7
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].70
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].71
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].72
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].73
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].74
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].75
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].8
+  _CallList([
+  ])
+# ---
+# name: test_repl[boolean_control_flow.lox].9
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox]
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].1
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].10
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].11
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].12
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].13
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].14
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].15
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].16
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].17
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].18
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].19
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].2
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].20
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].21
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].22
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].23
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].24
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].25
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].26
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].27
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].28
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].29
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].3
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].30
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].31
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].32
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].33
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].34
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].35
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].36
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].37
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].38
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].39
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].4
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].40
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].41
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].42
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].43
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].44
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].45
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].46
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].47
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].48
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].49
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].5
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].50
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].51
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].52
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].53
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].54
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].55
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].56
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].57
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].58
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].59
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].6
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].60
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].61
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].62
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].63
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].64
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].65
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].66
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].67
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].68
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].69
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].7
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].70
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        'Expected ; after print statement',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].71
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].72
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].73
+  _CallList([
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: a.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: b.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Uninitialized variable: c.'),
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        LoxRuntimeError('Undefined variable: d'),
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].74
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        'Expected ; after print statement',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].75
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].8
+  _CallList([
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].9
+  _CallList([
+  ])
+# ---

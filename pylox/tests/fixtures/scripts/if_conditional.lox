@@ -1,0 +1,23 @@
+var a =3;
+var b =7;
+if (true) {
+	print a;
+} else {
+	print b;
+}
+if (false) {
+	print a;
+} else {
+	print b;
+}
+
+if (true) {
+	print b;
+}
+if (1) {
+	print b;
+}
+if (false) {
+	print b;
+}
+

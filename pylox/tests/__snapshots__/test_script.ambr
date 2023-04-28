@@ -1,0 +1,168 @@
+# serializer version: 1
+# name: test_script[if_conditional.lox]
+  _CallList([
+  ])
+# ---
+# name: test_script[if_conditional.lox].1
+  _CallList([
+  ])
+# ---
+# name: test_script[if_conditional.lox].2
+  _CallList([
+  ])
+# ---
+# name: test_script[if_conditional.lox].3
+  _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        7,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        7,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        7,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_script[scoping.lox]
+  _CallList([
+  ])
+# ---
+# name: test_script[scoping.lox].1
+  _CallList([
+  ])
+# ---
+# name: test_script[scoping.lox].2
+  _CallList([
+  ])
+# ---
+# name: test_script[scoping.lox].3
+  _CallList([
+    _Call(
+      tuple(
+        'inner a',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'outer b',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global c',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'outer a',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'outer b',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global c',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global a',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global b',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'global c',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_script[while_loop.lox]
+  _CallList([
+  ])
+# ---
+# name: test_script[while_loop.lox].1
+  _CallList([
+  ])
+# ---
+# name: test_script[while_loop.lox].2
+  _CallList([
+  ])
+# ---
+# name: test_script[while_loop.lox].3
+  _CallList([
+    _Call(
+      tuple(
+        1,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        2,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
