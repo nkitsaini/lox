@@ -187,7 +187,7 @@ class Break(Statement):
 @final
 @dataclass
 class Return(Statement):
-	expr: BaseExpr
+	expr: Optional[BaseExpr]
 
 	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_return(self)

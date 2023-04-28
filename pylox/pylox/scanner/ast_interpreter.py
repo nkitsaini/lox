@@ -33,11 +33,19 @@ class LoxCallable(abc.ABC):
 	@abc.abstractmethod
 	def arity(self) -> int:
 		raise NotImplementedError()
+	
+	@abc.abstractmethod
+	def name(self) -> str:
+		raise NotImplementedError()
 
 @final
 class UserCallable(LoxCallable):
-	def __init__(self, fn: Function) -> None:
+	def __init__(self, fn: Function, closure: 'Environment') -> None:
 		self.fn = fn
+		self.closure = closure
+	
+	def name(self) -> str:
+		return self.fn.name.lexeme
 	
 	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
 		new_env = Environment()
@@ -45,7 +53,8 @@ class UserCallable(LoxCallable):
 			new_env.define(lexeme.lexeme)
 			new_env.set(lexeme, val_expr)
 		
-		new_env.parent = interpreter.env
+		old_env = interpreter.env
+		new_env.parent = self.closure
 		interpreter.env = new_env
 
 		try:
@@ -53,17 +62,19 @@ class UserCallable(LoxCallable):
 		except FunctionReturn as r:
 			return r.return_val
 		finally:
-			assert interpreter.env.parent is not None
-			interpreter.env = interpreter.env.parent
+			interpreter.env = old_env
 
 	def arity(self) -> int:
 		return len(self.fn.arguments)
 	
-class NativeLoxCallable(LoxCallable, abc.ABC):
-	@classmethod
+class NativeLoxCallable(LoxCallable):
+	@staticmethod
 	@abc.abstractmethod
-	def name(cls) -> str:
+	def static_name() -> str:
 		raise NotImplementedError()
+
+	def name(self) -> str:
+		return self.static_name()
 @final
 class ClockCallable(NativeLoxCallable):
 	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
@@ -72,9 +83,10 @@ class ClockCallable(NativeLoxCallable):
 	def arity(self) -> int:
 		return 0
 	
-	@classmethod
-	def name(cls) -> str:
+	@staticmethod
+	def static_name() -> str:
 		return "clock"
+	
 	
 
 
@@ -119,7 +131,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	def __init__(self) -> None:
 		super().__init__()
 		self.global_env = Environment()
-		self.global_env.declare(ClockCallable.name(), ClockCallable())
+		self.global_env.declare(ClockCallable.static_name(), ClockCallable())
 		self.env: Environment = self.global_env
 	
 	def visit_binary(self, expr: Binary):
@@ -278,8 +290,12 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 			lox.lox_print('true')
 		elif val is False:
 			lox.lox_print('false')
+		elif val is None:
+			lox.lox_print('nil')
 		elif isinstance(val, NativeLoxCallable):
 			lox.lox_print(f'<NativeLoxFunction: {val.name()}>')
+		elif isinstance(val, UserCallable):
+			lox.lox_print(f'<function: {val.name()}>')
 		else:
 			lox.lox_print(val)
 	
@@ -310,13 +326,15 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 
 	def visit_function(self, expr: Function):
 		self.env.define(expr.name.lexeme)
-		self.env.set(expr.name, UserCallable(expr))
+		self.env.set(expr.name, UserCallable(expr, self.env))
 
 	
 	def visit_break(self, expr: Break):
 		raise LoopBreak()
 
 	def visit_return(self, expr: Return):
+		if expr.expr is None:
+			raise FunctionReturn(None)
 		raise FunctionReturn(self.visit_any(expr.expr))
 	
 

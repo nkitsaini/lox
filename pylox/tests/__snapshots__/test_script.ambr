@@ -208,6 +208,36 @@
     ),
   ])
 # ---
+# name: test_script[functions_closure.lox]
+  _CallList([
+  ])
+# ---
+# name: test_script[functions_closure.lox].1
+  _CallList([
+  ])
+# ---
+# name: test_script[functions_closure.lox].2
+  _CallList([
+  ])
+# ---
+# name: test_script[functions_closure.lox].3
+  _CallList([
+    _Call(
+      tuple(
+        1,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        2,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
 # name: test_script[functions_fibonacci_series.lox]
   _CallList([
   ])

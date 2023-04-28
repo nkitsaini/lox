@@ -148,7 +148,9 @@ class Parser:
 		if self.open_functions == 0:
 			raise self.error(self.take(), "Can't use return outside functions")
 		self.consume(TokenType.RETURN, "Compiler Error")
-		expr = self.expression()
+		expr = None
+		if not self.match(TokenType.SEMICOLON):
+			expr = self.expression()
 		self.consume(TokenType.SEMICOLON, "Expect ; after return statement")
 		return Return(expr)
 

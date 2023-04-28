@@ -23,7 +23,7 @@ def main():
 		"If": "condition BaseExpr, inner Statement, else_inner Optional[Statement]",
 		"While": "condition BaseExpr, inner Statement",
 		"Break": None,
-		"Return": "expr BaseExpr",
+		"Return": "expr Optional[BaseExpr]",
 		"Function": "name Token, arguments List[Token], body Statement",
 	}
 
