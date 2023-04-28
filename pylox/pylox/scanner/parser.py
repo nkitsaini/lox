@@ -12,6 +12,7 @@ class Parser:
 	tokens: List[Token]
 	current: int = 0
 	open_loops: int = 0
+	open_functions: int = 0
 
 	def expression(self) -> BaseExpr:
 		return self.assignment()
@@ -101,6 +102,10 @@ class Parser:
 			return self.for_statement()
 		if self.match(TokenType.BREAK):
 			return self.break_statement()
+		if self.match(TokenType.RETURN):
+			return self.return_statement()
+		if self.match(TokenType.FUN):
+			return self.function_statement()
 		else:
 			return self.expression_statement()
 	
@@ -138,6 +143,14 @@ class Parser:
 		self.consume(TokenType.BREAK, "Compiler Error")
 		self.consume(TokenType.SEMICOLON, "Expect ; after break statement")
 		return Break()
+
+	def return_statement(self):
+		if self.open_functions == 0:
+			raise self.error(self.take(), "Can't use return outside functions")
+		self.consume(TokenType.RETURN, "Compiler Error")
+		expr = self.expression()
+		self.consume(TokenType.SEMICOLON, "Expect ; after return statement")
+		return Return(expr)
 
 	def block_statement(self):
 		self.take()
@@ -215,6 +228,26 @@ class Parser:
 		finally:
 			self.open_loops -= 1
 
+	def function_statement(self):
+		self.open_functions += 1
+		try:
+			self.take() # fun
+			function_name = self.consume(TokenType.IDENTIFIER, "function name missing")
+			self.consume(TokenType.LEFT_PARAN, "( missing after function name")
+			args: List[Token] = []
+			if not self.match(TokenType.RIGHT_PARAN):
+				args.append(self.consume(TokenType.IDENTIFIER, "Function args can only be identifiers"))
+				while self.match(TokenType.COMMA):
+					self.take() # ,
+					args.append(self.consume(TokenType.IDENTIFIER, "Function args can only be identifiers"))
+
+			self.take() # Right paran
+			body = self.statement()
+
+			return Function(function_name, args, body)
+		finally:
+			self.open_loops -= 1
+
 	def expression_statement(self):
 		rv = Expression(self.expression())
 		self.consume(TokenType.SEMICOLON, "Expected ; after Expression")
@@ -280,7 +313,37 @@ class Parser:
 			self.take()
 			return Unary(self.take(), self.unary())
 		else:
-			return self.primary()
+			return self.call()
+	
+	def call(self):
+		expr = self.primary()
+		while True:
+			if (self.match(TokenType.LEFT_PARAN)):
+				expr = self.finish_call(expr)
+			else:
+				break
+		return expr
+	
+	def finish_call(self, expr: BaseExpr) -> BaseExpr:
+		open_paren = self.take()
+		args = []
+		if (not self.match(TokenType.RIGHT_PARAN)):
+			args = self.arguments()
+		self.consume(TokenType.RIGHT_PARAN, "Function call paren is unclosed")
+		return Call(expr, open_paren, args)
+	
+	def arguments(self) -> List[BaseExpr]:
+		args = [self.expression()]
+		while self.match(TokenType.COMMA):
+			if (len(args) >= 255):
+				# NOTE: We don't throw error here
+				# because parser does not need to go into PANIC mode
+				# To parser the input is kinda valid.
+				self.error(self.take(), "Can't have more than 255 arguments.");
+			
+			self.take()
+			args.append(self.expression())
+		return args
 
 	def primary(self) -> BaseExpr:
 		if self.match(TokenType.RIGHT_PARAN):

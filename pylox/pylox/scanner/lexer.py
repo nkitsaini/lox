@@ -73,6 +73,16 @@ class Logical(BaseExpr):
 	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_logical(self)
 
+@final
+@dataclass
+class Call(BaseExpr):
+	callee: BaseExpr
+	paren: Token
+	arguments: List[BaseExpr]
+
+	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_call(self)
+
 
 class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -101,6 +111,10 @@ class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_logical(self, expr: 'Logical') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_call(self, expr: 'Call') -> _VisitorReturn:
 		raise NotImplementedError()
 
 	def visit_any(self, expr: BaseExpr) -> _VisitorReturn:
@@ -170,6 +184,24 @@ class Break(Statement):
 	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_break(self)
 
+@final
+@dataclass
+class Return(Statement):
+	expr: BaseExpr
+
+	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_return(self)
+
+@final
+@dataclass
+class Function(Statement):
+	name: Token
+	arguments: List[Token]
+	body: Statement
+
+	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_function(self)
+
 
 class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -198,6 +230,14 @@ class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_break(self, expr: 'Break') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_return(self, expr: 'Return') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_function(self, expr: 'Function') -> _VisitorReturn:
 		raise NotImplementedError()
 
 

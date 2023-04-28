@@ -14,6 +14,11 @@ class LoxRuntimeError(Exception):
 class LoopBreak(Exception):
 	pass
 
+class FunctionReturn(Exception):
+	def __init__(self, return_val: Any) -> None:
+		super().__init__("")
+		self.return_val = return_val
+
 class _UninitializedVar:
 	pass
 _UN_INITIALIZED = _UninitializedVar()
@@ -50,7 +55,6 @@ class Environment:
 		elif self.parent:
 			return self.parent.get(variable)
 		raise LoxRuntimeError(variable, f"Undefined variable: {name}")
-
 
 
 @final
@@ -103,6 +107,28 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 
 	def visit_grouping(self, expr: Grouping):
 		return self.visit_any(expr.expression)
+
+	def visit_call(self, expr: Call):
+		function_ref = self.visit_any(expr.callee)
+		if not isinstance(function_ref, Function):
+			raise LoxRuntimeError(function_ref, "Value is not a callable: " + str(function_ref))
+		if len(function_ref.arguments) != len(expr.arguments):
+			raise LoxRuntimeError(expr.paren, f"Expected {len(function_ref.arguments)} arguments to be passed. Found {len(expr.arguments)}")
+		new_env = Environment()
+		for lexeme, val_expr in zip(function_ref.arguments, expr.arguments):
+			new_env.define(lexeme.lexeme)
+			new_env.set(lexeme, self.visit_any(val_expr))
+		
+		new_env.parent = self.env
+		self.env = new_env
+
+		try:
+			self.visit_any(function_ref.body)
+		except FunctionReturn as r:
+			return r.return_val
+		finally:
+			assert self.env.parent is not None
+			self.env = self.env.parent
 
 	def visit_literal(self, expr: Literal):
 		return expr.value
@@ -220,10 +246,17 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 			except LoopBreak:
 				break
 
-		
+	def visit_function(self, expr: Function):
+		self.env.define(expr.name.lexeme)
+		self.env.set(expr.name, expr)
+
 	
 	def visit_break(self, expr: Break):
 		raise LoopBreak()
+
+	def visit_return(self, expr: Return):
+		raise FunctionReturn(self.visit_any(expr.expr))
+	
 
 
 if __name__ == "__main__":

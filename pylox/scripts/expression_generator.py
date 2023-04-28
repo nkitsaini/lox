@@ -12,6 +12,7 @@ def main():
 		"Variable": "name Token",
 		"Assignment": "name Token, expr BaseExpr ",
 		"Logical": "left BaseExpr, operator Token, right BaseExpr ",
+		"Call": "callee BaseExpr, paren Token, arguments List[BaseExpr] ",
 	}
 
 	statements = {
@@ -22,6 +23,8 @@ def main():
 		"If": "condition BaseExpr, inner Statement, else_inner Optional[Statement]",
 		"While": "condition BaseExpr, inner Statement",
 		"Break": None,
+		"Return": "expr BaseExpr",
+		"Function": "name Token, arguments List[Token], body Statement",
 	}
 
 	header = textwrap.dedent("""\

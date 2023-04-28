@@ -1,0 +1,9 @@
+fun hey(a) {
+	if (a==0) {
+		return "This is Zero";
+	}
+	return "This is non zero";
+}
+print hey(0);
+print hey(3);
+print hey(1);
