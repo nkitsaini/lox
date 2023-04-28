@@ -215,6 +215,13 @@
 # ---
 # name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].35
   _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].36
@@ -259,6 +266,13 @@
 # ---
 # name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].39
   _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
     _Call(
       tuple(
         3,
@@ -328,6 +342,13 @@
       dict({
       }),
     ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].44
@@ -379,6 +400,13 @@
 # ---
 # name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].47
   _CallList([
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
     _Call(
       tuple(
         3,
@@ -469,6 +497,13 @@
       dict({
       }),
     ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].52
@@ -541,6 +576,20 @@
       dict({
       }),
     ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].56
@@ -609,6 +658,20 @@
     _Call(
       tuple(
         3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
       ),
       dict({
       }),
@@ -692,6 +755,20 @@
     _Call(
       tuple(
         3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
       ),
       dict({
       }),
@@ -785,6 +862,20 @@
     _Call(
       tuple(
         3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
       ),
       dict({
       }),
@@ -895,6 +986,20 @@
     ),
     _Call(
       tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
         4,
       ),
       dict({
@@ -997,6 +1102,20 @@
     _Call(
       tuple(
         3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
       ),
       dict({
       }),
@@ -1119,6 +1238,20 @@
     ),
     _Call(
       tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
         4,
       ),
       dict({
@@ -1138,6 +1271,1308 @@
   ])
 # ---
 # name: test_repl[\n\tvar a;\n\tvar b;\n\tvar c;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b=3;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\ta=b+1;\n\tprint a;\n\tprint b;\n\tprint c;\n\tprint d;\n\tprint d\n\ta=3\n].9
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n]
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].1
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].10
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].11
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].12
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].13
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].14
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].15
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].16
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].17
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].18
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].19
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].2
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].20
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].21
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].22
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].23
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].24
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].25
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].26
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].27
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].28
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].29
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].3
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].30
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].31
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].32
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].33
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].34
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].35
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].36
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].37
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].38
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].39
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].4
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].40
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].41
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].42
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].43
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].44
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].45
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].46
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].47
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].48
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].49
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].5
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].50
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].51
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].52
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].53
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].54
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].55
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].56
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].57
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].58
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].59
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].6
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].60
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].61
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].62
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].63
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].64
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].65
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].66
+  _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.AND: 23>, lexeme='and', line=0, literal_val=False),
+        'Expected ; after Expression',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].67
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'false',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].7
+  _CallList([
+    _Call(
+      tuple(
+        'true',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].8
+  _CallList([
+  ])
+# ---
+# name: test_repl[\ntrue or false;\nfalse or true;\ntrue or true;\nfalse or false;\ntrue and false;\nfalse and true;\ntrue and true;\nfalse and false;\ntrue and 2;\n2 and true;\ntrue and true;\n2 and false;\n1 and 2;\n2 and 1;\n1 and 1;\n2 and false;\n].9
   _CallList([
   ])
 # ---

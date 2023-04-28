@@ -76,11 +76,31 @@ if (false) {
 }
 
 """
+
+boolean_control_flow = """
+true or false;
+false or true;
+true or true;
+false or false;
+true and false;
+false and true;
+true and true;
+false and false;
+true and 2;
+2 and true;
+true and true;
+2 and false;
+1 and 2;
+2 and 1;
+1 and 1;
+2 and false;
+"""
+
 @pytest.fixture(autouse=True)
 def run_around_tests():
     lox.reset__()
 
-@pytest.mark.parametrize("script", [variables])
+@pytest.mark.parametrize("script", [variables, boolean_control_flow])
 def test_repl(script: str, mocker: 'MockerFixture', snapshot: Any):
 	runner = Runner()
 	error_spy = mocker.spy(lox, 'error')

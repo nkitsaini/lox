@@ -19,7 +19,7 @@ class Runner:
 		assert statements is not None
 		
 		if (value := self.interpreter.interpret(statements)) != None:
-			print(value)
+			self.interpreter.printer(value)
 
 
 	def run_file(self, file_path: str):

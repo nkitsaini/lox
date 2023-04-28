@@ -11,6 +11,7 @@ def main():
 		"Unary": "operator Token, right BaseExpr",
 		"Variable": "name Token",
 		"Assignment": "name Token, expr BaseExpr ",
+		"Logical": "left BaseExpr, operator Token, right BaseExpr ",
 	}
 
 	statements = {

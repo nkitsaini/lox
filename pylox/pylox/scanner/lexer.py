@@ -63,6 +63,16 @@ class Assignment(BaseExpr):
 	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_assignment(self)
 
+@final
+@dataclass
+class Logical(BaseExpr):
+	left: BaseExpr
+	operator: Token
+	right: BaseExpr
+
+	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_logical(self)
+
 
 class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -87,6 +97,10 @@ class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_assignment(self, expr: 'Assignment') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_logical(self, expr: 'Logical') -> _VisitorReturn:
 		raise NotImplementedError()
 
 	def visit_any(self, expr: BaseExpr) -> _VisitorReturn:

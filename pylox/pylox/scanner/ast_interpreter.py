@@ -138,6 +138,20 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 			case _ as op:
 				raise RuntimeError(expr.operator, f"Bug in interpreter. Unexpected binary operator. {op}")
 
+	def visit_logical(self, expr: Logical):
+		left_value = self.visit_any(expr.left)
+		rv = left_value
+		if expr.operator.token_type == TokenType.OR:
+			if not self.is_truthy(left_value):
+				rv = self.visit_any(expr.right)
+		elif expr.operator.token_type == TokenType.AND:
+			if self.is_truthy(left_value):
+				rv = self.visit_any(expr.right)
+
+		else:
+			raise RuntimeError("Compiler Bug")
+		return rv
+		
 	def interpret(self, statements: List[Statement]):
 		try:
 			rv = None
@@ -171,7 +185,6 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		return self.env.get(expr.name)
 	
 	def printer(self, val: Any):
-		# In lox the true and false are lowercase
 		if val is True:
 			lox.lox_print('true')
 		elif val is False:
