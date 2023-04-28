@@ -1,12 +1,22 @@
 for(var i=1; i <= 5; i = i + 1) {
 	print i;
 }
+print "=================";
 var i;
 for(i=3; i <= 5; i = i + 1) {
 	print i;
 }
 
+print "=================";
 for(var j=1; j <= 5; j = j + 1) {
 	print j;
 }
+print "=================";
+for(i=3; i <= 5; i = i + 1) {
+	if (i==4){
+		break;
+	}
+	print i;
+}
+print "=================";
 print j; // should fail due to scoping

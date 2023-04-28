@@ -188,6 +188,7 @@ class Scanner:
 					"this": TokenType.THIS,
 					"var": TokenType.VAR,
 					"while": TokenType.WHILE,
+					"break": TokenType.BREAK,
 				}
 
 				if lexeme in reserved_identifier:

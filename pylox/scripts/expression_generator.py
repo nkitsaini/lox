@@ -21,6 +21,7 @@ def main():
 		"Block": "statements List[Statement]",
 		"If": "condition BaseExpr, inner Statement, else_inner Optional[Statement]",
 		"While": "condition BaseExpr, inner Statement",
+		"Break": None,
 	}
 
 	header = textwrap.dedent("""\
@@ -101,9 +102,12 @@ def main():
 		out += f"@final\n"
 		out += f"@dataclass\n"
 		out += f"class {expression_name}(Statement):\n"
-		for field_info in fields.split(','):
-			field_name, field_type = field_info.strip().split(' ')
-			out += TAB + f"{field_name}: {field_type}\n"
+		if fields == None:
+			out += TAB + "pass"
+		else:
+			for field_info in fields.split(','):
+				field_name, field_type = field_info.strip().split(' ')
+				out += TAB + f"{field_name}: {field_type}\n"
 		out += "\n"
 		out += TAB + "def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:\n"
 		out += TAB + TAB +  "return visitor.visit_" + expression_name.lower() + "(self)\n"

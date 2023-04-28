@@ -11,6 +11,9 @@ class LoxRuntimeError(Exception):
 		super().__init__(message)
 		self.token = token
 
+class LoopBreak(Exception):
+	pass
+
 class _UninitializedVar:
 	pass
 _UN_INITIALIZED = _UninitializedVar()
@@ -212,7 +215,15 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		
 	def visit_while(self, expr: While) -> None:
 		while self.visit_any(expr.condition):
-			self.visit_any(expr.inner)
+			try:
+				self.visit_any(expr.inner)
+			except LoopBreak:
+				break
+
+		
+	
+	def visit_break(self, expr: Break):
+		raise LoopBreak()
 
 
 if __name__ == "__main__":

@@ -2772,7 +2772,7 @@
   _CallList([
     _Call(
       tuple(
-        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        Token(token_type=<TokenType.EOF: 40>, lexeme='', line=0, literal_val=None),
         'Expected ; after print statement',
       ),
       dict({
@@ -2894,7 +2894,7 @@
   _CallList([
     _Call(
       tuple(
-        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        Token(token_type=<TokenType.EOF: 40>, lexeme='', line=0, literal_val=None),
         'Expected ; after print statement',
       ),
       dict({
@@ -2902,7 +2902,7 @@
     ),
     _Call(
       tuple(
-        Token(token_type=<TokenType.EOF: 39>, lexeme='', line=0, literal_val=None),
+        Token(token_type=<TokenType.EOF: 40>, lexeme='', line=0, literal_val=None),
         'Expected ; after Expression',
       ),
       dict({

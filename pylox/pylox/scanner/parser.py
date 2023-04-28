@@ -11,6 +11,7 @@ class ParseError(RuntimeError):
 class Parser:
 	tokens: List[Token]
 	current: int = 0
+	open_loops: int = 0
 
 	def expression(self) -> BaseExpr:
 		return self.assignment()
@@ -98,6 +99,8 @@ class Parser:
 			return self.while_statement()
 		if self.match(TokenType.FOR):
 			return self.for_statement()
+		if self.match(TokenType.BREAK):
+			return self.break_statement()
 		else:
 			return self.expression_statement()
 	
@@ -129,6 +132,13 @@ class Parser:
 		self.consume(TokenType.SEMICOLON, "Expected ; after print statement")
 		return rv
 
+	def break_statement(self):
+		if self.open_loops == 0:
+			raise self.error(self.take(), "Can't use break outside loops")
+		self.consume(TokenType.BREAK, "Compiler Error")
+		self.consume(TokenType.SEMICOLON, "Expect ; after break statement")
+		return Break()
+
 	def block_statement(self):
 		self.take()
 		statements: List[Statement] = []
@@ -156,55 +166,54 @@ class Parser:
 		return If(condition, inner, else_inner)
 
 	def while_statement(self):
-		self.take() # while
-		self.consume(TokenType.LEFT_PARAN, "`while` should be followed by `(`")
-		condition = self.expression()
-		self.consume(TokenType.RIGHT_PARAN, "Unclosed `while` parans `)`")
-		inner = self.statement()
+		self.open_loops += 1
+		try:
+			self.take() # while
+			self.consume(TokenType.LEFT_PARAN, "`while` should be followed by `(`")
+			condition = self.expression()
+			self.consume(TokenType.RIGHT_PARAN, "Unclosed `while` parans `)`")
+			inner = self.statement()
 
-		return While(condition, inner)
+			return While(condition, inner)
+		finally:
+			self.open_loops -= 1 
 
 	def for_statement(self):
-		self.take() # for
-		self.consume(TokenType.LEFT_PARAN, "`for` should be followed by `(`")
-		initializer: Optional[Statement] = None
-		if (self.match(TokenType.SEMICOLON)):
-			self.take()
-		elif (self.match(TokenType.VAR)):
-			initializer = self.var_statement()
-		else:
-			initializer = self.expression_statement()
-		
+		self.open_loops += 1
+		try:
+			self.take() # for
+			self.consume(TokenType.LEFT_PARAN, "`for` should be followed by `(`")
+			initializer: Optional[Statement] = None
+			if (self.match(TokenType.SEMICOLON)):
+				self.take()
+			elif (self.match(TokenType.VAR)):
+				initializer = self.var_statement()
+			else:
+				initializer = self.expression_statement()
+			
 
-		condition: Optional[BaseExpr] = None
-		if (not self.match(TokenType.SEMICOLON)):
-			condition = self.expression()
-		
-		self.consume(TokenType.SEMICOLON, "Expected semicolon after condition")
-		increment: Optional[BaseExpr] = None
-		if (not self.match(TokenType.RIGHT_PARAN)):
-			increment = self.expression()
-		
-		self.consume(TokenType.RIGHT_PARAN, "Expected ) after step in for loop")
+			condition: Optional[BaseExpr] = None
+			if (not self.match(TokenType.SEMICOLON)):
+				condition = self.expression()
+			
+			self.consume(TokenType.SEMICOLON, "Expected semicolon after condition")
+			increment: Optional[BaseExpr] = None
+			if (not self.match(TokenType.RIGHT_PARAN)):
+				increment = self.expression()
+			
+			self.consume(TokenType.RIGHT_PARAN, "Expected ) after step in for loop")
 
-		body = self.statement()
-		rv = body
-		if increment:
-			rv = Block([rv, Expression(increment)])
-		if condition:
-			rv = While(condition, rv)
-		if initializer:
-			rv = Block([initializer, rv])
-		return rv
-
-
-		
-		
-		# condition = self.expression()
-		# self.consume(TokenType.RIGHT_PARAN, "Unclosed `for` parans `)`")
-		# inner = self.statement()
-
-		# return While(condition, inner)
+			body = self.statement()
+			rv = body
+			if increment:
+				rv = Block([rv, Expression(increment)])
+			if condition:
+				rv = While(condition, rv)
+			if initializer:
+				rv = Block([initializer, rv])
+			return rv
+		finally:
+			self.open_loops -= 1
 
 	def expression_statement(self):
 		rv = Expression(self.expression())

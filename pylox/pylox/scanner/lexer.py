@@ -163,6 +163,13 @@ class While(Statement):
 	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_while(self)
 
+@final
+@dataclass
+class Break(Statement):
+	pass
+	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_break(self)
+
 
 class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -187,6 +194,10 @@ class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_while(self, expr: 'While') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_break(self, expr: 'Break') -> _VisitorReturn:
 		raise NotImplementedError()
 
 
