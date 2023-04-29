@@ -1842,17 +1842,18 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].26
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].27
@@ -1886,13 +1887,6 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].3
@@ -1901,17 +1895,18 @@
 # ---
 # name: test_repl[variable_declaration.lox].30
   _CallList([
-  ])
-# ---
-# name: test_repl[variable_declaration.lox].31
-  _CallList([
     _Call(
       tuple(
-        3,
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
       ),
       dict({
       }),
     ),
+  ])
+# ---
+# name: test_repl[variable_declaration.lox].31
+  _CallList([
   ])
 # ---
 # name: test_repl[variable_declaration.lox].32
@@ -1941,35 +1936,22 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].34
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].35
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].36
@@ -1999,42 +1981,22 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].38
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].39
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].4
@@ -2068,49 +2030,22 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].42
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].43
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].44
@@ -2140,56 +2075,22 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].46
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].47
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].48
@@ -2219,27 +2120,6 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].5
@@ -2248,38 +2128,18 @@
 # ---
 # name: test_repl[variable_declaration.lox].50
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].51
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].52
@@ -2309,70 +2169,22 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].54
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].55
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].56
@@ -2402,77 +2214,22 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].58
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].59
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].6
@@ -2506,84 +2263,22 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].62
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].63
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].64
@@ -2613,91 +2308,22 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].66
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].67
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].68
@@ -2727,41 +2353,6 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].7
@@ -2770,6 +2361,14 @@
 # ---
 # name: test_repl[variable_declaration.lox].70
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
     _Call(
       tuple(
         Token(token_type=<TokenType.EOF: 40>, lexeme='', line=0, literal_val=None),
@@ -2782,48 +2381,6 @@
 # ---
 # name: test_repl[variable_declaration.lox].71
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].72
@@ -2853,45 +2410,18 @@
       dict({
       }),
     ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Uninitialized variable: c.'),
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: d'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].74
   _CallList([
+    _Call(
+      tuple(
+        Token(token_type=<TokenType.IDENTIFIER: 20>, lexeme='d', line=0, literal_val=None),
+        'Unknown variable usage',
+      ),
+      dict({
+      }),
+    ),
     _Call(
       tuple(
         Token(token_type=<TokenType.EOF: 40>, lexeme='', line=0, literal_val=None),
@@ -2912,48 +2442,6 @@
 # ---
 # name: test_repl[variable_declaration.lox].75
   _CallList([
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        4,
-      ),
-      dict({
-      }),
-    ),
-    _Call(
-      tuple(
-        3,
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_repl[variable_declaration.lox].8

@@ -4,12 +4,16 @@ from .scanner.scanner import Scanner
 from .scanner.parser import Parser
 # from .scanner.ast_printer import AstPrinter
 from .scanner.ast_interpreter import AstInterpreter
+from .scanner.resolver import AstResolver
 from . import lox
 
 
 @dataclass
 class Runner:
-	interpreter: AstInterpreter = field(default_factory=AstInterpreter)
+	resolver: AstResolver = field(default_factory=AstResolver)
+	interpreter: AstInterpreter = field(init=False)
+	def __post_init__(self):
+		self.interpreter = AstInterpreter(self.resolver)
 	def run(self, source: str):
 		scanner = Scanner(source)
 		tokens = scanner.scan_tokens();
@@ -17,6 +21,9 @@ class Runner:
 		if lox.had_error:
 			return
 		assert statements is not None
+		self.resolver.resolve(statements)
+		if lox.had_error:
+			return
 		
 		if (value := self.interpreter.interpret(statements)) != None:
 			self.interpreter.printer(value)

@@ -28,13 +28,6 @@
 # ---
 # name: test_script[for_loop.lox].1
   _CallList([
-    _Call(
-      tuple(
-        LoxRuntimeError('Undefined variable: j'),
-      ),
-      dict({
-      }),
-    ),
   ])
 # ---
 # name: test_script[for_loop.lox].2

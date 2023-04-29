@@ -27,6 +27,11 @@ def errorToken(token: 'Token', msg: str):
 	line = token.line
 	lexem = token.lexeme
 	print(colorama.Fore.RED + "[ERROR] " + colorama.Fore.RESET + f"{colorama.Fore.GREEN}Token: {lexem} | Line {line+1} |{colorama.Fore.RESET} {msg}")
+
+def warningToken(token: 'Token', msg: str):
+	line = token.line
+	lexem = token.lexeme
+	print(colorama.Fore.CYAN + "[WARNING] " + colorama.Fore.RESET + f"{colorama.Fore.GREEN}Token: {lexem} | Line {line+1} |{colorama.Fore.RESET} {msg}")
 	
 # To make easily testable
 def lox_print(val: Any):

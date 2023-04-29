@@ -4,6 +4,7 @@ from .lexer import *
 import time
 from .tokens import TokenType
 from .. import lox
+from .resolver import AstResolver
 
 
 class LoxRuntimeError(Exception):
@@ -48,10 +49,9 @@ class UserCallable(LoxCallable):
 		return self.fn.name.lexeme
 	
 	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
-		new_env = Environment()
+		new_env = Environment(interpreter.resolver)
 		for lexeme, val_expr in zip(self.fn.arguments, arguments):
-			new_env.define(lexeme.lexeme)
-			new_env.set(lexeme, val_expr)
+			new_env.define(lexeme.lexeme, val_expr)
 		
 		old_env = interpreter.env
 		new_env.parent = self.closure
@@ -77,10 +77,9 @@ class AnonymousUserCallable(LoxCallable):
 		return ":Anonymous:"
 	
 	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
-		new_env = Environment()
+		new_env = Environment(interpreter.resolver)
 		for lexeme, val_expr in zip(self.fn.arguments, arguments):
-			new_env.define(lexeme.lexeme)
-			new_env.set(lexeme, val_expr)
+			new_env.define(lexeme.lexeme, val_expr)
 		
 		old_env = interpreter.env
 		new_env.parent = self.closure
@@ -121,46 +120,45 @@ class ClockCallable(NativeLoxCallable):
 
 @dataclass
 class Environment:
+	resolver: 'AstResolver'
 	parent: 'Environment | None' = None
 	envs: Dict[str, Any] = field(default_factory=dict)
 
-	def define(self, variable: str):
+	def declare(self, variable: str):
 		self.envs[variable] = _UN_INITIALIZED
-	def declare(self, variable: str, value: Any):
-		self.envs[variable] = value
 
-	def set(self, variable: Token, value: Any) -> Any:
+	def define(self, variable: str, value: Any):
+		self.envs[variable] = value
+	def set(self, variable: Token, value: Any, depth: Optional[int] = None) -> Any:
+		if depth == None:
+			depth = self.resolver.variable_to_depth[variable]
 		name = variable.lexeme
-		if name in self.envs:
+		if depth == 0:
 			self.envs[name] = value
 			return value
-		elif self.parent:
-			return self.parent.set(variable, value)
-		raise LoxRuntimeError(variable, f"Undefined variable: {name}")
-	
-	# def is_defined(self, variable: str) -> bool:
-	# 	return variable in self.envs
+		assert self.parent, "Compiler bug, parent undefined but didn't catch in resolver"
+		return self.parent.set(variable, value, depth - 1)
 
-	# def is_initialized(self, variable: str):
-	# 	return self.is_defined(variable) and self.envs[variable] is not _UN_INITIALIZED
-
-	def get(self, variable: Token) -> Any:
+	def get(self, variable: Token, depth: Optional[int] = None) -> Any:
+		if depth == None:
+			depth = self.resolver.variable_to_depth[variable]
 		name = variable.lexeme
-		if name in self.envs:
+		if depth == 0:
 			if self.envs[name] is _UN_INITIALIZED:
 				raise LoxRuntimeError(variable, f"Uninitialized variable: {name}.")
+
 			return self.envs[name]
-		elif self.parent:
-			return self.parent.get(variable)
-		raise LoxRuntimeError(variable, f"Undefined variable: {name}")
+		assert self.parent, "Compiler bug, parent undefined but didn't catch in resolver. get"
+		return self.parent.get(variable, depth-1)
 
 
 @final
 class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
-	def __init__(self) -> None:
-		super().__init__()
-		self.global_env = Environment()
-		self.global_env.declare(ClockCallable.static_name(), ClockCallable())
+	def __init__(self, resolver: 'AstResolver') -> None:
+		# super().__init__()
+		self.resolver = resolver
+		self.global_env = Environment(self.resolver)
+		self.global_env.define(ClockCallable.static_name(), ClockCallable())
 		self.env: Environment = self.global_env
 	
 	def visit_binary(self, expr: Binary):
@@ -307,12 +305,16 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		# if expr.name.lexeme in self.globals:
 		# 	raise LoxRuntimeError(expr.name, "Variable redclaration")
 		name = expr.name.lexeme
-		self.env.define(name)
+		result = None
 		if expr.expression is not None:
-			self.env.set(expr.name, expr.expression.run_against(self))
+			result = expr.expression.run_against(self)
+		self.env.declare(name)
+		if expr.expression is not None:
+			self.env.define(expr.name.lexeme, result)
 	
 	def visit_assignment(self, expr: Assignment) -> Any:
-		return self.env.set(expr.name, expr.expr.run_against(self))
+		val = expr.expr.run_against(self)
+		return self.env.set(expr.name, val)
 
 	def visit_variable(self, expr: Variable) -> Any:
 		return self.env.get(expr.name)
@@ -335,7 +337,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		self.printer(expr.expression.run_against(self))
 	
 	def visit_block(self, expr: Block) -> None:
-		self.env = Environment(self.env)
+		self.env = Environment(self.resolver, self.env)
 		try:
 			for statement in expr.statements:
 				self.visit_any(statement)
@@ -357,7 +359,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 				break
 
 	def visit_function(self, expr: Function):
-		self.env.define(expr.name.lexeme)
+		self.env.declare(expr.name.lexeme)
 		self.env.set(expr.name, UserCallable(expr, self.env))
 
 	
@@ -372,11 +374,12 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 
 
 if __name__ == "__main__":
-	interpreter = AstInterpreter()
 	expr = Binary(
 		Unary(Token(TokenType.MINUS, '-', 0, None), Literal(123)),
 		Grouping(Literal(54.234)),
 		Token(TokenType.STAR, '*', 0, None)
 	)
+	interpreter = AstInterpreter(AstResolver())
+	interpreter.resolver.resolve(expr)
 	print(expr.run_against(interpreter))
 	print()

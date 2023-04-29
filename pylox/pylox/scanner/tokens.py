@@ -11,6 +11,9 @@ class Token:
 	# Python representation of lox types
 	literal_val: Any = None
 
+	def __hash__(self) -> int:
+		return id(self)
+
 class TokenType(Enum):
 
 	# Single Character Tokens

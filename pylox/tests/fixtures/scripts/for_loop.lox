@@ -19,4 +19,3 @@ for(i=3; i <= 5; i = i + 1) {
 	print i;
 }
 print "=================";
-print j; // should fail due to scoping
