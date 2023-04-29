@@ -1,0 +1,13 @@
+fun twicer(actor, val) {
+	var orig_val = val;
+	val = actor(val);
+	val = actor(val);
+	return val;
+}
+
+for(var i=0; i < 10; i = i + 1){
+	print twicer(fun (i) {
+		i = i * 2;
+		return i;
+	},i);
+}

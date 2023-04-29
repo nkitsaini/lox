@@ -208,6 +208,92 @@
     ),
   ])
 # ---
+# name: test_script[functions_anonymous.lox]
+  _CallList([
+  ])
+# ---
+# name: test_script[functions_anonymous.lox].1
+  _CallList([
+  ])
+# ---
+# name: test_script[functions_anonymous.lox].2
+  _CallList([
+  ])
+# ---
+# name: test_script[functions_anonymous.lox].3
+  _CallList([
+    _Call(
+      tuple(
+        0,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        4,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        8,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        12,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        16,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        20,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        24,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        28,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        32,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        36,
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
 # name: test_script[functions_closure.lox]
   _CallList([
   ])

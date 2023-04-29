@@ -83,6 +83,15 @@ class Call(BaseExpr):
 	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_call(self)
 
+@final
+@dataclass
+class AnonFunction(BaseExpr):
+	arguments: List[Token]
+	body: 'Statement'
+
+	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_anonfunction(self)
+
 
 class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -115,6 +124,10 @@ class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_call(self, expr: 'Call') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_anonfunction(self, expr: 'AnonFunction') -> _VisitorReturn:
 		raise NotImplementedError()
 
 	def visit_any(self, expr: BaseExpr) -> _VisitorReturn:

@@ -67,6 +67,35 @@ class UserCallable(LoxCallable):
 	def arity(self) -> int:
 		return len(self.fn.arguments)
 	
+@final
+class AnonymousUserCallable(LoxCallable):
+	def __init__(self, fn: AnonFunction, closure: 'Environment') -> None:
+		self.fn = fn
+		self.closure = closure
+	
+	def name(self) -> str:
+		return ":Anonymous:"
+	
+	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
+		new_env = Environment()
+		for lexeme, val_expr in zip(self.fn.arguments, arguments):
+			new_env.define(lexeme.lexeme)
+			new_env.set(lexeme, val_expr)
+		
+		old_env = interpreter.env
+		new_env.parent = self.closure
+		interpreter.env = new_env
+
+		try:
+			interpreter.visit_any(self.fn.body)
+		except FunctionReturn as r:
+			return r.return_val
+		finally:
+			interpreter.env = old_env
+
+	def arity(self) -> int:
+		return len(self.fn.arguments)
+	
 class NativeLoxCallable(LoxCallable):
 	@staticmethod
 	@abc.abstractmethod
@@ -202,6 +231,9 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		# 	assert self.env.parent is not None
 		# 	self.env = self.env.parent
 
+	def visit_anonfunction(self, expr: AnonFunction):
+		return AnonymousUserCallable(expr, self.env)
+		...
 	def visit_literal(self, expr: Literal):
 		return expr.value
 	

@@ -13,6 +13,7 @@ def main():
 		"Assignment": "name Token, expr BaseExpr ",
 		"Logical": "left BaseExpr, operator Token, right BaseExpr ",
 		"Call": "callee BaseExpr, paren Token, arguments List[BaseExpr] ",
+		"AnonFunction": "arguments List[Token], body 'Statement'",
 	}
 
 	statements = {

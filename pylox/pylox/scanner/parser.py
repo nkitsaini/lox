@@ -16,7 +16,7 @@ class Parser:
 
 	def expression(self) -> BaseExpr:
 		return self.assignment()
-
+	
 	def assignment(self) -> BaseExpr:
 		# expr = self.equality()
 		expr = self.logic_or()
@@ -111,7 +111,10 @@ class Parser:
 		# Either var delaration or statement
 		if self.match(TokenType.VAR):
 			return self.var_statement()
-		elif self.match(TokenType.FUN):
+		
+		# Only match if it is named function. Anonymous functions will be treated
+		# as expressions
+		elif self.match(TokenType.FUN) and self.match_next(TokenType.IDENTIFIER):
 			return self.function_statement()
 		else:
 			return self.statement()
@@ -248,7 +251,26 @@ class Parser:
 
 			return Function(function_name, args, body)
 		finally:
-			self.open_loops -= 1
+			self.open_functions -= 1
+
+	def function_expression(self):
+		self.open_functions += 1
+		try:
+			self.take() # fun
+			self.consume(TokenType.LEFT_PARAN, "( missing in anonymous function declaration")
+			args: List[Token] = []
+			if not self.match(TokenType.RIGHT_PARAN):
+				args.append(self.consume(TokenType.IDENTIFIER, "Function args can only be identifiers"))
+				while self.match(TokenType.COMMA):
+					self.take() # ,
+					args.append(self.consume(TokenType.IDENTIFIER, "Function args can only be identifiers"))
+
+			self.take() # Right paran
+			body = self.statement()
+
+			return AnonFunction(args, body)
+		finally:
+			self.open_functions -= 1
 
 	def expression_statement(self):
 		rv = Expression(self.expression())
@@ -353,6 +375,8 @@ class Parser:
 			rv = Grouping(self.expression())
 			self.consume(TokenType.RIGHT_PARAN, "Expected ')' After expression") # consuming ending brace
 			return rv
+		elif self.match(TokenType.FUN):
+			return self.function_expression()
 		elif self.match(TokenType.NUMBER, TokenType.STRING, TokenType.NIL, TokenType.TRUE, TokenType.FALSE):
 			return lexer.Literal(self.take().literal_val)
 		elif self.match(TokenType.IDENTIFIER):
