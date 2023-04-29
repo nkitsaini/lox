@@ -360,7 +360,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 
 	def visit_function(self, expr: Function):
 		self.env.declare(expr.name.lexeme)
-		self.env.set(expr.name, UserCallable(expr, self.env))
+		self.env.define(expr.name.lexeme, UserCallable(expr, self.env))
 
 	
 	def visit_break(self, expr: Break):

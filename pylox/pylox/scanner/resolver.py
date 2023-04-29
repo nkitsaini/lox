@@ -44,7 +44,6 @@ class AstResolver(ExprVisitor[None], StmtVisitor[None]):
 	
 	def visit_function(self, expr: Function) -> None:
 		self.define(expr.name)
-		self.pin_resolution(expr.name)
 		with self.new_scope():
 			for arg in expr.arguments:
 				self.define(arg)
