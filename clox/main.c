@@ -7,6 +7,11 @@ int main(int argc, const* argv[]) {
 	initChunk(&chunk);
 	writeChunk(&chunk, OP_RETURN);
 
+	int constant = addConstant(&chunk, 1.2);
+	writeChunk(&chunk, OP_CONSTANT);
+	printf("Constant Add: %d", constant);
+	writeChunk(&chunk, constant);
+
 	disassembleChunk(&chunk, "test chunk");
 	freeChunk(&chunk);
 

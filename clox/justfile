@@ -5,3 +5,9 @@ build:
 
 run: build
 	./lox
+
+clean:
+	rm -rf *.gch
+
+clean-build: clean
+	just build
