@@ -112,6 +112,15 @@ class Get(BaseExpr):
 
 @final
 @dataclass
+class Super(BaseExpr):
+	keyword: Token
+	method: Token
+
+	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_super(self)
+
+@final
+@dataclass
 class AnonFunction(BaseExpr):
 	arguments: List[Token]
 	body: 'Statement'
@@ -163,6 +172,10 @@ class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_get(self, expr: 'Get') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_super(self, expr: 'Super') -> _VisitorReturn:
 		raise NotImplementedError()
 
 	@abc.abstractmethod
@@ -259,6 +272,7 @@ class Function(Statement):
 class Class(Statement):
 	name: Token
 	methods: List[Function]
+	superclass: Optional[Variable]
 
 	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_class(self)

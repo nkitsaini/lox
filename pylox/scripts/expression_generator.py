@@ -16,6 +16,7 @@ def main():
 		"Call": "callee BaseExpr, paren Token, arguments List[BaseExpr] ",
 		"This": "keyword Token",
 		"Get": "value BaseExpr, property Token",
+		"Super": "keyword Token, method Token",
 		"AnonFunction": "arguments List[Token], body 'Statement'",
 	}
 
@@ -29,7 +30,7 @@ def main():
 		"Break": None,
 		"Return": "expr Optional[BaseExpr]",
 		"Function": "name Token, arguments List[Token], body Statement",
-		"Class": "name Token, methods List[Function]",
+		"Class": "name Token, methods List[Function], superclass Optional[Variable]",
 	}
 
 	header = textwrap.dedent("""\

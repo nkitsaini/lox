@@ -26,3 +26,30 @@ jane.sayName();
 bill.sayName = jane.sayName;
 bill.sayName();
 jane.sayName();
+
+class TallPerson < Person {
+	howTall() {
+		print this.height;
+	}
+}
+var bob = TallPerson();
+bob.name = "Bob";
+bob.height = 73;
+bob.howTall();
+bob.sayName();
+
+print "============================";
+class TallPersonRevised < TallPerson {
+	tellMeAboutYourself() {
+		print "Okay, telling aobut me";
+		print super.howTall;
+		print super.howTall();
+		super.howTall();
+		super.sayName();
+		print "Done";
+	}
+}
+var tpr = TallPersonRevised();
+tpr.name = "Talkative Bob";
+tpr.height = 99;
+tpr.tellMeAboutYourself();

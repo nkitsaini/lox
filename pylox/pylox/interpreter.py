@@ -14,6 +14,7 @@ class Runner:
 	interpreter: AstInterpreter = field(init=False)
 	def __post_init__(self):
 		self.interpreter = AstInterpreter(self.resolver)
+
 	def run(self, source: str):
 		scanner = Scanner(source)
 		tokens = scanner.scan_tokens();

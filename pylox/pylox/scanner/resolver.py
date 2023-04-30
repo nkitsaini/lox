@@ -50,11 +50,23 @@ class AstResolver(ExprVisitor[None], StmtVisitor[None]):
 			self.resolve(expr.body)
 	
 	def visit_class(self, expr: Class):
+		if (expr.superclass is not None):
+			self.resolve(expr.superclass)
 		self.define(expr.name)
-		with self.new_scope():
-			self.scopes[-1]['this'] = True
-			for method in expr.methods:
-				self.visit_function(method)
+
+		if expr.superclass is None:
+			with self.new_scope():
+				self.scopes[-1]['this'] = True
+				for method in expr.methods:
+					self.visit_function(method)
+		else:
+			with self.new_scope():
+				self.scopes[-1]['super'] = True
+				with self.new_scope():
+					self.scopes[-1]['this'] = True
+					for method in expr.methods:
+						self.visit_function(method)
+			
 	
 	def visit_expression(self, expr: Expression) -> None:
 		self.resolve(expr.expression)
@@ -94,6 +106,9 @@ class AstResolver(ExprVisitor[None], StmtVisitor[None]):
 	def visit_this(self, expr: This):
 		self.pin_resolution(expr.keyword)
 	
+	def visit_super(self, expr: Super):
+		self.pin_resolution(expr.keyword)
+
 	def visit_setexpr(self, expr: SetExpr):
 		self.resolve(expr.value)
 		self.resolve(expr.target)

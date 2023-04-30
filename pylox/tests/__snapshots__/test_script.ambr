@@ -85,6 +85,76 @@
       dict({
       }),
     ),
+    _Call(
+      tuple(
+        73,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'Bob',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        '============================',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'Okay, telling aobut me',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        '<function: howTall>',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        99,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'nil',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        99,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'Talkative Bob',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'Done',
+      ),
+      dict({
+      }),
+    ),
   ])
 # ---
 # name: test_script[for_loop.lox]

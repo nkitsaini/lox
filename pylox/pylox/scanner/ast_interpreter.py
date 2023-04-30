@@ -221,8 +221,24 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	
 	def visit_class(self, expr: Class):
 		self.env.declare(expr.name.lexeme)
-		klass = LoxClass(expr, self.env)
+		superclass = None
+		if expr.superclass is not None:
+			superclass = self.env.get(expr.superclass.name)
+			if not isinstance(superclass, LoxClass):
+				raise LoxRuntimeError(expr.name, "Can only inherit from other classes")
+		klass = LoxClass(expr, self.env, superclass)
 		self.env.define(expr.name.lexeme, klass)
+	
+	def visit_super(self, expr: Super):
+		superclass = self.env.get(expr.keyword)
+		assert isinstance(superclass, LoxClass)
+		if expr.method.lexeme not in superclass.methods_by_names:
+			raise LoxRuntimeError(expr.method, "No such method on superclass")
+		superclass_depth = self.env.get_depth(expr.keyword)
+		this_instance = self.env.get_by_str('this', superclass_depth-1)
+		assert isinstance(this_instance, LoxInstance)
+		return UserCallable(superclass.methods_by_names[expr.method.lexeme], this_instance.env)
+	
 
 	def visit_this(self, expr: This):
 		return self.env.get(expr.keyword)

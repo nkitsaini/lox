@@ -260,12 +260,17 @@ class Parser:
 	def class_statement(self):
 		self.take() # class
 		name = self.consume(TokenType.IDENTIFIER, "Class identifier expected")
-		self.consume(TokenType.LEFT_BRACE, "Class name should be followed by {")
 		methods: List[Function] = []
+		superclass = None
+		if self.match(TokenType.LESS):
+			self.take()
+			superclass = self.consume(TokenType.IDENTIFIER, "Expected class name after `<` for class inheritance")
+		self.consume(TokenType.LEFT_BRACE, "Class name should be followed by {")
+
 		while not self.match(TokenType.RIGHT_BRACE) and self.peek_opt() is not None:
 			methods.append(self.function_statement(is_method = True))
 		self.consume(TokenType.RIGHT_BRACE, "Class paran unclosed: expected }")
-		return Class(name, methods)
+		return Class(name, methods, Variable(superclass) if superclass is not None else None)
 			
 
 	def function_expression(self):
@@ -402,5 +407,10 @@ class Parser:
 			return lexer.Literal(self.take().literal_val)
 		elif self.match(TokenType.IDENTIFIER):
 			return lexer.Variable(self.take())
+		elif self.match(TokenType.SUPER):
+			keyword = self.take()
+			self.consume(TokenType.DOT, "super must be followed by a DOT and identifier")
+			var = self.consume(TokenType.IDENTIFIER, "super. must be followed by an identifier")
+			return lexer.Super(keyword, var)
 		token = self.take()
 		raise self.error(token, f"Expected to find literal or group but found {token.lexeme}")

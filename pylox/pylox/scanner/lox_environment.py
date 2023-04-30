@@ -32,6 +32,19 @@ class Environment:
 		assert self.parent, "Compiler bug, parent undefined but didn't catch in resolver"
 		return self.parent.set(variable, value, depth - 1)
 
+	def get_by_str(self, variable: str, depth: int) -> Any:
+		name = variable
+		if depth == 0:
+			if self.envs[name] is _UN_INITIALIZED:
+				raise RuntimeError("Can't use get_by_str for possibly non-initialized stuff")
+
+			return self.envs[name]
+		assert self.parent, "Compiler bug, parent undefined but didn't catch in resolver. get"
+		return self.parent.get_by_str(variable, depth-1)
+	
+	def get_depth(self, variable: Token) -> int:
+		return self.resolver.variable_to_depth[variable]
+
 	def get(self, variable: Token, depth: Optional[int] = None) -> Any:
 		if depth == None:
 			depth = self.resolver.variable_to_depth[variable]
