@@ -11,8 +11,11 @@ def main():
 		"Unary": "operator Token, right BaseExpr",
 		"Variable": "name Token",
 		"Assignment": "name Token, expr BaseExpr ",
+		"SetExpr": "target BaseExpr, property Token, value BaseExpr",
 		"Logical": "left BaseExpr, operator Token, right BaseExpr ",
 		"Call": "callee BaseExpr, paren Token, arguments List[BaseExpr] ",
+		"This": "keyword Token",
+		"Get": "value BaseExpr, property Token",
 		"AnonFunction": "arguments List[Token], body 'Statement'",
 	}
 

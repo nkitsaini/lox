@@ -24,10 +24,11 @@ class Parser:
 			equals = self.take()
 			value = self.assignment()
 			# More checks other then `Variable` will be added here
-			# To accomodate cases like: `my_set[1+2].value = 3`
+			# To accomodate cases like: `my_set(1+2).value = 3`
 			if isinstance(expr, Variable):
-				r= Assignment(expr.name, value)
-				return r
+				return Assignment(expr.name, value)
+			elif isinstance(expr, Get):
+				return SetExpr(expr.value, expr.property, value)
 			self.error(equals, "Invalid Assignment target")
 		return expr
 	
@@ -358,6 +359,10 @@ class Parser:
 		while True:
 			if (self.match(TokenType.LEFT_PARAN)):
 				expr = self.finish_call(expr)
+			elif self.match(TokenType.DOT):
+				self.take()
+				property = self.consume(TokenType.IDENTIFIER, "Only identifiers can be accessed using `.` syntax")
+				expr = Get(expr, property)
 			else:
 				break
 		return expr
@@ -391,6 +396,8 @@ class Parser:
 			return rv
 		elif self.match(TokenType.FUN):
 			return self.function_expression()
+		elif self.match(TokenType.THIS):
+			return This(self.take())
 		elif self.match(TokenType.NUMBER, TokenType.STRING, TokenType.NIL, TokenType.TRUE, TokenType.FALSE):
 			return lexer.Literal(self.take().literal_val)
 		elif self.match(TokenType.IDENTIFIER):

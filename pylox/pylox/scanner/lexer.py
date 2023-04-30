@@ -65,6 +65,16 @@ class Assignment(BaseExpr):
 
 @final
 @dataclass
+class SetExpr(BaseExpr):
+	target: BaseExpr
+	property: Token
+	value: BaseExpr
+
+	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_setexpr(self)
+
+@final
+@dataclass
 class Logical(BaseExpr):
 	left: BaseExpr
 	operator: Token
@@ -82,6 +92,23 @@ class Call(BaseExpr):
 
 	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_call(self)
+
+@final
+@dataclass
+class This(BaseExpr):
+	keyword: Token
+
+	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_this(self)
+
+@final
+@dataclass
+class Get(BaseExpr):
+	value: BaseExpr
+	property: Token
+
+	def run_against(self, visitor: 'ExprVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_get(self)
 
 @final
 @dataclass
@@ -119,11 +146,23 @@ class ExprVisitor(abc.ABC, Generic[_VisitorReturn]):
 		raise NotImplementedError()
 
 	@abc.abstractmethod
+	def visit_setexpr(self, expr: 'SetExpr') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
 	def visit_logical(self, expr: 'Logical') -> _VisitorReturn:
 		raise NotImplementedError()
 
 	@abc.abstractmethod
 	def visit_call(self, expr: 'Call') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_this(self, expr: 'This') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_get(self, expr: 'Get') -> _VisitorReturn:
 		raise NotImplementedError()
 
 	@abc.abstractmethod

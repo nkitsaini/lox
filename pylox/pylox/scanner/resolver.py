@@ -51,7 +51,10 @@ class AstResolver(ExprVisitor[None], StmtVisitor[None]):
 	
 	def visit_class(self, expr: Class):
 		self.define(expr.name)
-		# TODO: maybe need to do something with methods here?
+		with self.new_scope():
+			self.scopes[-1]['this'] = True
+			for method in expr.methods:
+				self.visit_function(method)
 	
 	def visit_expression(self, expr: Expression) -> None:
 		self.resolve(expr.expression)
@@ -85,6 +88,16 @@ class AstResolver(ExprVisitor[None], StmtVisitor[None]):
 		for arg in expr.arguments:
 			self.resolve(arg)
 	
+	def visit_get(self, expr: Get):
+		self.resolve(expr.value)
+	
+	def visit_this(self, expr: This):
+		self.pin_resolution(expr.keyword)
+	
+	def visit_setexpr(self, expr: SetExpr):
+		self.resolve(expr.value)
+		self.resolve(expr.target)
+
 	def visit_grouping(self, expr: Grouping) -> None:
 		self.resolve(expr.expression)
 	

@@ -2,7 +2,7 @@ from typing import Any
 from pylox.scanner.lox_environment import Environment
 from pylox.scanner.lox_function import AnonymousUserCallable, ClockCallable, LoxCallable, UserCallable
 from pylox.scanner.lexer import Any, Assignment, Block, If, List
-from pylox.scanner.lox_class import LoxClass
+from pylox.scanner.lox_class import LoxClass, LoxInstance
 from pylox.scanner.lox_native_models import FunctionReturn, LoopBreak, LoxRuntimeError, LoxValue
 from .lexer import *
 from .tokens import TokenType
@@ -72,6 +72,21 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 			raise LoxRuntimeError(expr.paren, f"Expected {function_ref.arity()} arguments to be passed. Found {len(expr.arguments)}")
 
 		return function_ref.call(self, [self.visit_any(ex) for ex in expr.arguments])
+	
+	def visit_get(self, expr: Get):
+		obj = self.visit_any(expr.value)
+		if isinstance(obj, LoxInstance):
+			return obj.get(expr.property)
+		raise LoxRuntimeError(expr.property, "Only Instances have properties")
+	
+
+	def visit_setexpr(self, expr: SetExpr):
+		obj = self.visit_any(expr.target)
+		if isinstance(obj, LoxInstance):
+			return obj.set(expr.property, self.visit_any(expr.value))
+		raise LoxRuntimeError(expr.property, "Properties can only be set on instances")
+		
+		...
 
 	def visit_anonfunction(self, expr: AnonFunction):
 		return AnonymousUserCallable(expr, self.env)
@@ -206,9 +221,11 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	
 	def visit_class(self, expr: Class):
 		self.env.declare(expr.name.lexeme)
-		klass = LoxClass(expr)
+		klass = LoxClass(expr, self.env)
 		self.env.define(expr.name.lexeme, klass)
 
+	def visit_this(self, expr: This):
+		return self.env.get(expr.keyword)
 	
 	def visit_break(self, expr: Break):
 		raise LoopBreak()
@@ -217,6 +234,7 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 		if expr.expr is None:
 			raise FunctionReturn(None)
 		raise FunctionReturn(self.visit_any(expr.expr))
+	
 	
 
 

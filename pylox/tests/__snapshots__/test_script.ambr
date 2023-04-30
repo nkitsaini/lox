@@ -22,6 +22,71 @@
     ),
   ])
 # ---
+# name: test_script[class.lox]
+  _CallList([
+  ])
+# ---
+# name: test_script[class.lox].1
+  _CallList([
+  ])
+# ---
+# name: test_script[class.lox].2
+  _CallList([
+  ])
+# ---
+# name: test_script[class.lox].3
+  _CallList([
+    _Call(
+      tuple(
+        '<Class: MyClass>',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        3,
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'Test 2',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'Bill',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'Jane',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'Jane',
+      ),
+      dict({
+      }),
+    ),
+    _Call(
+      tuple(
+        'Jane',
+      ),
+      dict({
+      }),
+    ),
+  ])
+# ---
 # name: test_script[for_loop.lox]
   _CallList([
   ])
