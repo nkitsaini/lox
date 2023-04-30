@@ -116,6 +116,8 @@ class Parser:
 		# as expressions
 		elif self.match(TokenType.FUN) and self.match_next(TokenType.IDENTIFIER):
 			return self.function_statement()
+		elif self.match(TokenType.CLASS):
+			return self.class_statement()
 		else:
 			return self.statement()
 
@@ -233,10 +235,11 @@ class Parser:
 		finally:
 			self.open_loops -= 1
 
-	def function_statement(self):
+	def function_statement(self, is_method: bool = False):
 		self.open_functions += 1
 		try:
-			self.take() # fun
+			if not is_method: # Methods don't have `fun` keyword
+				self.take() # fun
 			function_name = self.consume(TokenType.IDENTIFIER, "function name missing")
 			self.consume(TokenType.LEFT_PARAN, "( missing after function name")
 			args: List[Token] = []
@@ -252,6 +255,17 @@ class Parser:
 			return Function(function_name, args, body)
 		finally:
 			self.open_functions -= 1
+	
+	def class_statement(self):
+		self.take() # class
+		name = self.consume(TokenType.IDENTIFIER, "Class identifier expected")
+		self.consume(TokenType.LEFT_BRACE, "Class name should be followed by {")
+		methods: List[Function] = []
+		while not self.match(TokenType.RIGHT_BRACE) and self.peek_opt() is not None:
+			methods.append(self.function_statement(is_method = True))
+		self.consume(TokenType.RIGHT_BRACE, "Class paran unclosed: expected }")
+		return Class(name, methods)
+			
 
 	def function_expression(self):
 		self.open_functions += 1

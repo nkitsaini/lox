@@ -49,6 +49,10 @@ class AstResolver(ExprVisitor[None], StmtVisitor[None]):
 				self.define(arg)
 			self.resolve(expr.body)
 	
+	def visit_class(self, expr: Class):
+		self.define(expr.name)
+		# TODO: maybe need to do something with methods here?
+	
 	def visit_expression(self, expr: Expression) -> None:
 		self.resolve(expr.expression)
 		

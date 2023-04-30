@@ -3,7 +3,7 @@ import colorama
 
 if TYPE_CHECKING:
 	from .scanner.tokens import Token
-	from .scanner.ast_interpreter import LoxRuntimeError
+	from .scanner.lox_native_models import LoxRuntimeError
 
 had_error = False
 had_runtime_error = False

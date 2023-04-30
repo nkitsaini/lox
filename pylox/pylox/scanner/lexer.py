@@ -215,6 +215,15 @@ class Function(Statement):
 	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
 		return visitor.visit_function(self)
 
+@final
+@dataclass
+class Class(Statement):
+	name: Token
+	methods: List[Function]
+
+	def run_against(self, visitor: 'StmtVisitor[_VisitorReturn]') -> _VisitorReturn:
+		return visitor.visit_class(self)
+
 
 class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 	@abc.abstractmethod
@@ -251,6 +260,10 @@ class StmtVisitor(abc.ABC, Generic[_VisitorReturn]):
 
 	@abc.abstractmethod
 	def visit_function(self, expr: 'Function') -> _VisitorReturn:
+		raise NotImplementedError()
+
+	@abc.abstractmethod
+	def visit_class(self, expr: 'Class') -> _VisitorReturn:
 		raise NotImplementedError()
 
 

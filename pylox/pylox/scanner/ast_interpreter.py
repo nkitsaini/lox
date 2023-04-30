@@ -1,155 +1,13 @@
 from typing import Any
-from pylox.scanner.lexer import Assignment, Block, If
+from pylox.scanner.lox_environment import Environment
+from pylox.scanner.lox_function import AnonymousUserCallable, ClockCallable, LoxCallable, UserCallable
+from pylox.scanner.lexer import Any, Assignment, Block, If, List
+from pylox.scanner.lox_class import LoxClass
+from pylox.scanner.lox_native_models import FunctionReturn, LoopBreak, LoxRuntimeError, LoxValue
 from .lexer import *
-import time
 from .tokens import TokenType
 from .. import lox
 from .resolver import AstResolver
-
-
-class LoxRuntimeError(Exception):
-
-	def __init__(self, token: Token, message: str) -> None:
-		super().__init__(message)
-		self.token = token
-
-class LoopBreak(Exception):
-	pass
-
-class FunctionReturn(Exception):
-	def __init__(self, return_val: Any) -> None:
-		super().__init__("")
-		self.return_val = return_val
-
-class _UninitializedVar:
-	pass
-
-_UN_INITIALIZED = _UninitializedVar()
-
-class LoxCallable(abc.ABC):
-	@abc.abstractmethod
-	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
-		raise NotImplementedError()
-
-	@abc.abstractmethod
-	def arity(self) -> int:
-		raise NotImplementedError()
-	
-	@abc.abstractmethod
-	def name(self) -> str:
-		raise NotImplementedError()
-
-@final
-class UserCallable(LoxCallable):
-	def __init__(self, fn: Function, closure: 'Environment') -> None:
-		self.fn = fn
-		self.closure = closure
-	
-	def name(self) -> str:
-		return self.fn.name.lexeme
-	
-	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
-		new_env = Environment(interpreter.resolver)
-		for lexeme, val_expr in zip(self.fn.arguments, arguments):
-			new_env.define(lexeme.lexeme, val_expr)
-		
-		old_env = interpreter.env
-		new_env.parent = self.closure
-		interpreter.env = new_env
-
-		try:
-			interpreter.visit_any(self.fn.body)
-		except FunctionReturn as r:
-			return r.return_val
-		finally:
-			interpreter.env = old_env
-
-	def arity(self) -> int:
-		return len(self.fn.arguments)
-	
-@final
-class AnonymousUserCallable(LoxCallable):
-	def __init__(self, fn: AnonFunction, closure: 'Environment') -> None:
-		self.fn = fn
-		self.closure = closure
-	
-	def name(self) -> str:
-		return ":Anonymous:"
-	
-	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
-		new_env = Environment(interpreter.resolver)
-		for lexeme, val_expr in zip(self.fn.arguments, arguments):
-			new_env.define(lexeme.lexeme, val_expr)
-		
-		old_env = interpreter.env
-		new_env.parent = self.closure
-		interpreter.env = new_env
-
-		try:
-			interpreter.visit_any(self.fn.body)
-		except FunctionReturn as r:
-			return r.return_val
-		finally:
-			interpreter.env = old_env
-
-	def arity(self) -> int:
-		return len(self.fn.arguments)
-	
-class NativeLoxCallable(LoxCallable):
-	@staticmethod
-	@abc.abstractmethod
-	def static_name() -> str:
-		raise NotImplementedError()
-
-	def name(self) -> str:
-		return self.static_name()
-@final
-class ClockCallable(NativeLoxCallable):
-	def call(self, interpreter: 'AstInterpreter', arguments: List[Any]) -> Any:
-		return time.time()
-
-	def arity(self) -> int:
-		return 0
-	
-	@staticmethod
-	def static_name() -> str:
-		return "clock"
-	
-	
-
-
-@dataclass
-class Environment:
-	resolver: 'AstResolver'
-	parent: 'Environment | None' = None
-	envs: Dict[str, Any] = field(default_factory=dict)
-
-	def declare(self, variable: str):
-		self.envs[variable] = _UN_INITIALIZED
-
-	def define(self, variable: str, value: Any):
-		self.envs[variable] = value
-	def set(self, variable: Token, value: Any, depth: Optional[int] = None) -> Any:
-		if depth == None:
-			depth = self.resolver.variable_to_depth[variable]
-		name = variable.lexeme
-		if depth == 0:
-			self.envs[name] = value
-			return value
-		assert self.parent, "Compiler bug, parent undefined but didn't catch in resolver"
-		return self.parent.set(variable, value, depth - 1)
-
-	def get(self, variable: Token, depth: Optional[int] = None) -> Any:
-		if depth == None:
-			depth = self.resolver.variable_to_depth[variable]
-		name = variable.lexeme
-		if depth == 0:
-			if self.envs[name] is _UN_INITIALIZED:
-				raise LoxRuntimeError(variable, f"Uninitialized variable: {name}.")
-
-			return self.envs[name]
-		assert self.parent, "Compiler bug, parent undefined but didn't catch in resolver. get"
-		return self.parent.get(variable, depth-1)
 
 
 @final
@@ -209,29 +67,15 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	def visit_call(self, expr: Call):
 		function_ref = self.visit_any(expr.callee)
 		if not isinstance(function_ref, LoxCallable):
-			raise LoxRuntimeError(function_ref, "Value is not a callable: " + str(function_ref))
+			raise LoxRuntimeError(expr.paren, "Value is not a callable: " + str(function_ref))
 		if function_ref.arity() != len(expr.arguments):
 			raise LoxRuntimeError(expr.paren, f"Expected {function_ref.arity()} arguments to be passed. Found {len(expr.arguments)}")
-		# new_env = Environment()
-		# for lexeme, val_expr in zip(function_ref.arguments, expr.arguments):
-		# 	new_env.define(lexeme.lexeme)
-		# 	new_env.set(lexeme, self.visit_any(val_expr))
-		
-		# new_env.parent = self.env
-		# self.env = new_env
 
 		return function_ref.call(self, [self.visit_any(ex) for ex in expr.arguments])
-		# try:
-		# 	self.visit_any(function_ref.body)
-		# except FunctionReturn as r:
-		# 	return r.return_val
-		# finally:
-		# 	assert self.env.parent is not None
-		# 	self.env = self.env.parent
 
 	def visit_anonfunction(self, expr: AnonFunction):
 		return AnonymousUserCallable(expr, self.env)
-		...
+
 	def visit_literal(self, expr: Literal):
 		return expr.value
 	
@@ -326,10 +170,8 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 			lox.lox_print('false')
 		elif val is None:
 			lox.lox_print('nil')
-		elif isinstance(val, NativeLoxCallable):
-			lox.lox_print(f'<NativeLoxFunction: {val.name()}>')
-		elif isinstance(val, UserCallable):
-			lox.lox_print(f'<function: {val.name()}>')
+		elif isinstance(val, LoxValue):
+			lox.lox_print(val.lox_name())
 		else:
 			lox.lox_print(val)
 	
@@ -361,6 +203,11 @@ class AstInterpreter(ExprVisitor[Any], StmtVisitor[None]):
 	def visit_function(self, expr: Function):
 		self.env.declare(expr.name.lexeme)
 		self.env.define(expr.name.lexeme, UserCallable(expr, self.env))
+	
+	def visit_class(self, expr: Class):
+		self.env.declare(expr.name.lexeme)
+		klass = LoxClass(expr)
+		self.env.define(expr.name.lexeme, klass)
 
 	
 	def visit_break(self, expr: Break):

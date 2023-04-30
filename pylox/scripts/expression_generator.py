@@ -26,6 +26,7 @@ def main():
 		"Break": None,
 		"Return": "expr Optional[BaseExpr]",
 		"Function": "name Token, arguments List[Token], body Statement",
+		"Class": "name Token, methods List[Function]",
 	}
 
 	header = textwrap.dedent("""\
