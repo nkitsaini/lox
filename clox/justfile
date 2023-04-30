@@ -1,0 +1,7 @@
+alias b := build
+
+build:
+	cc *.c -o lox
+
+run: build
+	./lox
