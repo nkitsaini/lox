@@ -30,21 +30,28 @@ void addLine(Chunk* chunk, int line) {
 	chunk -> line_vec_count += 2;
 }
 
+int getLine(Chunk* chunk, int idx) {
+	for (int block_idx =1; chunk->line_vec_count >= block_idx*2; block_idx++) {
+		if (chunk->lines[(block_idx*2) - 2] >= idx) {
+			// Belongs to current block
+			return chunk->lines[(block_idx*2) - 1];
+		}
+		idx -= chunk->lines[(block_idx*2) - 2]; // move to next block
+	}
+	// There's no more blocks to check
+	return -1;
+}
+
 void writeChunk(Chunk* chunk, uint8_t byte, int line) {
 	if (chunk->count > chunk->capacity -1) {
 		int oldCapacity = chunk -> capacity;
 		chunk->capacity = GROW_CAPACITY(oldCapacity);
 		chunk->code = GROW_ARRAY(uint8_t, chunk->code, oldCapacity, chunk->capacity);
-		chunk->lines = GROW_ARRAY(int, chunk->lines, oldCapacity, chunk->capacity);
 	}
 
 	chunk->code[chunk->count] = byte;
-	chunk->lines[chunk->count] = line;
+	addLine(chunk, line);
 	chunk->count +=1;
-}
-
-int getLine(Chunk* chunk, int token_idx) {
-	
 }
 
 int addConstant(Chunk* chunk, Value value) {
