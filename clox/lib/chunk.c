@@ -11,6 +11,7 @@ void initChunk(Chunk* chunk) {
 }
 
 void addLine(Chunk* chunk, int line) {
+	// printf("===== Add Line %d", line);
 	if (chunk->line_vec_count != 0 && chunk->lines[chunk->line_vec_count-1] == line) {
 		chunk->lines[chunk->line_vec_count-2]++;
 		return;
@@ -31,9 +32,12 @@ void addLine(Chunk* chunk, int line) {
 }
 
 int getLine(Chunk* chunk, int idx) {
+	int org_idx = idx;
+	idx++;
 	for (int block_idx =1; chunk->line_vec_count >= block_idx*2; block_idx++) {
 		if (chunk->lines[(block_idx*2) - 2] >= idx) {
 			// Belongs to current block
+			// printf("||Returning get line %d for %d || ", chunk->lines[(block_idx*2) - 1], org_idx);
 			return chunk->lines[(block_idx*2) - 1];
 		}
 		idx -= chunk->lines[(block_idx*2) - 2]; // move to next block
@@ -58,6 +62,25 @@ int addConstant(Chunk* chunk, Value value) {
 	writeValueArray(&chunk->constants, value);
 	return chunk->constants.count - 1;
 }
+
+void addConstantAddress(Chunk* chunk, int address, int line) {
+
+	if (address < 256) { // can fit in regular OP_CONSTANT (8 bit)
+		writeChunk(chunk, OP_CONSTANT, line);
+		writeChunk(chunk, address, line);
+		return;
+	}
+
+	writeChunk(chunk, OP_CONSTANT_LONG, line);
+	writeChunk(chunk, address >> 16, line);
+	writeChunk(chunk, (address >> 8) & ((1 << 8) - 1), line);
+	writeChunk(chunk, (address) & ((1 << 8) - 1), line);
+	// writeChunk(chunk, address >> 16, line);
+	// writeChunk(&chunk, address >> 8, line);
+	// writeChunk(&chunk, address >> 16, line);
+	return;
+}
+
 
 void freeChunk(Chunk* chunk) {
 	FREE_ARRAY(uint8_t, chunk->code, chunk->capacity);

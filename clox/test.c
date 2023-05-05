@@ -33,15 +33,15 @@ TEST chunk_run_store_lines(void) {
     addLine(&chunk, 4); // 7
     addLine(&chunk, 5); // 8
     addLine(&chunk, 6); // 9
+    ASSERT_EQ(1, getLine(&chunk, 0));
     ASSERT_EQ(1, getLine(&chunk, 1));
-    ASSERT_EQ(1, getLine(&chunk, 2));
-    ASSERT_EQ(2, getLine(&chunk, 3));
-    ASSERT_EQ(3, getLine(&chunk, 4));
+    ASSERT_EQ(2, getLine(&chunk, 2));
+    ASSERT_EQ(3, getLine(&chunk, 3));
+    ASSERT_EQ(4, getLine(&chunk, 4));
     ASSERT_EQ(4, getLine(&chunk, 5));
     ASSERT_EQ(4, getLine(&chunk, 6));
-    ASSERT_EQ(4, getLine(&chunk, 7));
-    ASSERT_EQ(5, getLine(&chunk, 8));
-    ASSERT_EQ(6, getLine(&chunk, 9));
+    ASSERT_EQ(5, getLine(&chunk, 7));
+    ASSERT_EQ(6, getLine(&chunk, 8));
 
     // Out of bound
     ASSERT_EQ(-1, getLine(&chunk, 10));
