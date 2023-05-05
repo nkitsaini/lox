@@ -19,6 +19,9 @@ int main(int argc, char* argv[]) {
 		printf("Wrote\n");
 
 	}
+	for (int i = 0; i < 500000; i++ ) {
+		writeChunk(&chunk, OP_NEGATE, 2);
+	}
 
 	writeChunk(&chunk, OP_ADD, 2);
 	int constant = addConstant(&chunk, 33);

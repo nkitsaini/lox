@@ -61,7 +61,20 @@ static InterpretResult run() {
 				printf("\n");
 				break;
 			}
-			case OP_NEGATE: push(-pop()); break;
+			case OP_NEGATE: {
+				// Little bit faster then push(-pop());
+				// Used hyperfine (500_000 negations create chunk + disassemble + execute chunk)
+				// Using inplace modification:
+				//     Time (mean ± σ):     534.5 ms ±   5.4 ms    [User: 508.4 ms, System: 36.3 ms]
+				//     Range (min … max):   525.0 ms … 543.8 ms    10 runs
+				// Using Pop:
+				//     Time (mean ± σ):     549.7 ms ±   7.9 ms    [User: 526.0 ms, System: 34.5 ms]
+				//     Range (min … max):   542.2 ms … 567.1 ms    10 runs
+
+
+				*(vm.stackTop-1) = -(*(vm.stackTop-1));
+				break;
+			}
 			case OP_ADD: BINARY_OP(+); break;
 			case OP_SUBTRACT: BINARY_OP(-); break;
 			case OP_MULTIPLY: BINARY_OP(*); break;
