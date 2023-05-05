@@ -8,11 +8,12 @@ void initChunk(Chunk* chunk) {
 	initValueArray(&chunk->constants);
 }
 
-static void addLine(Chunk* chunk, int line) {
+void addLine(Chunk* chunk, int line) {
 	if (chunk->line_vec_count != 0 && chunk->lines[chunk->line_vec_count-1] == line) {
 		chunk->lines[chunk->line_vec_count-2]++;
 		return;
 	}
+
 	if (chunk->line_vec_count > chunk->line_vec_capacity -2) { // -1, -2 both will work fine here. since we always increase by atleast two.
 		int oldCapacity = chunk -> line_vec_capacity;
 
@@ -21,6 +22,7 @@ static void addLine(Chunk* chunk, int line) {
 		chunk -> line_vec_capacity = GROW_CAPACITY(oldCapacity);
 		chunk -> lines = GROW_ARRAY(int, &chunk -> lines, oldCapacity, chunk -> line_vec_capacity);
 	}
+
 	chunk->lines[chunk -> line_vec_count] = 1;
 	chunk->lines[chunk -> line_vec_count + 1] = line;
 	chunk -> line_vec_count += 2;
