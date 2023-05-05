@@ -10,7 +10,7 @@ run: build
 	./lox
 
 test: test-build
-	./test -v | ./greenest
+	set -o pipefail && ./test -v | ./greenest
 
 clean:
 	rm -rf *.gch

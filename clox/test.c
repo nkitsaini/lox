@@ -47,6 +47,7 @@ TEST chunk_should_store_lines(void) {
 TEST chunk_run_store_lines(void) {
     Chunk chunk;
     initChunk(&chunk);
+
     addLine(&chunk, 1);
     addLine(&chunk, 1);
     addLine(&chunk, 2);
@@ -56,15 +57,24 @@ TEST chunk_run_store_lines(void) {
     addLine(&chunk, 4);
     addLine(&chunk, 5);
     addLine(&chunk, 6);
-    ASSERT_EQ(1, (&chunk)->lines[0]);
+    ASSERT_EQ(2, (&chunk)->lines[0]);
     ASSERT_EQ(1, (&chunk)->lines[1]);
-    ASSERT_EQ(2, (&chunk)->lines[2]);
-    ASSERT_EQ(3, (&chunk)->lines[3]);
-    ASSERT_EQ(4, (&chunk)->lines[4]);
-    ASSERT_EQ(4, (&chunk)->lines[5]);
-    ASSERT_EQ(4, (&chunk)->lines[6]);
-    ASSERT_EQ(5, (&chunk)->lines[7]);
-    ASSERT_EQ(6, (&chunk)->lines[8]);
+
+    ASSERT_EQ(1, (&chunk)->lines[2]);
+    ASSERT_EQ(2, (&chunk)->lines[3]);
+
+    ASSERT_EQ(1, (&chunk)->lines[4]);
+    ASSERT_EQ(3, (&chunk)->lines[5]);
+
+    ASSERT_EQ(3, (&chunk)->lines[6]);
+    ASSERT_EQ(4, (&chunk)->lines[7]);
+
+    ASSERT_EQ(1, (&chunk)->lines[8]);
+    ASSERT_EQ(5, (&chunk)->lines[9]);
+
+    ASSERT_EQ(1, (&chunk)->lines[10]);
+    ASSERT_EQ(6, (&chunk)->lines[11]);
+
     PASS();
 }
 

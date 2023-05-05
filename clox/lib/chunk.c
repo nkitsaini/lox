@@ -5,6 +5,8 @@ void initChunk(Chunk* chunk) {
 	chunk->count = 0;
 	chunk->code = NULL;
 	chunk->lines = NULL;
+	chunk->line_vec_capacity = 0;
+	chunk->line_vec_count = 0;
 	initValueArray(&chunk->constants);
 }
 
@@ -20,7 +22,7 @@ void addLine(Chunk* chunk, int line) {
 		// Due to GROW_CAPACITY guarantees, we'll atleast increase capacity by 2.
 		// Which is what we need.
 		chunk -> line_vec_capacity = GROW_CAPACITY(oldCapacity);
-		chunk -> lines = GROW_ARRAY(int, &chunk -> lines, oldCapacity, chunk -> line_vec_capacity);
+		chunk -> lines = GROW_ARRAY(int, chunk -> lines, oldCapacity, chunk -> line_vec_capacity);
 	}
 
 	chunk->lines[chunk -> line_vec_count] = 1;
