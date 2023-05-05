@@ -6,6 +6,7 @@
 		"cstdlib": "c",
 		"value.h": "c",
 		"new": "c",
-		"*.inc": "c"
+		"*.inc": "c",
+		"vm.h": "c"
 	}
 }
