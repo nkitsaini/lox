@@ -1,10 +1,16 @@
 alias b := build
 
 build:
-	zig cc *.c -o lox
+	zig cc -Wall -Wextra main.c lib/*.c -o lox
+
+test-build:
+	zig cc -Wall -Wextra test.c lib/*.c -o test
 
 run: build
 	./lox
+
+test: test-build
+	./test -v | ./greenest
 
 clean:
 	rm -rf *.gch
