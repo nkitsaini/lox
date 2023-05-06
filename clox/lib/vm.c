@@ -2,6 +2,7 @@
 #include "vm.h"
 #include "debug.h"
 #include "memory.h"
+#include "compiler.h"
 VM vm;
 
 static void resetStack() {
@@ -106,9 +107,11 @@ static InterpretResult run() {
 
 }
 
-InterpretResult interpret(Chunk *chunk)
+InterpretResult interpret(char *source)
 {
-	vm.chunk = chunk;
-	vm.ip = vm.chunk->code;
-	return run();
+	compile(source);
+	return INTERPRET_OK;
+	// vm.chunk = chunk;
+	// vm.ip = vm.chunk->code;
+	// return run();
 }
