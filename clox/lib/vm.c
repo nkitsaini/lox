@@ -13,8 +13,12 @@ void initVM() {
 	vm.stack_length = 0;
 	resetStack();
 }
-void freeVM() {
 
+void freeVM() {
+	FREE_ARRAY(Value, vm.stack, vm.stack_length);
+	vm.stack_length = 0;
+	vm.stack = NULL;
+	vm.stackTop = NULL;
 }
 
 void push(Value value)
