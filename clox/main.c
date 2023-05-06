@@ -19,9 +19,9 @@ int main(int argc, char* argv[]) {
 		printf("Wrote\n");
 
 	}
-	for (int i = 0; i < 500000; i++ ) {
-		writeChunk(&chunk, OP_NEGATE, 2);
-	}
+	// for (int i = 0; i < 5; i++ ) {
+	// 	writeChunk(&chunk, OP_NEGATE, 2);
+	// }
 
 	writeChunk(&chunk, OP_ADD, 2);
 	int constant = addConstant(&chunk, 33);
@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 	writeChunk(&chunk, OP_NEGATE, 2);
 	writeChunk(&chunk, OP_RETURN, 2);
 	disassembleChunk(&chunk, "test chunk");
-	printf("========= Interpreting ============");
+	printf("========= Interpreting ============\n");
 	interpret(&chunk);
 	freeVM();
 	freeChunk(&chunk);

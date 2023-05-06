@@ -1,6 +1,7 @@
 #include "common.h"
 #include "vm.h"
 #include "debug.h"
+#include "memory.h"
 VM vm;
 
 static void resetStack() {
@@ -8,6 +9,8 @@ static void resetStack() {
 }
 
 void initVM() {
+	vm.stack = NULL;
+	vm.stack_length = 0;
 	resetStack();
 }
 void freeVM() {
@@ -16,6 +19,12 @@ void freeVM() {
 
 void push(Value value)
 {
+	if (vm.stack_length == 0 || vm.stackTop == (vm.stack + vm.stack_length)) {
+		int new_size = GROW_CAPACITY(vm.stack_length);
+		vm.stack = GROW_ARRAY(Value, vm.stack, vm.stack_length, new_size);
+		vm.stackTop = vm.stack + vm.stack_length;
+		vm.stack_length = new_size;
+	}
 	*vm.stackTop = value;
 	vm.stackTop++;
 }
@@ -64,6 +73,7 @@ static InterpretResult run() {
 			case OP_NEGATE: {
 				// Little bit faster then push(-pop());
 				// Used hyperfine (500_000 negations create chunk + disassemble + execute chunk)
+				//
 				// Using inplace modification:
 				//     Time (mean ± σ):     534.5 ms ±   5.4 ms    [User: 508.4 ms, System: 36.3 ms]
 				//     Range (min … max):   525.0 ms … 543.8 ms    10 runs
