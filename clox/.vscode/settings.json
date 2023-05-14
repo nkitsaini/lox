@@ -7,6 +7,16 @@
 		"value.h": "c",
 		"new": "c",
 		"*.inc": "c",
-		"vm.h": "c"
+		"vm.h": "c",
+		"limits": "cpp",
+		"ratio": "cpp",
+		"*.tcc": "cpp",
+		"type_traits": "cpp",
+		"compiler.h": "c",
+		"array": "c",
+		"exception": "c",
+		"functional": "c",
+		"typeinfo": "c",
+		"*.def": "c"
 	}
 }

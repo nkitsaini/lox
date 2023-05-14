@@ -3,14 +3,23 @@ alias b := build
 build:
 	zig cc -Wall -Wextra main.c lib/*.c -o lox
 
-test-build:
-	zig cc -Wall -Wextra test.c lib/*.c -o test
 
 run: build
 	./lox
 
+run-file FILE: build
+	./lox {{FILE}}
+
+
+test-build:
+	zig cc -Wall -Wextra test.c lib/*.c -o test
+
 test: test-build
 	set -o pipefail && ./test -v | ./greenest
+
+test-nocolor: test-build
+	./test -v
+
 
 clean:
 	rm -rf *.gch

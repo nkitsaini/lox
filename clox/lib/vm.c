@@ -109,9 +109,16 @@ static InterpretResult run() {
 
 InterpretResult interpret(char *source)
 {
-	compile(source);
-	return INTERPRET_OK;
-	// vm.chunk = chunk;
-	// vm.ip = vm.chunk->code;
-	// return run();
+	Chunk chunk;
+	initChunk(&chunk);
+
+	if (!compile(source, &chunk)) {
+		freeChunk(&chunk);
+		return INTERPRET_COMPILE_ERROR;
+	}
+	vm.chunk = &chunk;
+	vm.ip = vm.chunk->code;
+	InterpretResult result = run();
+	freeChunk(&chunk);
+	return result;
 }
