@@ -256,6 +256,7 @@ parsePrecedence(Precedence precendence)
 		error("Expect Expression");
 		return;
 	}
+	// TODO(Chapter17-3): show how the mixfix operators like ( conditional ?: ) can be operated here
 	prefixRule();
 
 	while (precendence <= getRule(parser.current.type)->precedence)
