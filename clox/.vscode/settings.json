@@ -17,6 +17,9 @@
 		"exception": "c",
 		"functional": "c",
 		"typeinfo": "c",
-		"*.def": "c"
+		"*.def": "c",
+		"algorithm": "c",
+		"fstream": "c",
+		"numeric": "c"
 	}
 }
