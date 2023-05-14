@@ -1,0 +1,82 @@
+(-1 + 2) * 3 - -4
+
+
+> advance(); // current=`(`
+> expression()
+  > parsePrecedence(Equal)
+    > advance() // current `-`, previous = `(`;
+      > Who can parse as prefix`(` -> grouping
+      > grouping()
+        > expression()
+          > parsePrecedence(Equal)
+              > advance(); // current `1`, previous `-`
+              > who can parse as prefix `-` -> unary
+                > unary()
+                  > parsePrecedence(PREC_UNARY) // get all the unary and higher precendence
+                    > advance(); // current `+`, previous=1
+                    > who can parse as prefix `1` -> number()
+                    > number()
+                      > consume number from previous token's location = return 1
+                      > Emit 1
+                    > Does `+`(currentToken) has higher precendence then UNARY: No
+                    > return
+                  > `-` matches with NEGATE, so write that and return [BYTECODE: 1 -]
+              > current = +, previous='1'
+              > Does currentToken `+` has higher precendence then Equal: Yes
+                > advance(); // current=2, previous=+
+                > inifinix for last operator: binary()
+                > binary()
+                  > lastToken = '+'
+                  > parsePrecedence(one greater then (+ PREF_TERM), so not (PREF_FACTOR))
+                    > advance() // current=), previous=2
+                    > who can parse as prefix `2` -> number
+                    > number()
+                      > consume number from previous token's location = return 2
+                      > Emit 2
+                    > Does `)`(currentToken) has higher precendence then PREF_FACTOR[]: No
+                    > return
+                  > last Token matches Addition so write addition [BYTECODE: 1 - 2 +]
+              > Does curernt Token `)` has higher precendence then Equal: No
+              > Return
+          > Return
+        > Consume current `)` // previous=')', current = `*`
+      > Does '*' has higher precedence then `Equal`: Yes
+        > advance() // current='3', previous='*'
+        > Who can do infinix for '*' -> binary()
+        > binary()
+          > lastToken = '*'
+          > parsePrecedence(one greater then (* PREF_FACTOR), so not (PREF_UNARY))
+            > advance() // current=-, previous=3
+            > who can parse as prefix `3` -> number
+            > number()
+              > consume number from previous token's location = return 3
+              > Emit 3 [BYTECODE: 1 - 2 + 3]
+            > Does `-`(currentToken) has higher precendence then PREF_UNARY: No
+            > return
+          > last Token matches Multiply so write multiplication [BYTECODE: 1 - 2 + 3 *]
+      > Does '-' has higher precedence then `Equal`: Yes
+        > advance() // current='-', previous='-'
+        > Who can do infinix for '-' -> binary()
+        > binary()
+          > lastToken = '-'
+          > parsePrecedence(one greater then (- PREF_TERM), so (PREF_FACTOR))
+            > advance() // current=4, previous=-
+            > who can parse as prefix `-` -> unary
+            > unary()
+              > parsePrecedence(PREC_UNARY) // get all the unary and higher precendence
+                > advance(); // current `EOF`, previous=4
+                > who can parse as prefix `4` -> number()
+                > number()
+                  > consume number from previous token's location = return 4 
+                  > Emit 4 [BYTECODE: 1 - 2 + 3 * 4]
+                > Does `EOF`(currentToken) has higher precendence then UNARY: No
+                > return
+              > `-` matches with NEGATE, so write that and return [BYTECODE: 1 - 2 + 3 * 4 -]
+            > Does `-`(currentToken) has higher precendence then PREF_UNARY: No
+            > return
+          > last Token matches Subtract so write substraction [BYTECODE: 1 - 2 + 3 * 4 - -]
+
+
+[BYTECODE: 1          -            2       +          3           *            4            -          - ]
+stack:     [1]        [-1]       [-1 2]   [1]        [1 3]       [3]         [3 4]        [3 -4]       [7]
+

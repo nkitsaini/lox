@@ -20,6 +20,7 @@
 		"*.def": "c",
 		"algorithm": "c",
 		"fstream": "c",
-		"numeric": "c"
+		"numeric": "c",
+		"streambuf": "c"
 	}
 }
