@@ -5,33 +5,42 @@
 #include "memory.h"
 #include "value.h"
 
-typedef enum {
+typedef enum
+{
 	OP_CONSTANT,
+	OP_NIL,
+	OP_TRUE,
+	OP_FALSE,
+	OP_EQUAL,
+	OP_GREATER,
+	OP_LESS,
 	OP_ADD,
 	OP_SUBTRACT,
 	OP_MULTIPLY,
 	OP_DIVIDE,
+	OP_NOT,
 	OP_NEGATE,
 	OP_CONSTANT_LONG,
 	OP_RETURN,
 } OpCode;
 
-typedef struct {
+typedef struct
+{
 	int count;
 	int capacity;
-	uint8_t* code;
+	uint8_t *code;
 	int line_vec_count;
 	int line_vec_capacity;
-	int* lines;
+	int *lines;
 	ValueArray constants;
 } Chunk;
 
-void initChunk(Chunk* chunk);
-void writeChunk(Chunk* chunk, uint8_t byte, int line);
-void addLine(Chunk* chunk, int line);
-int getLine(Chunk* chunk, int idx);
-int addConstant(Chunk* chunk, Value value);
-void addConstantAddress(Chunk* chunk, int address, int line);
-void freeChunk(Chunk* chunk);
+void initChunk(Chunk *chunk);
+void writeChunk(Chunk *chunk, uint8_t byte, int line);
+void addLine(Chunk *chunk, int line);
+int getLine(Chunk *chunk, int idx);
+int addConstant(Chunk *chunk, Value value);
+void addConstantAddress(Chunk *chunk, int address, int line);
+void freeChunk(Chunk *chunk);
 
 #endif

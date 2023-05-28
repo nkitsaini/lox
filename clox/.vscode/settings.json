@@ -21,6 +21,9 @@
 		"algorithm": "c",
 		"fstream": "c",
 		"numeric": "c",
-		"streambuf": "c"
+		"streambuf": "c",
+		"istream": "c",
+		"optional": "c",
+		"variant": "c"
 	}
 }
