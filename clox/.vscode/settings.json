@@ -24,6 +24,7 @@
 		"streambuf": "c",
 		"istream": "c",
 		"optional": "c",
-		"variant": "c"
+		"variant": "c",
+		"object.h": "c"
 	}
 }
