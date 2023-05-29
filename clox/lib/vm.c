@@ -52,15 +52,18 @@ void initVM()
 {
 	vm.stack = NULL;
 	vm.stack_length = 0;
+	vm.objects = NULL;
 	resetStack();
 }
 
 void freeVM()
 {
+	// INVESTIGATE: Chapter 19 does not mention other code, how did I get it?
 	FREE_ARRAY(Value, vm.stack, vm.stack_length);
 	vm.stack_length = 0;
 	vm.stack = NULL;
 	vm.stackTop = NULL;
+	freeObjects();
 }
 
 void push(Value value)
