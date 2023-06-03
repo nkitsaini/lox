@@ -1,10 +1,9 @@
-#include "lib/common.h"
 #include "lib/chunk.h"
+#include "lib/common.h"
 #include "lib/debug.h"
 #include "lib/vm.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdlib.h>
 
 static char *readFile(const char *path)
 {
@@ -47,6 +46,7 @@ static void repl()
 			break;
 		}
 		interpret(line);
+		break;
 	}
 }
 

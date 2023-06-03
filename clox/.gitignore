@@ -1,4 +1,6 @@
 *.out
 *.gch
+vgcore.*
 lox
 test
+repl.lox

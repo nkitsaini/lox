@@ -23,6 +23,7 @@ test-nocolor: test-build
 
 clean:
 	rm -rf *.gch
+	rm -f lox test
 
 clean-build: clean
 	just build

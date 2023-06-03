@@ -53,11 +53,13 @@ void initVM()
 	vm.stack = NULL;
 	vm.stack_length = 0;
 	vm.objects = NULL;
+	initTable(&vm.strings);
 	resetStack();
 }
 
 void freeVM()
 {
+	freeTable(&vm.strings);
 	// INVESTIGATE: Chapter 19 does not mention other code, how did I get it?
 	FREE_ARRAY(Value, vm.stack, vm.stack_length);
 	vm.stack_length = 0;
@@ -205,9 +207,13 @@ static InterpretResult run()
 		case OP_DIVIDE:
 			BINARY_OP(NUMBER_VAL, /);
 			break;
+		case OP_PRINT:
+			printValue(pop());
+			printf("\n");
+			break;
 		case OP_RETURN:
 		{
-			printValue(pop());
+			// Exit Interpreter
 			return INTERPRET_OK;
 		}
 		}

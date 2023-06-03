@@ -25,6 +25,8 @@
 		"istream": "c",
 		"optional": "c",
 		"variant": "c",
-		"object.h": "c"
+		"object.h": "c",
+		"bit": "c",
+		"tuple": "c"
 	}
 }
