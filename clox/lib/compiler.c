@@ -32,7 +32,7 @@ typedef enum
 	PREC_PRIMARY,
 } Precedence;
 
-typedef void (*ParseFn)();
+typedef void (*ParseFn)(bool canAssign);
 
 typedef struct
 {
@@ -178,7 +178,7 @@ static void defineVariable(uint8_t global)
 	emitBytes(OP_DEFINE_GLOBAL, global);
 }
 
-static void binary()
+static void binary(bool canAssign)
 {
 	TokenType operatorType = parser.previous.type;
 	ParseRule *rule = getRule(operatorType);
@@ -224,7 +224,7 @@ static void binary()
 	}
 }
 
-static void literal()
+static void literal(bool canAssign)
 {
 	switch (parser.previous.type)
 	{
@@ -247,7 +247,7 @@ static void emitConstant(Value value)
 	emitBytes(OP_CONSTANT, makeConstant(value));
 }
 
-static void number()
+static void number(bool canAssign)
 {
 	// should it be `start + length` instead of NULL?
 	// investigate: Why does it work?, actually no, we're just saying take the first floating point. It'll only work as long as
@@ -256,22 +256,30 @@ static void number()
 	emitConstant(NUMBER_VAL(value));
 }
 
-static void string()
+static void string(bool canAssign)
 {
 	emitConstant(OBJ_VAL(copyString(parser.previous.start + 1, parser.previous.length - 2)));
 }
 
-static void namedVariable(Token name)
+static void namedVariable(Token name, bool canAssign)
 {
 	uint8_t arg = identifierConstant(&name);
-	emitBytes(OP_GET_GLOBAL, arg);
+	if (canAssign && match(TOKEN_EQUAL))
+	{
+		expression();
+		emitBytes(OP_SET_GLOBAL, arg);
+	}
+	else
+	{
+		emitBytes(OP_GET_GLOBAL, arg);
+	}
 }
-static void variable()
+static void variable(bool canAssign)
 {
-	namedVariable(parser.previous);
+	namedVariable(parser.previous, canAssign);
 }
 
-static void unary()
+static void unary(bool canAssign)
 {
 	TokenType operatorType = parser.previous.type;
 	parsePrecedence(PREC_UNARY);
@@ -288,7 +296,7 @@ static void unary()
 	}
 }
 
-static void grouping()
+static void grouping(bool canAssign)
 {
 	expression();
 	consume(TOKEN_RIGHT_PAREN, "Expect `)` after expression.");
@@ -346,14 +354,21 @@ static void parsePrecedence(Precedence precendence)
 		error("Expect Expression");
 		return;
 	}
+	bool canAssign = precendence <= PREC_ASSIGNMENT;
 	// TODO(Chapter17-3): show how the mixfix operators like ( conditional ?: ) can be operated here
-	prefixRule();
+
+	prefixRule(canAssign);
 
 	while (precendence <= getRule(parser.current.type)->precedence)
 	{
 		advance();
 		ParseFn infinixRule = getRule(parser.previous.type)->inifix;
-		infinixRule();
+		infinixRule(canAssign);
+	}
+
+	if (canAssign && match(TOKEN_EQUAL))
+	{
+		error("Invalid Assignment target.");
 	}
 }
 static ParseRule *getRule(TokenType type)
