@@ -53,6 +53,7 @@ void initVM()
 	vm.stack = NULL;
 	vm.stack_length = 0;
 	vm.objects = NULL;
+	initTable(&vm.globals);
 	initTable(&vm.strings);
 	resetStack();
 }
@@ -60,6 +61,7 @@ void initVM()
 void freeVM()
 {
 	freeTable(&vm.strings);
+	freeTable(&vm.globals);
 	// INVESTIGATE: Chapter 19 does not mention other code, how did I get it?
 	FREE_ARRAY(Value, vm.stack, vm.stack_length);
 	vm.stack_length = 0;
@@ -91,6 +93,7 @@ static InterpretResult run()
 {
 #define READ_BYTE() (*vm.ip++)
 #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
+#define READ_STRING() AS_STRING(READ_CONSTANT())
 // we pop `b` first because it'll be inserted last.
 // In expression `3 + 1`, we'll first insert `3` and then `1` to stack
 // So we need to assign `1` (top most element) to b and `3` to a
@@ -169,6 +172,25 @@ static InterpretResult run()
 		case OP_POP:
 			pop();
 			break;
+		case OP_DEFINE_GLOBAL:
+		{
+			ObjString *name = READ_STRING();
+			tableSet(&vm.globals, name, peek(0));
+			pop();
+			break;
+		}
+		case OP_GET_GLOBAL:
+		{
+			ObjString *name = READ_STRING();
+			Value value;
+			if (!tableGet(&vm.globals, name, &value))
+			{
+				runtimeError("Undefined variable '%s'.", name->chars);
+				return INTERPRET_RUNTIME_ERROR;
+			}
+			push(value);
+			break;
+		}
 		case OP_EQUAL:
 		{
 			Value b = pop();
@@ -224,6 +246,7 @@ static InterpretResult run()
 
 #undef READ_BYTE
 #undef READ_CONSTANT
+#undef READ_STRING
 #undef BINARY_OP
 }
 
