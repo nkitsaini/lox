@@ -230,7 +230,7 @@ impl<'a> Scanner<'a> {
         while Self::is_alpha(self.peek()) || self.peek().is_numeric() {
             self.advance();
         }
-        return self.make_token(self.identifier_type());
+        return self.make_token(dbg!(self.identifier_type()));
     }
 
     fn is_alpha(ch: char) -> bool {
@@ -273,7 +273,7 @@ impl<'a> Scanner<'a> {
                     match self.src.chars().nth(self.start + 1).unwrap() {
                         // TODO(perf): unnecessary twice-check
                         'h' => return self.check_keyword("his", This),
-                        'r' => return self.check_keyword("ue", True),
+                        'r' => return self.check_keyword("rue", True),
                         _ => (),
                     }
                 }

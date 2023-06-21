@@ -11,4 +11,5 @@ default = ["trace_execution"]
 
 [dependencies]
 anyhow = "1.0.71"
+enum-as-inner = "0.6.0"
 smallvec = "1.10.0"

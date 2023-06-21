@@ -8,6 +8,15 @@ pub enum OpCode {
     Constant { location: u8 },
     Negate,
 
+    Nil,
+    True,
+    False,
+    Not,
+
+    Equal,
+    Greater,
+    Less,
+
     Add,
     Subtract,
     Multiply,

@@ -28,6 +28,16 @@ impl OpCode {
                 println!();
             }
             Negate => self.simple_instruction("OP_NEGATE"),
+
+            Nil => self.simple_instruction("OP_NIL"),
+            True => self.simple_instruction("OP_TRUE"),
+            False => self.simple_instruction("OP_FALSE"),
+            Not => self.simple_instruction("OP_NOT"),
+
+            Equal => self.simple_instruction("OP_EQUAL"),
+            Less => self.simple_instruction("OP_LESS    "),
+            Greater => self.simple_instruction("OP_GREATER"),
+
             Add => self.simple_instruction("OP_ADD"),
             Multiply => self.simple_instruction("OP_MULTIPLY"),
             Subtract => self.simple_instruction("OP_SUBTRACT"),
