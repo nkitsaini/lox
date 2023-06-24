@@ -1,5 +1,5 @@
 // use crate::{compiler::compile, prelude::*};
-use crate::{compiler::Compiler, prelude::*, value::LoxObject};
+use crate::{compiler::Compiler, hashtable::HashTable, prelude::*, value::LoxObject};
 use smallvec;
 
 const STACK_MAX: usize = 256;
@@ -12,6 +12,8 @@ pub struct VM<'a> {
     ip: usize,
 
     stack: smallvec::SmallVec<[Value<'a>; STACK_MAX]>,
+
+    strings: HashTable<'a>,
 }
 
 fn is_falsey(value: Value) -> bool {
@@ -52,6 +54,7 @@ impl<'a> VM<'a> {
             chunk,
             ip: 0,
             stack: smallvec::SmallVec::new(),
+            strings: HashTable::new(),
         }
     }
 
@@ -137,7 +140,10 @@ impl<'a> VM<'a> {
                         self.stack.push(Value::Number(y + x));
                     }
                     (Value::Object(a), Value::Object(b)) => match (a.as_ref(), b.as_ref()) {
-                        (LoxObject::String(_), LoxObject::String(_)) => {
+                        (
+                            LoxObject::String { value: _, hash: _ },
+                            LoxObject::String { value: _, hash: _ },
+                        ) => {
                             self.concatenate();
                         }
                         _ => {
@@ -172,9 +178,9 @@ impl<'a> VM<'a> {
         let b = self.stack.pop().unwrap();
         let a = a.as_object().unwrap().as_string().unwrap();
         let b = b.as_object().unwrap().as_string().unwrap();
-        let result = b.to_string() + &a;
+        let result = b.0.to_string() + &a.0;
         self.stack
-            .push(Value::Object(Box::new(LoxObject::String(result))))
+            .push(Value::Object(Rc::new(LoxObject::new_string(result))))
     }
 }
 

@@ -98,7 +98,7 @@ impl<'a> Compiler<'a> {
         let prv = self.previous.unwrap().string;
 
         // remove the quotes
-        self.emit_constant(Value::Object(Box::new(LoxObject::String(
+        self.emit_constant(Value::Object(Rc::new(LoxObject::new_string(
             prv[1..prv.len() - 1].to_string(),
         ))));
     }

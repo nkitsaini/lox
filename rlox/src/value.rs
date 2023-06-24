@@ -14,8 +14,18 @@ pub enum ValueType {
 pub enum LoxObject<'a> {
     /// A Lox String can either be interned. Where it'll be shared across all
     /// Or it can be an intermediate result like in (a+b+c) result of a+b is not important
-    String(String),
+    String {
+        value: String,
+        hash: u32,
+    },
     Random(&'a u32),
+}
+
+impl<'a> LoxObject<'a> {
+    pub fn new_string(value: String) -> LoxObject<'a> {
+        let hash = hash_string(&value);
+        LoxObject::String { value, hash }
+    }
 }
 
 impl<'a> LoxObject<'a> {
@@ -29,7 +39,7 @@ pub enum Value<'a> {
     Bool(bool),
     Number(f64),
     Nil,
-    Object(Box<LoxObject<'a>>),
+    Object(Rc<LoxObject<'a>>),
 }
 
 impl<'a> PartialEq<Value<'a>> for Value<'a> {
@@ -84,8 +94,17 @@ impl<'a> ValuePrinter for Value<'a> {
         };
 
         match obj.as_ref() {
-            LoxObject::String(j) => print!("{}", j),
+            LoxObject::String { value, hash: _ } => print!("{}", value),
             _ => unreachable!(),
         }
     }
+}
+
+pub fn hash_string(val: &str) -> u32 {
+    let mut hash = 2166136261u32;
+    for i in 0..val.len() {
+        hash ^= val.bytes().nth(i).unwrap() as u32;
+        hash = hash.wrapping_mul(16777619);
+    }
+    hash
 }
