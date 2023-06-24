@@ -1,18 +1,38 @@
+use enum_kinds;
+use std::rc::Rc;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ValueType {
     Bool,
     Number,
     Nil,
+    Object,
 }
 
-#[derive(Clone, Copy, Debug, enum_as_inner::EnumAsInner)]
-pub enum Value {
+#[derive(Debug, Clone, enum_as_inner::EnumAsInner, enum_kinds::EnumKind)]
+#[enum_kind(LoxObjectKind)]
+pub enum LoxObject<'a> {
+    /// A Lox String can either be interned. Where it'll be shared across all
+    /// Or it can be an intermediate result like in (a+b+c) result of a+b is not important
+    String(String),
+    Random(&'a u32),
+}
+
+impl<'a> LoxObject<'a> {
+    pub fn kind(&self) -> LoxObjectKind {
+        LoxObjectKind::from(self)
+    }
+}
+
+#[derive(Debug, Clone, enum_as_inner::EnumAsInner)]
+pub enum Value<'a> {
     Bool(bool),
     Number(f64),
     Nil,
+    Object(Box<LoxObject<'a>>),
 }
 
-impl PartialEq<Value> for Value {
+impl<'a> PartialEq<Value<'a>> for Value<'a> {
     fn eq(&self, other: &Value) -> bool {
         if self.get_type() != other.get_type() {
             return false;
@@ -21,15 +41,19 @@ impl PartialEq<Value> for Value {
             Self::Bool(a) => a == other.as_bool().unwrap(),
             Self::Number(x) => x == other.as_number().unwrap(),
             Self::Nil => true,
+            Self::Object(x) => {
+                x.as_string().unwrap() == other.as_object().unwrap().as_string().unwrap()
+            }
         }
     }
 }
-impl Value {
+impl<'a> Value<'a> {
     pub fn get_type(&self) -> ValueType {
         match self {
             Self::Bool(_) => ValueType::Bool,
             Self::Number(_) => ValueType::Number,
             Self::Nil => ValueType::Nil,
+            Self::Object(_) => ValueType::Object,
         }
     }
 }
@@ -40,13 +64,28 @@ pub trait ValuePrinter {
     fn print(&self);
 }
 
-impl ValuePrinter for Value {
+impl<'a> ValuePrinter for Value<'a> {
     fn print(&self) {
         use Value::*;
-        match self {
-            Bool(x) => print!("{}", x),
-            Number(x) => print!("{}", x),
-            Nil => print!("nil"),
+        let obj = match self {
+            Bool(x) => {
+                print!("{}", x);
+                return;
+            }
+            Number(x) => {
+                print!("{}", x);
+                return;
+            }
+            Nil => {
+                print!("nil");
+                return;
+            }
+            Object(x) => x,
         };
+
+        match obj.as_ref() {
+            LoxObject::String(j) => print!("{}", j),
+            _ => unreachable!(),
+        }
     }
 }

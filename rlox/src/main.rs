@@ -9,6 +9,7 @@ mod prelude;
 mod scanner;
 mod value;
 mod vm;
+mod hashtable;
 
 use vm::VM;
 

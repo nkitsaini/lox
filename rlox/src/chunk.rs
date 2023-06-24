@@ -24,12 +24,12 @@ pub enum OpCode {
 }
 
 type LineNo = usize;
-pub struct Chunk {
+pub struct Chunk<'a> {
     pub code: Vec<(OpCode, LineNo)>,
-    pub constants: Vec<Value>,
+    pub constants: Vec<Value<'a>>,
 }
 
-impl Chunk {
+impl<'a> Chunk<'a> {
     pub fn new() -> Self {
         return Self {
             code: vec![],
@@ -41,7 +41,7 @@ impl Chunk {
         self.code.push((code, line));
     }
 
-    pub fn write_constant(&mut self, value: Value, line: usize) -> u8 {
+    pub fn write_constant(&mut self, value: Value<'a>, line: usize) -> u8 {
         self.constants.push(value);
         self.write(
             OpCode::Constant {

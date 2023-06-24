@@ -1,4 +1,5 @@
 use crate::prelude::*;
+use crate::value::LoxObject;
 use crate::{
     prelude::Chunk,
     scanner::{Scanner, Token, TokenType, TokenType::*},
@@ -10,7 +11,7 @@ pub struct Compiler<'a> {
     previous: Option<Token<'a>>,
     had_error: bool,
     panic_mode: bool,
-    chunk: Chunk,
+    chunk: Chunk<'a>,
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -91,6 +92,15 @@ impl<'a> Compiler<'a> {
     fn number(&mut self) {
         let value: f64 = self.previous.as_ref().unwrap().string.parse().unwrap();
         self.emit_constant(Value::Number(value));
+    }
+
+    fn string(&mut self) {
+        let prv = self.previous.unwrap().string;
+
+        // remove the quotes
+        self.emit_constant(Value::Object(Box::new(LoxObject::String(
+            prv[1..prv.len() - 1].to_string(),
+        ))));
     }
 
     fn grouping(&mut self) {
@@ -196,7 +206,7 @@ impl<'a> Compiler<'a> {
         self.emit_op(op2);
     }
 
-    fn emit_constant(&mut self, value: Value) {
+    fn emit_constant(&mut self, value: Value<'a>) {
         if self.chunk.constants.len() == u8::MAX as usize {
             self.error("Too many constants in one chunk.");
             return;
@@ -273,7 +283,7 @@ impl<'a> Compiler<'a> {
                 ParseRule::new(None, Some(Compiler::binary), Precedence::Comparison)
             }
             TokenType::Identifier => ParseRule::new(None, None, Precedence::None),
-            TokenType::String => ParseRule::new(None, None, Precedence::None),
+            TokenType::String => ParseRule::new(Some(Compiler::string), None, Precedence::None),
             TokenType::Number => ParseRule::new(Some(Compiler::number), None, Precedence::None),
             TokenType::And => ParseRule::new(None, None, Precedence::None),
             TokenType::Class => ParseRule::new(None, None, Precedence::None),

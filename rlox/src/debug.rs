@@ -23,7 +23,7 @@ impl OpCode {
             Return => self.simple_instruction("OP_RETURN"),
             Constant { location } => {
                 print!("{:<16} {:<4}", "OP_CONSTANT", location);
-                let value = chunk.constants[*location as usize];
+                let value = chunk.constants[*location as usize].clone();
                 value.print();
                 println!();
             }

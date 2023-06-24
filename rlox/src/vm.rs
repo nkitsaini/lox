@@ -1,17 +1,17 @@
 // use crate::{compiler::compile, prelude::*};
-use crate::{compiler::Compiler, prelude::*};
+use crate::{compiler::Compiler, prelude::*, value::LoxObject};
 use smallvec;
 
 const STACK_MAX: usize = 256;
 
-pub struct VM {
-    chunk: Chunk,
+pub struct VM<'a> {
+    chunk: Chunk<'a>,
 
     // Huh, the book says looking by index is slower them
     // looking by index. Why could that be? Due to additions?
     ip: usize,
 
-    stack: smallvec::SmallVec<[Value; STACK_MAX]>,
+    stack: smallvec::SmallVec<[Value<'a>; STACK_MAX]>,
 }
 
 fn is_falsey(value: Value) -> bool {
@@ -46,8 +46,8 @@ macro_rules! binary_op {
     }};
 }
 
-impl VM {
-    pub fn new(chunk: Chunk) -> Self {
+impl<'a> VM<'a> {
+    pub fn new(chunk: Chunk<'a>) -> Self {
         Self {
             chunk,
             ip: 0,
@@ -55,7 +55,7 @@ impl VM {
         }
     }
 
-    pub fn interpret(source: &str) -> InterpreterResult {
+    pub fn interpret(source: &'a str) -> InterpreterResult {
         let chunk: Option<Chunk> = Compiler::compile(source);
         let chunk = match chunk {
             Some(x) => x,
@@ -67,9 +67,9 @@ impl VM {
         return result;
     }
 
-    fn peek(&mut self, distance: usize) -> Value {
+    fn peek(&self, distance: usize) -> Value {
         let v = (-1 - distance as i32) as usize;
-        return *self.stack.get(v % self.stack.len()).unwrap();
+        return self.stack.get(v % self.stack.len()).cloned().unwrap();
     }
 
     fn run(&mut self) -> InterpreterResult {
@@ -100,7 +100,7 @@ impl VM {
                     return Ok(());
                 }
                 Constant { location } => {
-                    let constant = self.chunk.constants[location as usize];
+                    let constant = self.chunk.constants[location as usize].clone();
                     self.stack.push(constant);
                 }
                 Negate => {
@@ -130,7 +130,27 @@ impl VM {
                     let val = self.stack.pop().unwrap();
                     self.stack.push(Value::Bool(is_falsey(val)));
                 }
-                Add => binary_op!(self, Value::Number, +),
+                Add => match (self.peek(0), self.peek(1)) {
+                    (Value::Number(x), Value::Number(y)) => {
+                        self.stack.pop();
+                        self.stack.pop();
+                        self.stack.push(Value::Number(y + x));
+                    }
+                    (Value::Object(a), Value::Object(b)) => match (a.as_ref(), b.as_ref()) {
+                        (LoxObject::String(_), LoxObject::String(_)) => {
+                            self.concatenate();
+                        }
+                        _ => {
+                            self.runtime_error("Operands must be two numbers or two strings.");
+                            return Err(InterpreterError::RuntimeError);
+                        }
+                    },
+                    _ => {
+                        self.runtime_error("Operands must be two numbers or two strings.");
+                        return Err(InterpreterError::RuntimeError);
+                    }
+                },
+                // Add => binary_op!(self, Value::Number, +),
                 Multiply => binary_op!(self, Value::Number, *),
                 Subtract => binary_op!(self, Value::Number, -),
                 Divide => binary_op!(self, Value::Number, /),
@@ -145,6 +165,16 @@ impl VM {
         let line = self.chunk.code[instruction].1;
         eprintln!("[line {}] in script\n", line);
         self.stack.clear();
+    }
+
+    fn concatenate(&mut self) {
+        let a = self.stack.pop().unwrap();
+        let b = self.stack.pop().unwrap();
+        let a = a.as_object().unwrap().as_string().unwrap();
+        let b = b.as_object().unwrap().as_string().unwrap();
+        let result = b.to_string() + &a;
+        self.stack
+            .push(Value::Object(Box::new(LoxObject::String(result))))
     }
 }
 
