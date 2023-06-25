@@ -58,14 +58,23 @@ impl<'a> VM<'a> {
         }
     }
 
+    pub fn new_with_strings(chunk: Chunk<'a>, strings: HashTable<'a>) -> Self {
+        Self {
+            chunk,
+            ip: 0,
+            stack: smallvec::SmallVec::new(),
+            strings,
+        }
+    }
+
     pub fn interpret(source: &'a str) -> InterpreterResult {
-        let chunk: Option<Chunk> = Compiler::compile(source);
-        let chunk = match chunk {
+        let strings = HashTable::new();
+        let (chunk, strings) = match Compiler::compile(source, strings) {
             Some(x) => x,
             None => return Err(InterpreterError::CompileError),
         };
 
-        let mut vm = Self::new(chunk);
+        let mut vm = Self::new_with_strings(chunk, strings);
         let result = vm.run();
         return result;
     }
@@ -179,8 +188,20 @@ impl<'a> VM<'a> {
         let a = a.as_object().unwrap().as_string().unwrap();
         let b = b.as_object().unwrap().as_string().unwrap();
         let result = b.0.to_string() + &a.0;
-        self.stack
-            .push(Value::Object(Rc::new(LoxObject::new_string(result))))
+
+        let res = self.allocate_string(result);
+        self.stack.push(Value::Object(res));
+    }
+
+    fn allocate_string(&mut self, val: String) -> Rc<LoxObject<'a>> {
+        let lox_str = LoxObject::new_string(val);
+        let entry = self.strings.find_string(&lox_str).clone();
+        if let Some(x) = entry {
+            return x;
+        }
+        let str = Rc::new(lox_str);
+        self.strings.set(str.clone(), Value::Nil);
+        return str;
     }
 }
 

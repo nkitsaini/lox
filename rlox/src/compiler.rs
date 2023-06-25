@@ -1,3 +1,4 @@
+use crate::hashtable::HashTable;
 use crate::prelude::*;
 use crate::value::LoxObject;
 use crate::{
@@ -12,6 +13,7 @@ pub struct Compiler<'a> {
     had_error: bool,
     panic_mode: bool,
     chunk: Chunk<'a>,
+    strings: HashTable<'a>,
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -61,7 +63,7 @@ struct ParseRule<'a> {
 }
 
 impl<'a> Compiler<'a> {
-    pub fn new(source: &'a str) -> Self {
+    pub fn new(source: &'a str, strings: HashTable<'a>) -> Self {
         Compiler {
             scanner: Scanner::new(source),
             current: None,
@@ -69,11 +71,12 @@ impl<'a> Compiler<'a> {
             had_error: false,
             panic_mode: false,
             chunk: Chunk::new(),
+            strings,
         }
     }
 
-    pub fn compile(source: &'a str) -> Option<Chunk> {
-        let mut compiler = Self::new(source);
+    pub fn compile(source: &'a str, strings: HashTable<'a>) -> Option<(Chunk<'a>, HashTable<'a>)> {
+        let mut compiler = Self::new(source, strings);
         compiler.advance();
         compiler.expression();
         compiler.consume(TokenType::Eof, "Expect End of expression.");
@@ -81,7 +84,7 @@ impl<'a> Compiler<'a> {
         if compiler.had_error {
             return None;
         } else {
-            return Some(compiler.chunk);
+            return Some((compiler.chunk, compiler.strings));
         }
     }
 
@@ -98,9 +101,19 @@ impl<'a> Compiler<'a> {
         let prv = self.previous.unwrap().string;
 
         // remove the quotes
-        self.emit_constant(Value::Object(Rc::new(LoxObject::new_string(
-            prv[1..prv.len() - 1].to_string(),
-        ))));
+        let str = self.allocate_string(prv[1..prv.len() - 1].to_string());
+        self.emit_constant(Value::Object(str));
+    }
+
+    fn allocate_string(&mut self, val: std::string::String) -> Rc<LoxObject<'a>> {
+        let lox_str = LoxObject::new_string(val);
+        let entry = self.strings.find_string(&lox_str).clone();
+        if let Some(x) = entry {
+            return x;
+        }
+        let str = Rc::new(lox_str);
+        self.strings.set(str.clone(), Value::Nil);
+        return str;
     }
 
     fn grouping(&mut self) {

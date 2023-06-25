@@ -36,8 +36,13 @@ impl<'a> HashTable<'a> {
         // TODO(perf): Control the vector capacity grow instead of looking at len
         if self.count as f32 + 1.0 > self.entries.len() as f32 * TABLE_MAX_LOAD {
             let old_capacity = self.entries.len();
-            let new_capacity = old_capacity * 2;
+            let new_capacity = if old_capacity == 0 {
+                8
+            } else {
+                old_capacity * 2
+            };
             self.adjust_capacity(new_capacity);
+            dbg!("adjust cap", new_capacity);
         }
         let entry: &mut Entry = Self::find_entry(&mut self.entries, &key);
         let is_new_key = entry.key.is_none();
@@ -140,6 +145,33 @@ impl<'a> HashTable<'a> {
                 dest.value = entry.value;
                 self.count += 1;
             }
+        }
+    }
+
+    pub fn find_string(&self, string: &LoxObject) -> Option<Rc<LoxObject<'a>>> {
+        let value = string.as_string().unwrap();
+        if self.count == 0 {
+            return None;
+        }
+        let mut index = value.1 & self.entries.len() as u32;
+        loop {
+            let entry = self.entries.get(index as usize).unwrap();
+            match &entry.key {
+                None => {
+                    // Non-tombstone entry
+                    if entry.value.is_nil() {
+                        return None;
+                    }
+                }
+                Some(x) => {
+                    let v = x.as_string().unwrap();
+                    if v.1 == value.1 && v.0 == value.0 {
+                        return Some(x.clone());
+                    }
+                }
+            }
+            index += 1;
+            index %= self.entries.len() as u32;
         }
     }
 
