@@ -14,6 +14,8 @@ pub struct VM<'a> {
     stack: smallvec::SmallVec<[Value<'a>; STACK_MAX]>,
 
     strings: HashTable<'a>,
+
+    globals: HashTable<'a>,
 }
 
 fn is_falsey(value: Value) -> bool {
@@ -50,12 +52,11 @@ macro_rules! binary_op {
 
 impl<'a> VM<'a> {
     pub fn new(chunk: Chunk<'a>) -> Self {
-        Self {
-            chunk,
-            ip: 0,
-            stack: smallvec::SmallVec::new(),
-            strings: HashTable::new(),
-        }
+        Self::new_with_strings(chunk, HashTable::new())
+    }
+
+    pub fn empty_new() -> Self {
+        Self::new(Chunk::new())
     }
 
     pub fn new_with_strings(chunk: Chunk<'a>, strings: HashTable<'a>) -> Self {
@@ -64,22 +65,22 @@ impl<'a> VM<'a> {
             ip: 0,
             stack: smallvec::SmallVec::new(),
             strings,
+            globals: HashTable::new(),
         }
     }
-
-    pub fn interpret(source: &'a str) -> InterpreterResult {
-        let strings = HashTable::new();
-        let (chunk, strings) = match Compiler::compile(source, strings) {
+    pub fn interpret(&mut self, source: &'a str) -> InterpreterResult {
+        let old_strings = std::mem::replace(&mut self.strings, HashTable::new());
+        let (chunk, new_strings) = match Compiler::compile(source, old_strings) {
             Some(x) => x,
             None => return Err(InterpreterError::CompileError),
         };
-
-        let mut vm = Self::new_with_strings(chunk, strings);
-        let result = vm.run();
-        return result;
+        self.ip = 0;
+        self.chunk = chunk;
+        self.strings = new_strings;
+        self.run()
     }
 
-    fn peek(&self, distance: usize) -> Value {
+    fn peek(&self, distance: usize) -> Value<'a> {
         let v = (-1 - distance as i32) as usize;
         return self.stack.get(v % self.stack.len()).cloned().unwrap();
     }
@@ -107,8 +108,7 @@ impl<'a> VM<'a> {
             self.ip += 1;
             match instruction {
                 Return => {
-                    self.stack.pop().unwrap().print();
-                    println!();
+                    // Exit interpreter;
                     return Ok(());
                 }
                 Constant { location } => {
@@ -172,9 +172,50 @@ impl<'a> VM<'a> {
 
                 Print => {
                     self.stack.pop().unwrap().print();
+                    println!();
+                }
+
+                Pop => {
+                    self.stack.pop().unwrap();
+                }
+
+                DefineGlobal { location } => {
+                    let name = self.read_constant(location).as_object().unwrap().clone();
+                    let val = self.peek(0);
+                    self.globals.set(name, val);
+                    self.stack.pop().unwrap();
+                }
+                GetGlobal { location } => {
+                    let name = self.read_constant(location).as_object().unwrap().clone();
+                    match self.globals.get(&name) {
+                        None => {
+                            self.runtime_error(&format!(
+                                "Undefined variable '{}'",
+                                name.as_string().unwrap().0
+                            ));
+                            return Err(InterpreterError::RuntimeError);
+                        }
+                        Some(x) => self.stack.push(x.clone()),
+                    }
+                }
+                SetGlobal { location } => {
+                    let name = self.read_constant(location).as_object().unwrap().clone();
+                    let val = self.peek(0);
+                    if self.globals.set(name.clone(), val) {
+                        self.globals.delete(&name);
+                        self.runtime_error(&format!(
+                            "Undefined variable '{}'.",
+                            name.as_string().unwrap().0
+                        ));
+                        return Err(InterpreterError::RuntimeError);
+                    }
                 }
             }
         }
+    }
+
+    fn read_constant(&self, location: u8) -> Value<'a> {
+        return self.chunk.constants[location as usize].clone();
     }
 
     fn runtime_error(&mut self, msg: &str) {

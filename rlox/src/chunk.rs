@@ -23,6 +23,10 @@ pub enum OpCode {
     Divide,
 
     Print,
+    Pop,
+    DefineGlobal { location: u8 },
+    GetGlobal { location: u8 },
+    SetGlobal { location: u8 },
 }
 
 type LineNo = usize;
@@ -43,6 +47,13 @@ impl<'a> Chunk<'a> {
         self.code.push((code, line));
     }
 
+    /// Add constant without any opcode
+    pub fn add_constant(&mut self, value: Value<'a>) -> u8 {
+        self.constants.push(value);
+        return (self.constants.len() - 1) as u8;
+    }
+
+    /// Add constant with OpCode::Constant code
     pub fn write_constant(&mut self, value: Value<'a>, line: usize) -> u8 {
         self.constants.push(value);
         self.write(

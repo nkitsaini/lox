@@ -230,7 +230,7 @@ impl<'a> Scanner<'a> {
         while Self::is_alpha(self.peek()) || self.peek().is_numeric() {
             self.advance();
         }
-        return self.make_token(dbg!(self.identifier_type()));
+        return self.make_token(self.identifier_type());
     }
 
     fn is_alpha(ch: char) -> bool {

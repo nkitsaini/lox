@@ -56,7 +56,11 @@ impl<'a> PartialEq<Value<'a>> for Value<'a> {
                 if x.kind() != other.kind() {
                     return false;
                 }
-                x.as_string().unwrap() == other.as_object().unwrap().as_string().unwrap()
+
+                if x.is_string() && other.is_string() {
+                    return Rc::ptr_eq(x, other);
+                }
+                return false;
             }
         }
     }

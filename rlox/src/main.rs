@@ -5,11 +5,11 @@ use std::io::Write;
 mod chunk;
 mod compiler;
 mod debug;
+mod hashtable;
 mod prelude;
 mod scanner;
 mod value;
 mod vm;
-mod hashtable;
 
 use vm::VM;
 
@@ -31,13 +31,19 @@ fn repl() {
     let stdin = io::stdin();
     print!("> ");
     io::stdout().flush().ok();
+    let mut vm = VM::empty_new();
     for line in stdin.lines() {
         match line {
             Err(_) => {
                 eprintln!("[REPL Error]: Invalid input, try again!");
             }
             Ok(x) => {
-                VM::interpret(&x).ok();
+                // TODO: We make it static to simplify lifetime of
+                // tokens and LoxObjects
+                // LoxObjects now allocate their own string, so only tokens are remaining
+                // deal with it and remove the leak
+                let x: &'static str = Box::leak(Box::new(x));
+                vm.interpret(&x).ok();
             }
         };
         print!("> ");
@@ -48,7 +54,8 @@ fn repl() {
 
 fn run_file(path: &str) -> anyhow::Result<()> {
     let source = fs::read_to_string(path)?;
-    let result = VM::interpret(&source);
+    let mut vm = VM::empty_new();
+    let result = vm.interpret(&source);
 
     let error = match result {
         Err(x) => x,

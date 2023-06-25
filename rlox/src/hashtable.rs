@@ -4,6 +4,7 @@ use crate::{prelude::Value, value::LoxObject};
 
 const TABLE_MAX_LOAD: f32 = 0.75;
 
+#[derive(Debug)]
 pub struct Entry<'a> {
     key: Option<Rc<LoxObject<'a>>>,
     value: Value<'a>,
@@ -17,6 +18,7 @@ impl<'a> Entry<'a> {
         }
     }
 }
+#[derive(Debug)]
 pub struct HashTable<'a> {
     /// Total filled entries in table
     count: usize,
@@ -153,7 +155,7 @@ impl<'a> HashTable<'a> {
         if self.count == 0 {
             return None;
         }
-        let mut index = value.1 & self.entries.len() as u32;
+        let mut index = value.1 % self.entries.len() as u32;
         loop {
             let entry = self.entries.get(index as usize).unwrap();
             match &entry.key {

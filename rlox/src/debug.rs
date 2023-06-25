@@ -21,12 +21,7 @@ impl OpCode {
         use OpCode::*;
         match self {
             Return => self.simple_instruction("OP_RETURN"),
-            Constant { location } => {
-                print!("{:<16} {:<4}", "OP_CONSTANT", location);
-                let value = chunk.constants[*location as usize].clone();
-                value.print();
-                println!();
-            }
+            Constant { location } => self.constant_instruction(chunk, "OP_CONSTANT", *location),
             Negate => self.simple_instruction("OP_NEGATE"),
 
             Nil => self.simple_instruction("OP_NIL"),
@@ -44,7 +39,21 @@ impl OpCode {
             Divide => self.simple_instruction("OP_DIVIDE"),
 
             Print => self.simple_instruction("OP_PRINT"),
+            Pop => self.simple_instruction("OP_POP"),
+
+            DefineGlobal { location } => {
+                self.constant_instruction(chunk, "OP_DEFINE_GLOBAL", *location)
+            }
+            GetGlobal { location } => self.constant_instruction(chunk, "OP_GET_GLOBAL", *location),
+            SetGlobal { location } => self.constant_instruction(chunk, "OP_SET_GLOBAL", *location),
         }
+    }
+
+    fn constant_instruction(&self, chunk: &Chunk, name: &str, location: u8) {
+        print!("{:<16} {:<4}", name, location);
+        let value = chunk.constants[location as usize].clone();
+        value.print();
+        println!();
     }
 
     fn simple_instruction(&self, name: &str) {

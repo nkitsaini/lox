@@ -54,7 +54,8 @@ impl Precedence {
 
 // type ParseFn = Fn(&mut Compiler) -> ();
 
-type ParseFn<'a> = for<'c> fn(&'c mut Compiler<'a>) -> ();
+/// Takes (&mut Compiler, can_assign: bool)
+type ParseFn<'a> = for<'c> fn(&'c mut Compiler<'a>, bool) -> ();
 
 struct ParseRule<'a> {
     prefix: Option<ParseFn<'a>>,
@@ -93,33 +94,107 @@ impl<'a> Compiler<'a> {
     fn expression(&mut self) {
         self.parse_precedence(Precedence::Assignment);
     }
+
     fn print_statement(&mut self) {
         self.expression();
         self.consume(Semicolon, "Expect ';' after value.");
         self.emit_op(OpCode::Print);
     }
 
+    fn expression_statement(&mut self) {
+        self.expression();
+        self.consume(Semicolon, "Expect ';' after value.");
+
+        // Expression emits value, but a expression statement should not
+        self.emit_op(OpCode::Pop);
+    }
+
+    fn define_variable(&mut self, location: u8) {
+        self.emit_op(OpCode::DefineGlobal { location });
+    }
+
+    fn var_declaration(&mut self) {
+        let global = self.parse_variable("Expect variable name.");
+        dbg!(self.current);
+
+        if self.match_(Equal) {
+            dbg!("Equal");
+            self.expression();
+        } else {
+            self.emit_op(OpCode::Nil);
+        }
+        self.consume(Semicolon, "Expect `;` after variable declaration.");
+        self.define_variable(global);
+    }
+
     fn declaration(&mut self) {
-        self.statement();
+        if self.match_(Var) {
+            self.var_declaration();
+        } else {
+            self.statement();
+        }
+
+        // A new statement marks beginning of a new life
+        // Sins of past are forgotten
+        //
+        // If there is an error then we find the next point where we should
+        // start scanning.
+        // For example, We need this if the error was `;` not found that previous statement is kinda
+        // still active.
+        if self.panic_mode {
+            self.synchronize();
+        }
+    }
+
+    fn synchronize(&mut self) {
+        self.panic_mode = false;
+        while self.current.unwrap().ty != Eof {
+            if self.previous.unwrap().ty == Semicolon {
+                return;
+            }
+            match self.current.unwrap().ty {
+                Class | Fun | Var | For | If | While | Print | Return => {
+                    return;
+                }
+                _ => {}
+            }
+            self.advance();
+        }
     }
 
     fn statement(&mut self) {
         if self.match_(Print) {
             self.print_statement();
+        } else {
+            self.expression_statement();
         }
     }
 
-    fn number(&mut self) {
+    fn number(&mut self, _can_assing: bool) {
         let value: f64 = self.previous.as_ref().unwrap().string.parse().unwrap();
         self.emit_constant(Value::Number(value));
     }
 
-    fn string(&mut self) {
+    fn string(&mut self, _can_assing: bool) {
         let prv = self.previous.unwrap().string;
 
         // remove the quotes
         let str = self.allocate_string(prv[1..prv.len() - 1].to_string());
         self.emit_constant(Value::Object(str));
+    }
+
+    fn named_variable(&mut self, can_assign: bool) {
+        let arg = self.identifier_constant();
+        if can_assign && self.match_(Equal) {
+            self.expression();
+            self.emit_op(OpCode::SetGlobal { location: arg });
+        } else {
+            self.emit_op(OpCode::GetGlobal { location: arg });
+        }
+    }
+
+    fn variable(&mut self, can_assign: bool) {
+        self.named_variable(can_assign);
     }
 
     fn allocate_string(&mut self, val: std::string::String) -> Rc<LoxObject<'a>> {
@@ -133,12 +208,12 @@ impl<'a> Compiler<'a> {
         return str;
     }
 
-    fn grouping(&mut self) {
+    fn grouping(&mut self, _can_assing: bool) {
         self.expression();
         self.consume(TokenType::RightParen, "Expect ')' after expression.");
     }
 
-    fn unary(&mut self) {
+    fn unary(&mut self, _can_assing: bool) {
         let operator = self.previous.as_ref().unwrap().ty;
         self.parse_precedence(Precedence::Unary);
         match operator {
@@ -147,7 +222,7 @@ impl<'a> Compiler<'a> {
             _ => return,
         }
     }
-    fn binary(&mut self) {
+    fn binary(&mut self, _can_assing: bool) {
         let operator = self.previous.as_ref().unwrap().ty;
         let rule = Self::get_rule(operator);
         self.parse_precedence(rule.precedence.get_next());
@@ -167,7 +242,7 @@ impl<'a> Compiler<'a> {
         }
     }
 
-    fn literal(&mut self) {
+    fn literal(&mut self, _can_assing: bool) {
         match self.previous.unwrap().ty {
             False => self.emit_op(OpCode::False),
             Nil => self.emit_op(OpCode::Nil),
@@ -186,13 +261,28 @@ impl<'a> Compiler<'a> {
             }
             Some(x) => x,
         };
-        prefix_fn(self);
+        let can_assign = precedence <= Precedence::Assignment;
+        prefix_fn(self, can_assign);
 
         while precedence <= Self::get_rule(self.current.as_ref().unwrap().ty).precedence {
             self.advance();
             let infix_rule = Self::get_rule(self.previous.as_ref().unwrap().ty).infix;
-            infix_rule.unwrap()(self);
+            infix_rule.unwrap()(self, can_assign);
         }
+
+        if can_assign && self.match_(Equal) {
+            self.error("Invalid Assignment Target.");
+        }
+    }
+
+    fn identifier_constant(&mut self) -> u8 {
+        let string = self.allocate_string(self.previous.unwrap().string.to_string());
+        self.make_constant(Value::Object(string))
+    }
+
+    fn parse_variable(&mut self, msg: &str) -> u8 {
+        self.consume(Identifier, msg);
+        self.identifier_constant()
     }
 
     fn advance(&mut self) {
@@ -225,6 +315,7 @@ impl<'a> Compiler<'a> {
         if !self.check(ty) {
             false
         } else {
+            self.advance();
             true
         }
     }
@@ -248,13 +339,18 @@ impl<'a> Compiler<'a> {
         self.emit_op(op2);
     }
 
-    fn emit_constant(&mut self, value: Value<'a>) {
+    fn make_constant(&mut self, value: Value<'a>) -> u8 {
         if self.chunk.constants.len() == u8::MAX as usize {
             self.error("Too many constants in one chunk.");
-            return;
+            // TOOD: rustic way
+            return 0;
         }
-        self.chunk
-            .write_constant(value, self.previous.unwrap().line);
+        self.chunk.add_constant(value)
+    }
+
+    fn emit_constant(&mut self, value: Value<'a>) {
+        let location = self.make_constant(value);
+        self.emit_op(OpCode::Constant { location });
     }
 
     fn error_at_current(&mut self, msg: &str) {
@@ -324,7 +420,9 @@ impl<'a> Compiler<'a> {
             TokenType::LessEqual => {
                 ParseRule::new(None, Some(Compiler::binary), Precedence::Comparison)
             }
-            TokenType::Identifier => ParseRule::new(None, None, Precedence::None),
+            TokenType::Identifier => {
+                ParseRule::new(Some(Compiler::variable), None, Precedence::None)
+            }
             TokenType::String => ParseRule::new(Some(Compiler::string), None, Precedence::None),
             TokenType::Number => ParseRule::new(Some(Compiler::number), None, Precedence::None),
             TokenType::And => ParseRule::new(None, None, Precedence::None),
@@ -352,15 +450,15 @@ impl<'a> Compiler<'a> {
 // All of this madness is to implement the pratt-parser in similar fashion as the book.
 impl<'a>
     From<(
-        Option<for<'c> fn(&'c mut Compiler<'a>) -> ()>,
-        Option<for<'c> fn(&'c mut Compiler<'a>) -> ()>,
+        Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
+        Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
         Precedence,
     )> for ParseRule<'a>
 {
     fn from(
         value: (
-            Option<for<'c> fn(&'c mut Compiler<'a>) -> ()>,
-            Option<for<'c> fn(&'c mut Compiler<'a>) -> ()>,
+            Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
+            Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
             Precedence,
         ),
     ) -> Self {
@@ -374,8 +472,8 @@ impl<'a>
 
 impl<'a> ParseRule<'a> {
     fn new(
-        suffix: Option<for<'c> fn(&'c mut Compiler<'a>) -> ()>,
-        infix: Option<for<'c> fn(&'c mut Compiler<'a>) -> ()>,
+        suffix: Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
+        infix: Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
         precedence: Precedence,
     ) -> Self {
         return (suffix, infix, precedence).into();
