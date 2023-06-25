@@ -78,7 +78,9 @@ impl<'a> Compiler<'a> {
     pub fn compile(source: &'a str, strings: HashTable<'a>) -> Option<(Chunk<'a>, HashTable<'a>)> {
         let mut compiler = Self::new(source, strings);
         compiler.advance();
-        compiler.expression();
+        while !compiler.match_(Eof) {
+            compiler.declaration();
+        }
         compiler.consume(TokenType::Eof, "Expect End of expression.");
         compiler.end_compiler();
         if compiler.had_error {
@@ -90,6 +92,21 @@ impl<'a> Compiler<'a> {
 
     fn expression(&mut self) {
         self.parse_precedence(Precedence::Assignment);
+    }
+    fn print_statement(&mut self) {
+        self.expression();
+        self.consume(Semicolon, "Expect ';' after value.");
+        self.emit_op(OpCode::Print);
+    }
+
+    fn declaration(&mut self) {
+        self.statement();
+    }
+
+    fn statement(&mut self) {
+        if self.match_(Print) {
+            self.print_statement();
+        }
     }
 
     fn number(&mut self) {
@@ -198,6 +215,18 @@ impl<'a> Compiler<'a> {
             return;
         }
         self.error_at_current(msg);
+    }
+
+    fn check(&self, ty: TokenType) -> bool {
+        self.current.unwrap().ty == ty
+    }
+
+    fn match_(&mut self, ty: TokenType) -> bool {
+        if !self.check(ty) {
+            false
+        } else {
+            true
+        }
     }
 
     fn end_compiler(&mut self) {

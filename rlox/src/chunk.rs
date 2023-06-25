@@ -21,6 +21,8 @@ pub enum OpCode {
     Subtract,
     Multiply,
     Divide,
+
+    Print,
 }
 
 type LineNo = usize;

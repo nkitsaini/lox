@@ -169,6 +169,10 @@ impl<'a> VM<'a> {
                 Multiply => binary_op!(self, Value::Number, *),
                 Subtract => binary_op!(self, Value::Number, -),
                 Divide => binary_op!(self, Value::Number, /),
+
+                Print => {
+                    self.stack.pop().unwrap().print();
+                }
             }
         }
     }

@@ -52,6 +52,10 @@ impl<'a> PartialEq<Value<'a>> for Value<'a> {
             Self::Number(x) => x == other.as_number().unwrap(),
             Self::Nil => true,
             Self::Object(x) => {
+                let other = other.as_object().unwrap();
+                if x.kind() != other.kind() {
+                    return false;
+                }
                 x.as_string().unwrap() == other.as_object().unwrap().as_string().unwrap()
             }
         }

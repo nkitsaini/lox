@@ -42,6 +42,8 @@ impl OpCode {
             Multiply => self.simple_instruction("OP_MULTIPLY"),
             Subtract => self.simple_instruction("OP_SUBTRACT"),
             Divide => self.simple_instruction("OP_DIVIDE"),
+
+            Print => self.simple_instruction("OP_PRINT"),
         }
     }
 
