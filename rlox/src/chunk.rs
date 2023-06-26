@@ -54,17 +54,4 @@ impl<'a> Chunk<'a> {
         self.constants.push(value);
         return (self.constants.len() - 1) as u8;
     }
-
-    /// Add constant with OpCode::Constant code
-    pub fn write_constant(&mut self, value: Value<'a>, line: usize) -> u8 {
-        self.constants.push(value);
-        self.write(
-            OpCode::Constant {
-                // TODO: handle overflow
-                location: (self.constants.len() - 1) as u8,
-            },
-            line,
-        );
-        return (self.constants.len() - 1) as u8;
-    }
 }

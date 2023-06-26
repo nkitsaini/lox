@@ -6,7 +6,7 @@ use smallvec;
 
 const STACK_MAX: usize = 256;
 
-pub struct VM<'a, WS: Write, WE: Write> {
+pub struct VM<'a, 'b, WS: Write, WE: Write> {
     chunk: Chunk<'a>,
 
     // Huh, the book says looking by index is slower them
@@ -19,8 +19,8 @@ pub struct VM<'a, WS: Write, WE: Write> {
 
     globals: HashTable<'a>,
 
-    stdout: &'a mut WS,
-    stderr: &'a mut WE,
+    stdout: &'b mut WS,
+    stderr: &'b mut WE,
 }
 
 fn is_falsey(value: Value) -> bool {
@@ -55,20 +55,20 @@ macro_rules! binary_op {
     }};
 }
 
-impl<'a, WS: Write, WE: Write> VM<'a, WS, WE> {
-    pub fn new(chunk: Chunk<'a>, stdout: &'a mut WS, stderr: &'a mut WE) -> Self {
+impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
+    pub fn new(chunk: Chunk<'a>, stdout: &'b mut WS, stderr: &'b mut WE) -> Self {
         Self::new_with_strings(chunk, HashTable::new(), stdout, stderr)
     }
 
-    pub fn empty_new(stdout: &'a mut WS, stderr: &'a mut WE) -> Self {
+    pub fn empty_new(stdout: &'b mut WS, stderr: &'b mut WE) -> Self {
         Self::new(Chunk::new(), stdout, stderr)
     }
 
     pub fn new_with_strings(
         chunk: Chunk<'a>,
         strings: HashTable<'a>,
-        stdout: &'a mut WS,
-        stderr: &'a mut WE,
+        stdout: &'b mut WS,
+        stderr: &'b mut WE,
     ) -> Self {
         Self {
             chunk,
@@ -82,7 +82,7 @@ impl<'a, WS: Write, WE: Write> VM<'a, WS, WE> {
     }
     pub fn interpret(&mut self, source: &'a str) -> InterpreterResult {
         let old_strings = std::mem::replace(&mut self.strings, HashTable::new());
-        let (chunk, new_strings) = match Compiler::compile(source, old_strings) {
+        let (chunk, new_strings) = match Compiler::compile(source, old_strings, &mut self.stderr) {
             Some(x) => x,
             None => return Err(InterpreterError::CompileError),
         };

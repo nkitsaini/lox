@@ -1,3 +1,5 @@
+use std::io::Write;
+
 use crate::hashtable::HashTable;
 use crate::prelude::*;
 use crate::value::LoxObject;
@@ -13,7 +15,7 @@ pub struct Local<'a> {
     depth: Option<usize>, // None if unitialized
 }
 
-pub struct Compiler<'a> {
+pub struct Compiler<'a, 'b, WE: Write> {
     scanner: Scanner<'a>,
     current: Option<Token<'a>>,
     previous: Option<Token<'a>>,
@@ -24,6 +26,8 @@ pub struct Compiler<'a> {
 
     locals: smallvec::SmallVec<[Local<'a>; U8_COUNT]>,
     scope_depth: usize,
+
+    stderr: &'b mut WE,
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -65,16 +69,16 @@ impl Precedence {
 // type ParseFn = Fn(&mut Compiler) -> ();
 
 /// Takes (&mut Compiler, can_assign: bool)
-type ParseFn<'a> = for<'c> fn(&'c mut Compiler<'a>, bool) -> ();
+type ParseFn<'a, 'b, WE: Write> = for<'c> fn(&'c mut Compiler<'a, 'b, WE>, bool) -> ();
 
-struct ParseRule<'a> {
-    prefix: Option<ParseFn<'a>>,
-    infix: Option<ParseFn<'a>>,
+struct ParseRule<'a, 'b, WE: Write> {
+    prefix: Option<ParseFn<'a, 'b, WE>>,
+    infix: Option<ParseFn<'a, 'b, WE>>,
     precedence: Precedence,
 }
 
-impl<'a> Compiler<'a> {
-    pub fn new(source: &'a str, strings: HashTable<'a>) -> Self {
+impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
+    pub fn new(source: &'a str, strings: HashTable<'a>, stderr: &'b mut WE) -> Self {
         Compiler {
             scanner: Scanner::new(source),
             current: None,
@@ -86,11 +90,17 @@ impl<'a> Compiler<'a> {
 
             locals: smallvec::SmallVec::new(),
             scope_depth: 0,
+
+            stderr,
         }
     }
 
-    pub fn compile(source: &'a str, strings: HashTable<'a>) -> Option<(Chunk<'a>, HashTable<'a>)> {
-        let mut compiler = Self::new(source, strings);
+    pub fn compile(
+        source: &'a str,
+        strings: HashTable<'a>,
+        stderr: &'b mut WE,
+    ) -> Option<(Chunk<'a>, HashTable<'a>)> {
+        let mut compiler = Self::new(source, strings, stderr);
         compiler.advance();
         while !compiler.match_(Eof) {
             compiler.declaration();
@@ -477,22 +487,23 @@ impl<'a> Compiler<'a> {
         if self.panic_mode {
             return;
         }
-        eprint!("[line {}] Error", token.line);
+
+        writeln!(self.stderr, "[line {}] Error", token.line).unwrap();
 
         match token.ty {
             TokenType::Eof => {
-                eprint!(" at end");
+                write!(self.stderr, " at end").unwrap();
             }
             TokenType::Error => {}
             _ => {
-                eprint!(" at '{}'", token.string);
+                write!(self.stderr, " at '{}'", token.string).unwrap();
             }
         }
-        eprintln!(": {}", msg);
+        writeln!(self.stderr, ": {}", msg).unwrap();
         self.had_error = true;
     }
 
-    fn get_rule(ty: TokenType) -> ParseRule<'a> {
+    fn get_rule(ty: TokenType) -> ParseRule<'a, 'b, WE> {
         match ty {
             TokenType::LeftParen => {
                 ParseRule::new(Some(Compiler::grouping), None, Precedence::None)
@@ -557,17 +568,17 @@ impl<'a> Compiler<'a> {
 }
 
 // All of this madness is to implement the pratt-parser in similar fashion as the book.
-impl<'a>
+impl<'a, 'b, WE: Write>
     From<(
-        Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
-        Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
+        Option<ParseFn<'a, 'b, WE>>,
+        Option<ParseFn<'a, 'b, WE>>,
         Precedence,
-    )> for ParseRule<'a>
+    )> for ParseRule<'a, 'b, WE>
 {
     fn from(
         value: (
-            Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
-            Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
+            Option<ParseFn<'a, 'b, WE>>,
+            Option<ParseFn<'a, 'b, WE>>,
             Precedence,
         ),
     ) -> Self {
@@ -579,10 +590,10 @@ impl<'a>
     }
 }
 
-impl<'a> ParseRule<'a> {
+impl<'a, 'b, WE: Write> ParseRule<'a, 'b, WE> {
     fn new(
-        suffix: Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
-        infix: Option<for<'c> fn(&'c mut Compiler<'a>, bool) -> ()>,
+        suffix: Option<ParseFn<'a, 'b, WE>>,
+        infix: Option<ParseFn<'a, 'b, WE>>,
         precedence: Precedence,
     ) -> Self {
         return (suffix, infix, precedence).into();
