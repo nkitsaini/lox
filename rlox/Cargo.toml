@@ -7,10 +7,14 @@ edition = "2021"
 [features]
 # Defines a feature named `webp` that does not enable any other features.
 trace_execution = []
-default = ["trace_execution"]
+default = [] 
 
 [dependencies]
 anyhow = "1.0.71"
 enum-as-inner = "0.6.0"
 enum-kinds = "0.5.1"
 smallvec = "1.10.0"
+
+[dev-dependencies]
+insta = "1.30.0"
+pretty_assertions = "1.3.0"

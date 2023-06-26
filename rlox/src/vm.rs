@@ -1,10 +1,12 @@
+use std::io::{self, Write};
+
 // use crate::{compiler::compile, prelude::*};
 use crate::{compiler::Compiler, hashtable::HashTable, prelude::*, value::LoxObject};
 use smallvec;
 
 const STACK_MAX: usize = 256;
 
-pub struct VM<'a> {
+pub struct VM<'a, WS: Write, WE: Write> {
     chunk: Chunk<'a>,
 
     // Huh, the book says looking by index is slower them
@@ -16,6 +18,9 @@ pub struct VM<'a> {
     strings: HashTable<'a>,
 
     globals: HashTable<'a>,
+
+    stdout: &'a mut WS,
+    stderr: &'a mut WE,
 }
 
 fn is_falsey(value: Value) -> bool {
@@ -50,22 +55,29 @@ macro_rules! binary_op {
     }};
 }
 
-impl<'a> VM<'a> {
-    pub fn new(chunk: Chunk<'a>) -> Self {
-        Self::new_with_strings(chunk, HashTable::new())
+impl<'a, WS: Write, WE: Write> VM<'a, WS, WE> {
+    pub fn new(chunk: Chunk<'a>, stdout: &'a mut WS, stderr: &'a mut WE) -> Self {
+        Self::new_with_strings(chunk, HashTable::new(), stdout, stderr)
     }
 
-    pub fn empty_new() -> Self {
-        Self::new(Chunk::new())
+    pub fn empty_new(stdout: &'a mut WS, stderr: &'a mut WE) -> Self {
+        Self::new(Chunk::new(), stdout, stderr)
     }
 
-    pub fn new_with_strings(chunk: Chunk<'a>, strings: HashTable<'a>) -> Self {
+    pub fn new_with_strings(
+        chunk: Chunk<'a>,
+        strings: HashTable<'a>,
+        stdout: &'a mut WS,
+        stderr: &'a mut WE,
+    ) -> Self {
         Self {
             chunk,
             ip: 0,
             stack: smallvec::SmallVec::new(),
             strings,
             globals: HashTable::new(),
+            stdout,
+            stderr,
         }
     }
     pub fn interpret(&mut self, source: &'a str) -> InterpreterResult {
@@ -95,7 +107,7 @@ impl<'a> VM<'a> {
                 print!("        stack: ");
                 for value in self.stack.iter() {
                     print!("[ ");
-                    value.print();
+                    value.print(&mut io::stdout());
                     print!(" ]");
                 }
                 println!();
@@ -171,8 +183,8 @@ impl<'a> VM<'a> {
                 Divide => binary_op!(self, Value::Number, /),
 
                 Print => {
-                    self.stack.pop().unwrap().print();
-                    println!();
+                    self.stack.pop().unwrap().print(self.stdout);
+                    writeln!(self.stdout);
                 }
 
                 Pop => {
@@ -210,6 +222,13 @@ impl<'a> VM<'a> {
                         return Err(InterpreterError::RuntimeError);
                     }
                 }
+
+                GetLocal { stack_idx } => {
+                    self.stack.push(self.stack[stack_idx as usize].clone());
+                }
+                SetLocal { stack_idx } => {
+                    self.stack[stack_idx as usize] = self.peek(0);
+                }
             }
         }
     }
@@ -219,11 +238,11 @@ impl<'a> VM<'a> {
     }
 
     fn runtime_error(&mut self, msg: &str) {
-        eprintln!("{}", msg);
+        writeln!(self.stderr, "{}", msg);
 
         let instruction = self.ip - 1;
         let line = self.chunk.code[instruction].1;
-        eprintln!("[line {}] in script\n", line);
+        writeln!(self.stderr, "[line {}] in script\n", line);
         self.stack.clear();
     }
 
@@ -250,7 +269,7 @@ impl<'a> VM<'a> {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum InterpreterError {
     CompileError,
     RuntimeError,

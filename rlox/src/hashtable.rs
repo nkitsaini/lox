@@ -44,7 +44,6 @@ impl<'a> HashTable<'a> {
                 old_capacity * 2
             };
             self.adjust_capacity(new_capacity);
-            dbg!("adjust cap", new_capacity);
         }
         let entry: &mut Entry = Self::find_entry(&mut self.entries, &key);
         let is_new_key = entry.key.is_none();

@@ -1,0 +1,25 @@
+var a = 3;
+a  = a + 2;
+
+var b = 9;
+
+{
+	var b = 7;
+	b = b + a;
+	print b;
+}
+
+print a;
+print b;
+
+
+// var a = 3;
+// a  = a + 2;
+
+// {
+// 	var b = 7;
+// 	b = b + 2;
+// 	print b;
+// }
+
+// print a;

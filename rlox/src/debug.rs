@@ -46,13 +46,20 @@ impl OpCode {
             }
             GetGlobal { location } => self.constant_instruction(chunk, "OP_GET_GLOBAL", *location),
             SetGlobal { location } => self.constant_instruction(chunk, "OP_SET_GLOBAL", *location),
+
+            GetLocal { stack_idx } => self.byte_instruction("OP_GET_LOCAL", *stack_idx),
+            SetLocal { stack_idx } => self.byte_instruction("OP_SET_LOCAL", *stack_idx),
         }
+    }
+
+    fn byte_instruction(&self, name: &str, idx: u8) {
+        println!("{:<16} {:<4}", name, idx);
     }
 
     fn constant_instruction(&self, chunk: &Chunk, name: &str, location: u8) {
         print!("{:<16} {:<4}", name, location);
         let value = chunk.constants[location as usize].clone();
-        value.print();
+        value.print(&mut std::io::stdout());
         println!();
     }
 

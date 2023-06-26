@@ -1,0 +1,8 @@
+---
+source: tests/test_scope.rs
+expression: out
+---
+12
+5
+9
+

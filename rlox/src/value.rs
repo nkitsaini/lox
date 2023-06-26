@@ -1,5 +1,5 @@
 use enum_kinds;
-use std::rc::Rc;
+use std::{io::Write, rc::Rc};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ValueType {
@@ -79,23 +79,23 @@ impl<'a> Value<'a> {
 // TODO: Maybe the printing can be done with Display trait itself?, evaluate later.
 
 pub trait ValuePrinter {
-    fn print(&self);
+    fn print<W: Write>(&self, writer: &mut W);
 }
 
 impl<'a> ValuePrinter for Value<'a> {
-    fn print(&self) {
+    fn print<W: Write>(&self, writer: &mut W) {
         use Value::*;
         let obj = match self {
             Bool(x) => {
-                print!("{}", x);
+                write!(writer, "{}", x);
                 return;
             }
             Number(x) => {
-                print!("{}", x);
+                write!(writer, "{}", x);
                 return;
             }
             Nil => {
-                print!("nil");
+                write!(writer, "nil");
                 return;
             }
             Object(x) => x,

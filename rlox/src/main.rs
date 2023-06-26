@@ -31,7 +31,9 @@ fn repl() {
     let stdin = io::stdin();
     print!("> ");
     io::stdout().flush().ok();
-    let mut vm = VM::empty_new();
+    let mut out = io::stdout();
+    let mut err = io::stderr();
+    let mut vm = VM::empty_new(&mut out, &mut err);
     for line in stdin.lines() {
         match line {
             Err(_) => {
@@ -54,7 +56,10 @@ fn repl() {
 
 fn run_file(path: &str) -> anyhow::Result<()> {
     let source = fs::read_to_string(path)?;
-    let mut vm = VM::empty_new();
+
+    let mut out = io::stdout();
+    let mut err = io::stderr();
+    let mut vm = VM::empty_new(&mut out, &mut err);
     let result = vm.interpret(&source);
 
     let error = match result {

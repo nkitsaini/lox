@@ -6,6 +6,13 @@ use crate::{
     scanner::{Scanner, Token, TokenType, TokenType::*},
 };
 
+const U8_COUNT: usize = u8::MAX as usize + 1;
+
+pub struct Local<'a> {
+    name: Token<'a>,
+    depth: Option<usize>, // None if unitialized
+}
+
 pub struct Compiler<'a> {
     scanner: Scanner<'a>,
     current: Option<Token<'a>>,
@@ -14,6 +21,9 @@ pub struct Compiler<'a> {
     panic_mode: bool,
     chunk: Chunk<'a>,
     strings: HashTable<'a>,
+
+    locals: smallvec::SmallVec<[Local<'a>; U8_COUNT]>,
+    scope_depth: usize,
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -73,6 +83,9 @@ impl<'a> Compiler<'a> {
             panic_mode: false,
             chunk: Chunk::new(),
             strings,
+
+            locals: smallvec::SmallVec::new(),
+            scope_depth: 0,
         }
     }
 
@@ -95,6 +108,13 @@ impl<'a> Compiler<'a> {
         self.parse_precedence(Precedence::Assignment);
     }
 
+    fn block(&mut self) {
+        while !self.check(RightBrace) && !self.check(Eof) {
+            self.declaration();
+        }
+        self.consume(RightBrace, "Expect '}' after block.");
+    }
+
     fn print_statement(&mut self) {
         self.expression();
         self.consume(Semicolon, "Expect ';' after value.");
@@ -110,15 +130,18 @@ impl<'a> Compiler<'a> {
     }
 
     fn define_variable(&mut self, location: u8) {
+        // local variable is referenced by index in stack instead of name
+        if self.scope_depth > 0 {
+            self.mark_initialized();
+            return;
+        }
         self.emit_op(OpCode::DefineGlobal { location });
     }
 
     fn var_declaration(&mut self) {
         let global = self.parse_variable("Expect variable name.");
-        dbg!(self.current);
 
         if self.match_(Equal) {
-            dbg!("Equal");
             self.expression();
         } else {
             self.emit_op(OpCode::Nil);
@@ -165,6 +188,10 @@ impl<'a> Compiler<'a> {
     fn statement(&mut self) {
         if self.match_(Print) {
             self.print_statement();
+        } else if self.match_(LeftBrace) {
+            self.begin_scope();
+            self.block();
+            self.end_scope();
         } else {
             self.expression_statement();
         }
@@ -183,18 +210,32 @@ impl<'a> Compiler<'a> {
         self.emit_constant(Value::Object(str));
     }
 
-    fn named_variable(&mut self, can_assign: bool) {
-        let arg = self.identifier_constant();
+    fn named_variable(&mut self, can_assign: bool, token: Token<'a>) {
+        let get_op;
+        let set_op;
+        let arg = self.resolve_local(token);
+        match arg {
+            None => {
+                let arg = self.identifier_constant(token);
+                get_op = OpCode::GetGlobal { location: arg };
+                set_op = OpCode::SetGlobal { location: arg };
+            }
+            Some(x) => {
+                get_op = OpCode::GetLocal { stack_idx: x };
+                set_op = OpCode::SetLocal { stack_idx: x };
+            }
+        }
+
         if can_assign && self.match_(Equal) {
             self.expression();
-            self.emit_op(OpCode::SetGlobal { location: arg });
+            self.emit_op(set_op);
         } else {
-            self.emit_op(OpCode::GetGlobal { location: arg });
+            self.emit_op(get_op);
         }
     }
 
     fn variable(&mut self, can_assign: bool) {
-        self.named_variable(can_assign);
+        self.named_variable(can_assign, self.previous.unwrap());
     }
 
     fn allocate_string(&mut self, val: std::string::String) -> Rc<LoxObject<'a>> {
@@ -275,14 +316,66 @@ impl<'a> Compiler<'a> {
         }
     }
 
-    fn identifier_constant(&mut self) -> u8 {
-        let string = self.allocate_string(self.previous.unwrap().string.to_string());
+    fn identifier_constant(&mut self, token: Token<'a>) -> u8 {
+        let string = self.allocate_string(token.string.to_string());
         self.make_constant(Value::Object(string))
+    }
+
+    fn identifiers_equal(&self, a: Token<'a>, b: Token<'a>) -> bool {
+        return a.string == b.string;
+    }
+
+    fn resolve_local(&mut self, token: Token<'a>) -> Option<u8> {
+        for (i, value) in self.locals.iter().enumerate().rev() {
+            if self.identifiers_equal(value.name, token) {
+                if value.depth.is_none() {
+                    self.error("Can't read local variable in its own initializer.");
+                }
+                return Some(i as u8);
+            }
+        }
+        None
+    }
+
+    fn add_local(&mut self, token: Token<'a>) {
+        if self.locals.len() == U8_COUNT {
+            self.error("Too many local variables in function.");
+            return;
+        }
+        self.locals.push(Local {
+            name: token,
+            depth: None,
+        });
+    }
+
+    fn declare_variable(&mut self) {
+        if self.scope_depth == 0 {
+            return;
+        }
+        let val = *self.previous.as_ref().unwrap();
+        for i in (0..self.locals.len()).rev() {
+            let local = &self.locals[i];
+            if local.depth.is_some() && local.depth.unwrap() < self.scope_depth {
+                break;
+            }
+            if self.identifiers_equal(val, local.name) {
+                self.error("Already a variable with this name in this scope.");
+            }
+        }
+        self.add_local(val);
     }
 
     fn parse_variable(&mut self, msg: &str) -> u8 {
         self.consume(Identifier, msg);
-        self.identifier_constant()
+        self.declare_variable();
+        if self.scope_depth > 0 {
+            return 0;
+        };
+        self.identifier_constant(self.previous.unwrap())
+    }
+
+    fn mark_initialized(&mut self) {
+        self.locals.last_mut().unwrap().depth = Some(self.scope_depth);
     }
 
     fn advance(&mut self) {
@@ -327,6 +420,22 @@ impl<'a> Compiler<'a> {
             if !self.had_error {
                 disassemble_chunk(&self.chunk, "code");
             }
+        }
+    }
+
+    fn begin_scope(&mut self) {
+        self.scope_depth += 1;
+    }
+
+    fn end_scope(&mut self) {
+        self.scope_depth -= 1;
+
+        while !self.locals.is_empty()
+            && self.locals.last().unwrap().depth.is_some()
+            && self.locals.last().unwrap().depth.unwrap() > self.scope_depth
+        {
+            self.emit_op(OpCode::Pop);
+            self.locals.pop();
         }
     }
 

@@ -27,6 +27,8 @@ pub enum OpCode {
     DefineGlobal { location: u8 },
     GetGlobal { location: u8 },
     SetGlobal { location: u8 },
+    GetLocal { stack_idx: u8 },
+    SetLocal { stack_idx: u8 },
 }
 
 type LineNo = usize;
