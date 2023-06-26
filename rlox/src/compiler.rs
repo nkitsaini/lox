@@ -488,7 +488,7 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
             return;
         }
 
-        writeln!(self.stderr, "[line {}] Error", token.line).unwrap();
+        write!(self.stderr, "[line {}] Error", token.line).unwrap();
 
         match token.ty {
             TokenType::Eof => {
