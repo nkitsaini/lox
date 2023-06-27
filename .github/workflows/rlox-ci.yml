@@ -2,7 +2,11 @@ name: Cargo Build & Test
 
 on:
   push:
+    path:
+      - rlox/**
   pull_request:
+    path:
+      - rlox/**
 
 env: 
   CARGO_TERM_COLOR: always
