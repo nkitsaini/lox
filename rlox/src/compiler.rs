@@ -31,7 +31,7 @@ pub struct Compiler<'a, 'b, WE: Write> {
 }
 macro_rules! emit_jump {
     ($compiler:ident, $enum_variant:ident) => {{
-        let a = OpCode::$enum_variant { target: 0 };
+        let a = OpCode::$enum_variant { offset: 0 };
         $compiler.emit_op(a);
         $compiler.chunk.code.len()
     }};
@@ -165,6 +165,41 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         self.patch_jump(else_jump);
     }
 
+    fn while_statement(&mut self) {
+        // while (condition) {statement}
+        let loop_start = self.chunk.code.len();
+
+        self.consume(LeftParen, "Expect '(' after 'while'.");
+        self.expression();
+        self.consume(RightParen, "Expect ')' after condition.");
+
+        let condition_jump = emit_jump!(self, JumpIfFalse);
+        self.emit_op(OpCode::Pop);
+
+        self.statement();
+        self.emit_loop(loop_start);
+
+        self.patch_jump(condition_jump);
+        self.emit_op(OpCode::Pop);
+    }
+
+    fn for_statement(&mut self) {
+        let loop_start = self.chunk.code.len();
+
+        self.consume(LeftParen, "Expect '(' after 'while'.");
+        self.expression();
+        self.consume(RightParen, "Expect ')' after condition.");
+
+        let condition_jump = emit_jump!(self, JumpIfFalse);
+        self.emit_op(OpCode::Pop);
+
+        self.statement();
+        self.emit_loop(loop_start);
+
+        self.patch_jump(condition_jump);
+        self.emit_op(OpCode::Pop);
+    }
+
     fn define_variable(&mut self, location: u8) {
         // local variable is referenced by index in stack instead of name
         if self.scope_depth > 0 {
@@ -247,6 +282,10 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
             self.print_statement();
         } else if self.match_(If) {
             self.if_statement();
+        } else if self.match_(While) {
+            self.while_statement();
+        } else if self.match_(For) {
+            self.for_statement();
         } else if self.match_(LeftBrace) {
             self.begin_scope();
             self.block();
@@ -507,6 +546,17 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         self.emit_op(op2);
     }
 
+    fn emit_loop(&mut self, chunk_loc: usize) {
+        let offset = self.chunk.code.len() - chunk_loc;
+        if offset > u16::MAX as usize {
+            self.error("Loop body too large.");
+        }
+
+        self.emit_op(OpCode::Loop {
+            offset: offset as u16 + 1, // +1 to include this current loop opcode
+        });
+    }
+
     fn patch_jump(&mut self, opcode_loc: usize) {
         let jump = self.chunk.code.len() - opcode_loc;
 
@@ -515,8 +565,8 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         }
 
         match self.chunk.code.get_mut(opcode_loc - 1).unwrap() {
-            (OpCode::JumpIfFalse { target }, _) => *target = jump as u16,
-            (OpCode::Jump { target }, _) => *target = jump as u16,
+            (OpCode::JumpIfFalse { offset: target }, _) => *target = jump as u16,
+            (OpCode::Jump { offset: target }, _) => *target = jump as u16,
             _ => unreachable!(),
         }
     }

@@ -29,3 +29,7 @@ fn test_if_else() {
 fn test_or_and() {
     test_execution_success!("fixtures/or_and.lox");
 }
+#[test]
+fn test_while() {
+    test_execution_success!("fixtures/while.lox");
+}

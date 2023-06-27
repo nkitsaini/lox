@@ -50,8 +50,11 @@ impl OpCode {
             GetLocal { stack_idx } => self.byte_instruction("OP_GET_LOCAL", *stack_idx),
             SetLocal { stack_idx } => self.byte_instruction("OP_SET_LOCAL", *stack_idx),
 
-            JumpIfFalse { target } => self.jump_instruction("OP_JUMP_IF_FALSE", *target, true),
-            Jump { target } => self.jump_instruction("OP_JUMP", *target, true),
+            JumpIfFalse { offset: target } => {
+                self.jump_instruction("OP_JUMP_IF_FALSE", *target, true)
+            }
+            Jump { offset: target } => self.jump_instruction("OP_JUMP", *target, true),
+            Loop { offset: target } => self.jump_instruction("OP_LOOP", *target, false),
         }
     }
 

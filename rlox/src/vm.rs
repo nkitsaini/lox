@@ -94,10 +94,9 @@ impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
     }
 
     fn peek(&self, distance: usize) -> Value<'a> {
-        let v = (-1 - distance as i32) as isize;
         return self
             .stack
-            .get((v.rem_euclid(self.stack.len() as isize)) as usize)
+            .get(self.stack.len() - 1 - distance)
             .cloned()
             .unwrap();
     }
@@ -234,14 +233,15 @@ impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
                 SetLocal { stack_idx } => {
                     self.stack[stack_idx as usize] = self.peek(0);
                 }
-                JumpIfFalse { target } => {
+                JumpIfFalse { offset } => {
                     if is_falsey(self.peek(0)) {
-                        self.ip += target as usize;
+                        self.ip += offset as usize;
                     }
                 }
-                Jump { target } => {
-                    self.ip += target as usize;
+                Jump { offset } => {
+                    self.ip += offset as usize;
                 }
+                Loop { offset } => self.ip -= offset as usize,
             }
         }
     }
