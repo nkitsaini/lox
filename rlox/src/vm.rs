@@ -238,6 +238,9 @@ impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
                         self.ip += target as usize;
                     }
                 }
+                Jump { target } => {
+                    self.ip += target as usize;
+                }
             }
         }
     }

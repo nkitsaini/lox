@@ -1,8 +1,9 @@
 ---
-source: tests/common/mod.rs
+source: tests/test_jump.rs
 expression: "String::from_utf8(stdout.into_inner()).unwrap()"
 ---
 0
-1
+2
 3
+5
 

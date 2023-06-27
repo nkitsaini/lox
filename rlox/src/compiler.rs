@@ -156,7 +156,7 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
 
         self.statement();
 
-        let else_jump = emit_jump!(self, JumpIfFalse);
+        let else_jump = emit_jump!(self, Jump);
         self.patch_jump(then_jump);
 
         if self.match_(Else) {
@@ -500,6 +500,7 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
 
         match self.chunk.code.get_mut(opcode_loc - 1).unwrap() {
             (OpCode::JumpIfFalse { target }, _) => *target = jump as u16,
+            (OpCode::Jump { target }, _) => *target = jump as u16,
             _ => unreachable!(),
         }
     }

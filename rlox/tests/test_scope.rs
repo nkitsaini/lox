@@ -1,5 +1,5 @@
+#[macro_use]
 mod common;
-use common::*;
 
 use rlox::vm::InterpreterError;
 
@@ -20,7 +20,8 @@ var b = 9;
 print a;
 print b;
 ";
-    test_successfull_execution(script, "scope");
+
+    test_execution_success!(script);
 }
 
 #[test]
@@ -38,5 +39,6 @@ var b = 9;
 print a;
 print b;
 ";
-    test_execution(Err(InterpreterError::CompileError), script, "scope_error");
+
+    test_execution!(Err(InterpreterError::CompileError), script);
 }
