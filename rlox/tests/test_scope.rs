@@ -1,11 +1,11 @@
-use std::io::Cursor;
+mod common;
+use common::*;
 
-use pretty_assertions::assert_eq;
-use rlox::vm::{InterpreterError, VM};
+use rlox::vm::InterpreterError;
 
 #[test]
 fn test_scope() {
-    const SCRIPT: &'static str = "
+    let script = "
 var a = 3;
 a  = a + 2;
 
@@ -20,23 +20,12 @@ var b = 9;
 print a;
 print b;
 ";
-    let mut stdout = Cursor::new(Vec::new());
-    let mut stderr = Cursor::new(Vec::new());
-    let mut vm = VM::empty_new(&mut stdout, &mut stderr);
-    let res = vm.interpret(SCRIPT);
-
-    drop(vm);
-
-    assert_eq!(res, Ok(()));
-    assert!(stderr.into_inner().is_empty());
-    let stdout = stdout.into_inner();
-    let out = String::from_utf8(stdout).unwrap();
-    insta::assert_snapshot!(out);
+    test_successfull_execution(script, "scope");
 }
 
 #[test]
 fn test_scope_error() {
-    const SCRIPT: &'static str = "
+    let script = "
 var a = 3;
 a  = a + 2;
 
@@ -49,14 +38,5 @@ var b = 9;
 print a;
 print b;
 ";
-    let mut stdout = Cursor::new(Vec::new());
-    let mut stderr = Cursor::new(Vec::new());
-    let mut vm = VM::empty_new(&mut stdout, &mut stderr);
-    let res = vm.interpret(SCRIPT);
-
-    drop(vm);
-
-    assert_eq!(res, Err(InterpreterError::CompileError));
-    insta::assert_snapshot!(String::from_utf8(stderr.into_inner()).unwrap());
-    insta::assert_snapshot!(String::from_utf8(stdout.into_inner()).unwrap());
+    test_execution(Err(InterpreterError::CompileError), script, "scope_error");
 }

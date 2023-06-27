@@ -29,6 +29,13 @@ pub struct Compiler<'a, 'b, WE: Write> {
 
     stderr: &'b mut WE,
 }
+macro_rules! emit_jump {
+    ($compiler:ident, $enum_variant:ident) => {{
+        let a = OpCode::$enum_variant { target: 0 };
+        $compiler.emit_op(a);
+        $compiler.chunk.code.len()
+    }};
+}
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Precedence {
@@ -139,6 +146,25 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         self.emit_op(OpCode::Pop);
     }
 
+    fn if_statement(&mut self) {
+        // if (abc ) {...}
+        self.consume(LeftParen, "Expect '(' after 'if'.");
+        self.expression();
+        self.consume(RightParen, "Expect ')' after condition.");
+
+        let then_jump = emit_jump!(self, JumpIfFalse);
+
+        self.statement();
+
+        let else_jump = emit_jump!(self, JumpIfFalse);
+        self.patch_jump(then_jump);
+
+        if self.match_(Else) {
+            self.statement();
+        }
+        self.patch_jump(else_jump);
+    }
+
     fn define_variable(&mut self, location: u8) {
         // local variable is referenced by index in stack instead of name
         if self.scope_depth > 0 {
@@ -198,6 +224,8 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
     fn statement(&mut self) {
         if self.match_(Print) {
             self.print_statement();
+        } else if self.match_(If) {
+            self.if_statement();
         } else if self.match_(LeftBrace) {
             self.begin_scope();
             self.block();
@@ -456,6 +484,24 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
     fn emit_ops(&mut self, op1: OpCode, op2: OpCode) {
         self.emit_op(op1);
         self.emit_op(op2);
+    }
+
+    fn emit_jump(&mut self, op: OpCode) -> usize {
+        self.emit_op(op);
+        return self.chunk.code.len();
+    }
+
+    fn patch_jump(&mut self, opcode_loc: usize) {
+        let jump = self.chunk.code.len() - opcode_loc;
+
+        if jump > u16::MAX as usize {
+            self.error("Too much code to jump over.");
+        }
+
+        match self.chunk.code.get_mut(opcode_loc - 1).unwrap() {
+            (OpCode::JumpIfFalse { target }, _) => *target = jump as u16,
+            _ => unreachable!(),
+        }
     }
 
     fn make_constant(&mut self, value: Value<'a>) -> u8 {

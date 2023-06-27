@@ -29,6 +29,7 @@ pub enum OpCode {
     SetGlobal { location: u8 },
     GetLocal { stack_idx: u8 },
     SetLocal { stack_idx: u8 },
+    JumpIfFalse { target: u16 },
 }
 
 type LineNo = usize;

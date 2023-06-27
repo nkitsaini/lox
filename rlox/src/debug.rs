@@ -49,10 +49,22 @@ impl OpCode {
 
             GetLocal { stack_idx } => self.byte_instruction("OP_GET_LOCAL", *stack_idx),
             SetLocal { stack_idx } => self.byte_instruction("OP_SET_LOCAL", *stack_idx),
+
+            JumpIfFalse { target } => self.jump_instruction("OP_JUMP_IF_FALSE", *target, true),
         }
     }
 
+    fn jump_instruction(&self, name: &str, count: u16, is_forward: bool) {
+        println!(
+            "{:<16} -> {}",
+            name,
+            count as i64 * if is_forward { 1 } else { -1 }
+        )
+    }
+
     fn byte_instruction(&self, name: &str, idx: u8) {
+        // TODO: currently the idx is confused with the actual location of code block in chunk
+        // Fix it.
         println!("{:<16} {:<4}", name, idx);
     }
 

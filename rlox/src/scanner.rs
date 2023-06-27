@@ -1,9 +1,13 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TokenType {
     // Single Character
+    /// (
     LeftParen,
+    /// )
     RightParen,
+    /// {
     LeftBrace,
+    /// }
     RightBrace,
     Comma,
     Dot,

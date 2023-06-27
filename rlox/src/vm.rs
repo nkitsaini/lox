@@ -93,8 +93,12 @@ impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
     }
 
     fn peek(&self, distance: usize) -> Value<'a> {
-        let v = (-1 - distance as i32) as usize;
-        return self.stack.get(v % self.stack.len()).cloned().unwrap();
+        let v = (-1 - distance as i32) as isize;
+        return self
+            .stack
+            .get((v.rem_euclid(self.stack.len() as isize)) as usize)
+            .cloned()
+            .unwrap();
     }
 
     fn run(&mut self) -> InterpreterResult {
@@ -228,6 +232,11 @@ impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
                 }
                 SetLocal { stack_idx } => {
                     self.stack[stack_idx as usize] = self.peek(0);
+                }
+                JumpIfFalse { target } => {
+                    if is_falsey(self.peek(0)) {
+                        self.ip += target as usize;
+                    }
                 }
             }
         }

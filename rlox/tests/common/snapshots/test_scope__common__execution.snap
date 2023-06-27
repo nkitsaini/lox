@@ -1,0 +1,6 @@
+---
+source: tests/common/mod.rs
+expression: "String::from_utf8(stderr.into_inner()).unwrap()"
+---
+[line 8] Error at 'b': Can't read local variable in its own initializer.
+
