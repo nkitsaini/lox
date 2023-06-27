@@ -1,0 +1,6 @@
+---
+source: tests/test_scripts.rs
+expression: stderr
+---
+[line 8] Error at 'b': Can't read local variable in its own initializer.
+

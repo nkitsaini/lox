@@ -1,0 +1,8 @@
+---
+source: tests/test_scripts.rs
+expression: stdout
+---
+0
+1
+3
+

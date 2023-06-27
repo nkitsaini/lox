@@ -2,11 +2,13 @@
 // It starts having different folder locations for `cargo insta test` and `cargo test`
 
 macro_rules! test_execution {
-    ($result:expr, $script:expr) => {{
+    ($result:expr, $script_path:literal) => {{
+        let value = include_str!($script_path);
         let mut stdout = std::io::Cursor::new(Vec::new());
         let mut stderr = std::io::Cursor::new(Vec::new());
         let mut vm = rlox::vm::VM::empty_new(&mut stdout, &mut stderr);
-        let res = vm.interpret($script);
+        // let res = vm.interpret($script);
+        let res = vm.interpret(value);
 
         drop(vm);
 
@@ -20,7 +22,7 @@ macro_rules! test_execution {
     }};
 }
 macro_rules! test_execution_success {
-    ($script:ident) => {
-        test_execution!(Ok(()), $script);
+    ($script_path:literal) => {
+        test_execution!(Ok(()), $script_path);
     };
 }

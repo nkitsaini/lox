@@ -1,0 +1,12 @@
+
+var a = 3;
+a  = a + 2;
+
+var b = 9;
+
+{
+	var b = b; // this should show error
+}
+
+print a;
+print b;
