@@ -33,3 +33,7 @@ fn test_or_and() {
 fn test_while() {
     test_execution_success!("fixtures/while.lox");
 }
+#[test]
+fn test_for() {
+    test_execution_success!("fixtures/for.lox");
+}

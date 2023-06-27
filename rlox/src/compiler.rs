@@ -184,20 +184,52 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
     }
 
     fn for_statement(&mut self) {
-        let loop_start = self.chunk.code.len();
+        // for (initialization, condition, increment) {statement}
 
-        self.consume(LeftParen, "Expect '(' after 'while'.");
-        self.expression();
-        self.consume(RightParen, "Expect ')' after condition.");
+        // NEXT:
 
-        let condition_jump = emit_jump!(self, JumpIfFalse);
-        self.emit_op(OpCode::Pop);
+        // Initialization
+        self.consume(LeftParen, "Expect '(' after 'for'.");
+        if !self.match_(Semicolon) {
+            self.declaration();
+            // self.consume(Semicolon, "Expect ';' after initialization.");
+        }
+
+        let expr_loc = self.chunk.code.len();
+        let mut end_jump = None;
+        // Condition
+        if !self.match_(Semicolon) {
+            self.expression();
+            self.consume(Semicolon, "Expect ';' after condition.");
+
+            end_jump = Some(emit_jump!(self, JumpIfFalse));
+            self.emit_op(OpCode::Pop);
+        }
+
+        // skip-increment
+        let loop_body_jump = emit_jump!(self, Jump);
+        let increment_loc = self.chunk.code.len();
+
+        // Increment
+        if !self.match_(RightParen) {
+            self.expression();
+            self.emit_op(OpCode::Pop);
+            self.consume(RightParen, "Expect ')' after increment clause.");
+        }
+
+        // Go back to condition
+        self.emit_loop(expr_loc);
+
+        self.patch_jump(loop_body_jump);
 
         self.statement();
-        self.emit_loop(loop_start);
 
-        self.patch_jump(condition_jump);
-        self.emit_op(OpCode::Pop);
+        self.emit_loop(increment_loc);
+
+        if let Some(x) = end_jump {
+            self.patch_jump(x);
+            self.emit_op(OpCode::Pop);
+        }
     }
 
     fn define_variable(&mut self, location: u8) {
