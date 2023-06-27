@@ -184,20 +184,23 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
     }
 
     fn for_statement(&mut self) {
-        // for (initialization, condition, increment) {statement}
+        self.begin_scope();
 
-        // NEXT:
-
-        // Initialization
+        // ------------------ 1. Initialization
         self.consume(LeftParen, "Expect '(' after 'for'.");
-        if !self.match_(Semicolon) {
-            self.declaration();
-            // self.consume(Semicolon, "Expect ';' after initialization.");
+        // we
+        if self.match_(Semicolon) {
+            // No initialization
+        } else if self.match_(Var) {
+            self.var_declaration();
+        } else {
+            self.expression_statement();
         }
 
         let expr_loc = self.chunk.code.len();
         let mut end_jump = None;
-        // Condition
+
+        // ------------------ 2. Condition
         if !self.match_(Semicolon) {
             self.expression();
             self.consume(Semicolon, "Expect ';' after condition.");
@@ -210,7 +213,7 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         let loop_body_jump = emit_jump!(self, Jump);
         let increment_loc = self.chunk.code.len();
 
-        // Increment
+        // ------------------ 3. Increment
         if !self.match_(RightParen) {
             self.expression();
             self.emit_op(OpCode::Pop);
@@ -230,6 +233,8 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
             self.patch_jump(x);
             self.emit_op(OpCode::Pop);
         }
+
+        self.end_scope();
     }
 
     fn define_variable(&mut self, location: u8) {

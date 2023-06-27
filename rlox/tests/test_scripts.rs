@@ -37,3 +37,11 @@ fn test_while() {
 fn test_for() {
     test_execution_success!("fixtures/for.lox");
 }
+
+#[test]
+fn test_for_scope() {
+    test_execution!(
+        Err(InterpreterError::RuntimeError),
+        "fixtures/for-scope.lox"
+    );
+}

@@ -1,0 +1,8 @@
+---
+source: tests/test_scripts.rs
+expression: stderr
+---
+Undefined variable 'i'
+[line 5] in script
+
+
