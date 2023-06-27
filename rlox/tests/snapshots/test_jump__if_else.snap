@@ -1,5 +1,9 @@
 ---
 source: tests/test_jump.rs
-expression: "String::from_utf8(stderr.into_inner()).unwrap()"
+expression: stdout
 ---
+0
+2
+3
+5
 

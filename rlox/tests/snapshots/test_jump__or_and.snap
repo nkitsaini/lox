@@ -1,5 +1,9 @@
 ---
 source: tests/test_jump.rs
-expression: stderr
+expression: stdout
 ---
+2
+1
+0
+7
 

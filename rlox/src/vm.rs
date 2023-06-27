@@ -27,6 +27,7 @@ fn is_falsey(value: Value) -> bool {
     match value {
         Value::Nil => true,
         Value::Bool(x) => !x,
+        Value::Number(x) => x == 0f64,
         _ => false,
     }
 }

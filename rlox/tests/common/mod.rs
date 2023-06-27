@@ -10,9 +10,13 @@ macro_rules! test_execution {
 
         drop(vm);
 
+        let stderr = String::from_utf8(stderr.into_inner()).unwrap();
+        let stdout = String::from_utf8(stdout.into_inner()).unwrap();
+        println!("======== stdout: \n{}", &stdout);
+        println!("======== stderr: \n{}", &stderr);
         pretty_assertions::assert_eq!(res, $result);
-        insta::assert_snapshot!(String::from_utf8(stderr.into_inner()).unwrap());
-        insta::assert_snapshot!(String::from_utf8(stdout.into_inner()).unwrap());
+        insta::assert_snapshot!(stdout);
+        insta::assert_snapshot!(stderr);
     }};
 }
 macro_rules! test_execution_success {

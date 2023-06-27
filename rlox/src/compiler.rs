@@ -174,6 +174,27 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         self.emit_op(OpCode::DefineGlobal { location });
     }
 
+    fn and_(&mut self, _can_assing: bool) {
+        let end_jump = emit_jump!(self, JumpIfFalse);
+        self.emit_op(OpCode::Pop);
+        self.parse_precedence(Precedence::And);
+        self.patch_jump(end_jump);
+    }
+
+    fn or_(&mut self, _can_assing: bool) {
+        // 1. true or X => true
+        // 2. false or X => X
+
+        let else_jump = emit_jump!(self, JumpIfFalse);
+        let end_jump = emit_jump!(self, Jump);
+
+        self.patch_jump(else_jump);
+        self.emit_op(OpCode::Pop); // Case 2
+        self.parse_precedence(Precedence::Or);
+
+        self.patch_jump(end_jump);
+    }
+
     fn var_declaration(&mut self) {
         let global = self.parse_variable("Expect variable name.");
 
@@ -486,11 +507,6 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         self.emit_op(op2);
     }
 
-    fn emit_jump(&mut self, op: OpCode) -> usize {
-        self.emit_op(op);
-        return self.chunk.code.len();
-    }
-
     fn patch_jump(&mut self, opcode_loc: usize) {
         let jump = self.chunk.code.len() - opcode_loc;
 
@@ -592,7 +608,7 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
             }
             TokenType::String => ParseRule::new(Some(Compiler::string), None, Precedence::None),
             TokenType::Number => ParseRule::new(Some(Compiler::number), None, Precedence::None),
-            TokenType::And => ParseRule::new(None, None, Precedence::None),
+            TokenType::And => ParseRule::new(None, Some(Compiler::and_), Precedence::And),
             TokenType::Class => ParseRule::new(None, None, Precedence::None),
             TokenType::Else => ParseRule::new(None, None, Precedence::None),
             TokenType::False => ParseRule::new(Some(Compiler::literal), None, Precedence::None),
@@ -600,7 +616,7 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
             TokenType::Fun => ParseRule::new(None, None, Precedence::None),
             TokenType::If => ParseRule::new(None, None, Precedence::None),
             TokenType::Nil => ParseRule::new(Some(Compiler::literal), None, Precedence::None),
-            TokenType::Or => ParseRule::new(None, None, Precedence::None),
+            TokenType::Or => ParseRule::new(None, Some(Compiler::or_), Precedence::Or),
             TokenType::Print => ParseRule::new(None, None, Precedence::None),
             TokenType::Return => ParseRule::new(None, None, Precedence::None),
             TokenType::Super => ParseRule::new(None, None, Precedence::None),

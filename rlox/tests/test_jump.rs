@@ -42,3 +42,15 @@ fn test_if_else() {
 
     test_execution_success!(source);
 }
+
+#[test]
+fn test_or_and() {
+    let source = r#"
+    print 0 or 2;
+    print 1 or 7;
+    print 0 and 2;
+    print 1 and 7;
+"#;
+
+    test_execution_success!(source);
+}
