@@ -32,7 +32,6 @@ void addLine(Chunk* chunk, int line) {
 }
 
 int getLine(Chunk* chunk, int idx) {
-	int org_idx = idx;
 	idx++;
 	for (int block_idx =1; chunk->line_vec_count >= block_idx*2; block_idx++) {
 		if (chunk->lines[(block_idx*2) - 2] >= idx) {

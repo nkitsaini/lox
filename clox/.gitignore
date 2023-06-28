@@ -4,3 +4,4 @@ vgcore.*
 lox
 test
 repl.lox
+.cache
