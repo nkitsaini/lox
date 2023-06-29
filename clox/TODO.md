@@ -1,2 +1,2 @@
-Next: https://craftinginterpreters.com/types-of-values.html#lox-values-and-c-values
+Next: https://craftinginterpreters.com/calls-and-functions.html#binding-arguments-to-parameters
 - [ ] Add custom memory allocator (see: memory.c)
