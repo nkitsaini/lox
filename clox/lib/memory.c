@@ -31,6 +31,10 @@ static void freeObject(Obj *object) {
     FREE(ObjFunction, object);
     break;
   }
+  case OBJ_NATIVE: {
+    FREE(ObjNative, object);
+    break;
+  }
   }
 }
 
@@ -69,8 +73,8 @@ void freeObjects() {
 // 		return ptr
 // 	else:
 // 		new_start = free_memory.find((start, end) => end - start >=
-// size) 		allocated_memory[new_start] = new_start + size 		copy(ptr, end,
-// new_start, new_start + size)
+// size) 		allocated_memory[new_start] = new_start + size
+// copy(ptr, end, new_start, new_start + size)
 
 // 		free_memory[new_start + size] = free_memory[new_start];
 // 		delete free_memory[new_start];
@@ -87,7 +91,8 @@ void freeObjects() {
 // }
 
 // void* reallocate_hardcore_mode(void* pointer, size_t oldSize, size_t newSize)
-// { 	if (ptr_initialized == 0) { 		ptr = malloc(1024 * 1024 * 10); // 10 MB
+// { 	if (ptr_initialized == 0) { 		ptr = malloc(1024 * 1024 * 10);
+// // 10 MB
 // 	}
 
 // 	if (newSize == 0) {
