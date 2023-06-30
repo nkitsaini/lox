@@ -45,20 +45,27 @@ typedef struct {
 typedef struct {
   Token name;
   int depth;
+  bool isCaptured;
 } Local;
+
+typedef struct {
+  uint8_t index;
+  bool isLocal;
+} Upvalue;
 
 typedef enum {
   TYPE_FUNCTION,
   TYPE_SCRIPT,
 } FunctionType;
 
-typedef struct {
+typedef struct Compiler {
   struct Compiler *enclosing;
   ObjFunction *function;
   FunctionType type;
 
   Local locals[UINT8_COUNT];
   int localCount;
+  Upvalue upvalues[UINT8_COUNT];
   int scopeDepth;
 } Compiler;
 
@@ -178,7 +185,11 @@ static void endScope() {
   current->scopeDepth--;
   while (current->localCount > 0 &&
          current->locals[current->localCount - 1].depth > current->scopeDepth) {
-    emitByte(OP_POP);
+    if (current->locals[current->localCount - 1].isCaptured) {
+      emitByte(OP_CLOSE_UPVALUE);
+    } else {
+      emitByte(OP_POP);
+    }
     current->localCount--;
   }
 }
@@ -222,6 +233,42 @@ static int resolveLocal(Compiler *compiler, Token *name) {
   return -1;
 }
 
+static int addUpValue(Compiler *compiler, uint8_t index, bool isLocal) {
+  int upValueCount = compiler->function->upvalueCount;
+
+  for (int i = 0; i < upValueCount; i++) {
+    Upvalue *upvalue = &compiler->upvalues[i];
+    if (upvalue->index == index && upvalue->isLocal == isLocal) {
+      return i;
+    }
+  }
+  if (upValueCount == UINT8_COUNT) {
+    error("Too many closure variables in function.");
+    return 0;
+  }
+  compiler->upvalues[upValueCount].isLocal = isLocal;
+  compiler->upvalues[upValueCount].index = index;
+  return compiler->function->upvalueCount++;
+}
+
+static int resolveUpvalue(Compiler *compiler, Token *name) {
+  if (compiler->enclosing == NULL)
+    return -1;
+
+  int local = resolveLocal(compiler->enclosing, name);
+  if (local != -1) {
+    compiler->enclosing->locals[local].isCaptured = true;
+    return addUpValue(compiler, (uint8_t)local, true);
+  }
+
+  int upvalue = resolveUpvalue(compiler->enclosing, name);
+  if (upvalue != -1) {
+    return addUpValue(compiler, (uint8_t)upvalue, false);
+  }
+
+  return -1;
+}
+
 static void addLocal(Token name) {
   if (current->localCount == UINT8_COUNT) {
     error("Too many local variables in function.");
@@ -230,6 +277,7 @@ static void addLocal(Token name) {
   Local *local = &current->locals[current->localCount++];
   local->name = name;
   local->depth = -1;
+  local->isCaptured = false;
 }
 
 static void declareVariable() {
@@ -286,6 +334,7 @@ static uint8_t argumentList() {
 }
 
 static void and_(bool canAssign) {
+  UNUSED(canAssign);
   int endJump = emitJump(OP_JUMP_IF_FALSE);
   emitByte(OP_POP);
   parsePrecedence(PREC_AND);
@@ -293,6 +342,7 @@ static void and_(bool canAssign) {
 }
 
 static void or_(bool canAssign) {
+  UNUSED(canAssign);
   int elseJump = emitJump(OP_JUMP_IF_FALSE);
   int endJump = emitJump(OP_JUMP);
   patchJump(elseJump);
@@ -302,6 +352,7 @@ static void or_(bool canAssign) {
 }
 
 static void binary(bool canAssign) {
+  UNUSED(canAssign);
   TokenType operatorType = parser.previous.type;
   ParseRule *rule = getRule(operatorType);
   parsePrecedence((Precedence)(rule->precedence + 1));
@@ -345,12 +396,14 @@ static void binary(bool canAssign) {
   }
 }
 
-static void call() {
+static void call(bool canAssign) {
+  UNUSED(canAssign);
   uint8_t argCount = argumentList();
   emitBytes(OP_CALL, argCount);
 }
 
 static void literal(bool canAssign) {
+  UNUSED(canAssign);
   switch (parser.previous.type) {
   case TOKEN_FALSE:
     emitByte(OP_FALSE);
@@ -384,11 +437,13 @@ static void initCompiler(Compiler *compiler, FunctionType type) {
 
   Local *local = &current->locals[current->localCount++];
   local->depth = 0;
+  local->isCaptured = false;
   local->name.start = "";
   local->name.length = 0;
 }
 
 static void number(bool canAssign) {
+  UNUSED(canAssign);
   // should it be `start + length` instead of NULL?
   // investigate: Why does it work?, actually no, we're just saying take the
   // first floating point. It'll only work as long as lox and C representation
@@ -398,6 +453,7 @@ static void number(bool canAssign) {
 }
 
 static void string(bool canAssign) {
+  UNUSED(canAssign);
   emitConstant(OBJ_VAL(
       copyString(parser.previous.start + 1, parser.previous.length - 2)));
 }
@@ -408,6 +464,9 @@ static void namedVariable(Token name, bool canAssign) {
   if (arg != -1) {
     getOp = OP_GET_LOCAL;
     setOp = OP_SET_LOCAL;
+  } else if ((arg = resolveUpvalue(current, &name)) != -1) {
+    getOp = OP_GET_UPVALUE;
+    setOp = OP_SET_UPVALUE;
   } else {
     arg = identifierConstant(&name);
     getOp = OP_GET_GLOBAL;
@@ -426,6 +485,7 @@ static void variable(bool canAssign) {
 }
 
 static void unary(bool canAssign) {
+  UNUSED(canAssign);
   TokenType operatorType = parser.previous.type;
   parsePrecedence(PREC_UNARY);
   switch (operatorType) {
@@ -441,6 +501,7 @@ static void unary(bool canAssign) {
 }
 
 static void grouping(bool canAssign) {
+  UNUSED(canAssign);
   expression();
   consume(TOKEN_RIGHT_PAREN, "Expect `)` after expression.");
 }
@@ -544,7 +605,12 @@ static void function(FunctionType type) {
   consume(TOKEN_LEFT_BRACE, "Expect '{' after function name.");
   block();
   ObjFunction *function = endCompiler();
-  emitBytes(OP_CONSTANT, makeConstant(OBJ_VAL(function)));
+  emitBytes(OP_CLOSURE, makeConstant(OBJ_VAL(function)));
+
+  for (int i = 0; i < function->upvalueCount; i++) {
+    emitByte(compiler.upvalues[i].isLocal ? 1 : 0);
+    emitByte(compiler.upvalues[i].index);
+  }
 }
 
 static void funDeclaration() {
