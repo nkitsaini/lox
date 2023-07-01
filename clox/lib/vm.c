@@ -152,6 +152,13 @@ static void concatenate() {
 void initVM() {
   resetStack();
   vm.objects = NULL;
+  vm.bytesAllocated = 0;
+  vm.nextGC = 1024 * 1024; // 1MB
+
+  vm.grayCount = 0;
+  vm.grayCapacity = 0;
+  vm.grayStack = NULL;
+
   initTable(&vm.globals);
   initTable(&vm.strings);
   defineNative("clock", clockNative);
@@ -206,6 +213,7 @@ static InterpretResult run() {
 #endif
 
 #ifdef DEBUG_TRACE_EXECUTION
+    printf("STACK: ");
     for (Value *slot = vm.stack; slot < vm.stackTop; slot++) {
       printf("[ ");
       printValue(*slot);
@@ -326,6 +334,8 @@ static InterpretResult run() {
         double a = AS_NUMBER(pop());
         push(NUMBER_VAL(a + b));
       } else {
+        printValue(peek(0));
+        printValue(peek(1));
         runtimeError("Operands must be two numbers or two strings.");
         return INTERPRET_RUNTIME_ERROR;
       }

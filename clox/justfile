@@ -12,7 +12,7 @@ build-debug:
 debug-repl: build-debug
 	gdb --args ./lox repl.lox
 
-run-repl: build
+run-repl: build-debug
 	./lox repl.lox
 
 run: build
