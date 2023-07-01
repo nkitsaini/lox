@@ -1,8 +1,16 @@
 alias b := build
 
 build:
+	zig cc -Wall -Wextra main.c lib/*.c -o lox
+
+build-release:
 	zig cc -O3 -Wall -Wextra main.c lib/*.c -o lox
 
+build-debug:
+	gcc -g -Wall -Wextra main.c lib/*.c -o lox
+
+debug-repl: build-debug
+	gdb --args ./lox repl.lox
 
 run: build
 	./lox
