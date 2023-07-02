@@ -1,15 +1,16 @@
 #include "object.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "chunk.h"
 #include "memory.h"
 #include "table.h"
 #include "value.h"
 #include "vm.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define ALLOCATE_OBJ(type, objectType)                                         \
+#define ALLOCATE_OBJ(type, objectType) \
   (type *)allocateObject(sizeof(type), objectType)
 
 static uint32_t hashString(const char *key, int length) {
@@ -86,8 +87,7 @@ static ObjString *allocateString(char *chars, int length, uint32_t hash) {
 ObjString *copyString(const char *chars, int length) {
   uint32_t hash = hashString(chars, length);
   ObjString *interned = tableFindString(&vm.strings, chars, length, hash);
-  if (interned != NULL)
-    return interned;
+  if (interned != NULL) return interned;
 
   char *heapChars = ALLOCATE(char, length + 1);
   memcpy(heapChars, chars, length);
@@ -112,27 +112,27 @@ void printFunction(ObjFunction *function) {
 
 void printObject(Value value) {
   switch (OBJ_TYPE(value)) {
-  case OBJ_CLASS: {
-    printf("%s", AS_CLASS(value)->name->chars);
-    break;
-  }
-  case OBJ_STRING:
-    printf("%s", AS_CSTRING(value));
-    break;
-  case OBJ_FUNCTION:
-    printFunction(AS_FUNCTION(value));
-    break;
-  case OBJ_CLOSURE:
-    printFunction(AS_CLOSURE(value)->function);
-    break;
-  case OBJ_NATIVE:
-    printf("<native fn>");
-    break;
-  case OBJ_UPVALUE:
-    // Can never be called by user
-    // Upvalue are internal construct only
-    printf("upvalue");
-    break;
+    case OBJ_CLASS: {
+      printf("%s", AS_CLASS(value)->name->chars);
+      break;
+    }
+    case OBJ_STRING:
+      printf("%s", AS_CSTRING(value));
+      break;
+    case OBJ_FUNCTION:
+      printFunction(AS_FUNCTION(value));
+      break;
+    case OBJ_CLOSURE:
+      printFunction(AS_CLOSURE(value)->function);
+      break;
+    case OBJ_NATIVE:
+      printf("<native fn>");
+      break;
+    case OBJ_UPVALUE:
+      // Can never be called by user
+      // Upvalue are internal construct only
+      printf("upvalue");
+      break;
   }
 }
 

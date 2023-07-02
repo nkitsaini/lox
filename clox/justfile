@@ -16,7 +16,7 @@ run-repl: build-debug
 	./lox repl.lox
 
 format:
-	find  . -iname '*.h' -o -iname '*.c' | xargs clang-format -i
+	find  . -iname '*.h' -o -iname '*.c' | xargs clang-format --style=google -i
 
 
 run: build

@@ -1,4 +1,8 @@
 #include "memory.h"
+
+#include <memory.h>
+#include <stdlib.h>
+
 #include "backtrace.h"
 #include "chunk.h"
 #include "compiler.h"
@@ -6,12 +10,11 @@
 #include "table.h"
 #include "value.h"
 #include "vm.h"
-#include <memory.h>
-#include <stdlib.h>
 
 #ifdef DEBUG_LOG_GC
-#include "debug.h"
 #include <stdio.h>
+
+#include "debug.h"
 #endif
 
 #define GC_HEAD_GROW_FACTOR 2
@@ -33,14 +36,12 @@ void *reallocate(void *pointer, size_t oldSize, size_t newSize) {
 
   void *result = realloc(pointer, newSize);
   if (result == NULL)
-    exit(1); // allocation failed due out of memory. Is it possible otherwise?
+    exit(1);  // allocation failed due out of memory. Is it possible otherwise?
   return result;
 }
 void markObject(Obj *object) {
-  if (object == NULL)
-    return;
-  if (object->isMarked)
-    return;
+  if (object == NULL) return;
+  if (object->isMarked) return;
 
 #ifdef DEBUG_LOG_GC
   printf("%p mark ", (void *)object);
@@ -59,8 +60,7 @@ void markObject(Obj *object) {
 }
 
 void markValue(Value value) {
-  if (IS_OBJ(value))
-    markObject(AS_OBJ(value));
+  if (IS_OBJ(value)) markObject(AS_OBJ(value));
 }
 
 static void markArray(ValueArray *array) {
@@ -76,32 +76,32 @@ static void blackenObject(Obj *object) {
   printf("\n");
 #endif
   switch (object->type) {
-  case OBJ_CLASS: {
-    ObjClass *klass = (ObjClass *)object;
-    // QUEST: Why not mark class itself?
-    markObject((Obj *)klass->name);
-    break;
-  }
-  case OBJ_CLOSURE: {
-    ObjClosure *closure = (ObjClosure *)object;
-    markObject((Obj *)closure->function);
-    for (int i = 0; i < closure->upvalueCount; i++) {
-      markObject((Obj *)closure->upvalues[i]);
+    case OBJ_CLASS: {
+      ObjClass *klass = (ObjClass *)object;
+      // QUEST: Why not mark class itself?
+      markObject((Obj *)klass->name);
+      break;
     }
-    break;
-  }
-  case OBJ_FUNCTION: {
-    ObjFunction *function = (ObjFunction *)object;
-    markObject((Obj *)function->name);
-    markArray(&function->chunk.constants);
-    break;
-  }
-  case OBJ_UPVALUE:
-    markValue(((ObjUpvalue *)object)->closed);
-    break;
-  case OBJ_NATIVE:
-  case OBJ_STRING:
-    break;
+    case OBJ_CLOSURE: {
+      ObjClosure *closure = (ObjClosure *)object;
+      markObject((Obj *)closure->function);
+      for (int i = 0; i < closure->upvalueCount; i++) {
+        markObject((Obj *)closure->upvalues[i]);
+      }
+      break;
+    }
+    case OBJ_FUNCTION: {
+      ObjFunction *function = (ObjFunction *)object;
+      markObject((Obj *)function->name);
+      markArray(&function->chunk.constants);
+      break;
+    }
+    case OBJ_UPVALUE:
+      markValue(((ObjUpvalue *)object)->closed);
+      break;
+    case OBJ_NATIVE:
+    case OBJ_STRING:
+      break;
   }
 }
 
@@ -114,34 +114,34 @@ static void freeObject(Obj *object) {
   }
 #endif
   switch (object->type) {
-  case OBJ_STRING: {
-    ObjString *string = (ObjString *)object;
-    FREE_ARRAY(char, string->chars, string->length + 1);
-    FREE(ObjString, object);
-    break;
-  }
-  case OBJ_FUNCTION: {
-    ObjFunction *function = (ObjFunction *)object;
-    freeChunk(&function->chunk);
-    FREE(ObjFunction, object);
-    break;
-  }
-  case OBJ_CLOSURE: {
-    ObjClosure *closure = (ObjClosure *)object;
-    FREE_ARRAY(ObjUpvalue *, closure->upvalues, closure->upvalueCount);
-    FREE(ObjClosure, object);
-    break;
-  }
-  case OBJ_NATIVE: {
-    FREE(ObjNative, object);
-    break;
-  }
-  case OBJ_UPVALUE: {
-    FREE(ObjUpvalue, object);
-  }
-  case OBJ_CLASS: {
-    FREE(ObjClass, object);
-  }
+    case OBJ_STRING: {
+      ObjString *string = (ObjString *)object;
+      FREE_ARRAY(char, string->chars, string->length + 1);
+      FREE(ObjString, object);
+      break;
+    }
+    case OBJ_FUNCTION: {
+      ObjFunction *function = (ObjFunction *)object;
+      freeChunk(&function->chunk);
+      FREE(ObjFunction, object);
+      break;
+    }
+    case OBJ_CLOSURE: {
+      ObjClosure *closure = (ObjClosure *)object;
+      FREE_ARRAY(ObjUpvalue *, closure->upvalues, closure->upvalueCount);
+      FREE(ObjClosure, object);
+      break;
+    }
+    case OBJ_NATIVE: {
+      FREE(ObjNative, object);
+      break;
+    }
+    case OBJ_UPVALUE: {
+      FREE(ObjUpvalue, object);
+    }
+    case OBJ_CLASS: {
+      FREE(ObjClass, object);
+    }
   }
 }
 

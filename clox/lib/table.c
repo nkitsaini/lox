@@ -1,3 +1,5 @@
+#include "table.h"
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -5,8 +7,6 @@
 #include "object.h"
 #include "table.h"
 #include "value.h"
-
-#include "table.h"
 
 #define TABLE_MAX_LOAD 0.75
 
@@ -32,8 +32,7 @@ static Entry *findEntry(Entry *entries, int capacity, ObjString *key) {
       if (IS_NIL(entry->value)) {
         return tombstone != NULL ? tombstone : entry;
       } else {
-        if (tombstone == NULL)
-          tombstone = entry;
+        if (tombstone == NULL) tombstone = entry;
       }
     }
     index = (index + 1) % capacity;
@@ -51,8 +50,7 @@ static void adjustCapacity(Table *table, int capacity) {
   table->count = 0;
   for (int i = 0; i < table->capacity; i++) {
     Entry *entry = &table->entries[i];
-    if (entry->key == NULL)
-      continue;
+    if (entry->key == NULL) continue;
     Entry *dest = findEntry(entries, capacity, entry->key);
     dest->key = entry->key;
     dest->value = entry->value;
@@ -70,8 +68,8 @@ bool tableSet(Table *table, ObjString *key, Value value) {
   }
   Entry *entry = findEntry(table->entries, table->capacity, key);
   bool isNewKey = entry->key == NULL;
-  if (isNewKey && IS_NIL(entry->value)) // don't increment for tombstones (they
-                                        // are already counted)
+  if (isNewKey && IS_NIL(entry->value))  // don't increment for tombstones (they
+                                         // are already counted)
     table->count++;
   entry->key = key;
   entry->value = value;
@@ -84,8 +82,7 @@ bool tableDelete(Table *table, ObjString *key) {
     return false;
   }
   Entry *entry = findEntry(table->entries, table->capacity, key);
-  if (entry->key == NULL)
-    return false;
+  if (entry->key == NULL) return false;
 
   entry->key = NULL;
   entry->value = BOOL_VAL(true);
@@ -125,7 +122,6 @@ ObjString *tableFindString(Table *table, const char *chars, int length,
 
     if (entry->key == NULL) {
       if (IS_NIL(entry->value)) {
-
         return entry->key;
       }
     } else if (entry->key->length == length && entry->key->hash == hash &&

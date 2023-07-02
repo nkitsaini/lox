@@ -1,13 +1,15 @@
 #include "compiler.h"
+
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "chunk.h"
 #include "common.h"
 #include "object.h"
 #include "scanner.h"
 #include "value.h"
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #ifdef DEBUG_PRINT_CODE
 #include "debug.h"
@@ -17,7 +19,7 @@ typedef struct {
   Token current;
   Token previous;
   bool hadError;
-  bool panicMode; // Did I forget to implement this in pylox?
+  bool panicMode;  // Did I forget to implement this in pylox?
 } Parser;
 
 typedef enum {
@@ -75,8 +77,7 @@ Compiler *current = NULL;
 static Chunk *currentChunk() { return &current->function->chunk; }
 
 static void errorAt(Token *token, const char *message) {
-  if (parser.panicMode)
-    return;
+  if (parser.panicMode) return;
   parser.panicMode = true;
   fprintf(stderr, "[line %d] Error", token->line);
 
@@ -102,8 +103,7 @@ static void advance() {
 
   for (;;) {
     parser.current = scanToken();
-    if (parser.current.type != TOKEN_ERROR)
-      break;
+    if (parser.current.type != TOKEN_ERROR) break;
 
     errorAtCurrent(parser.current.start);
   }
@@ -120,8 +120,7 @@ static void consume(TokenType type, const char *message) {
 static bool check(TokenType type) { return parser.current.type == type; }
 
 static bool match(TokenType type) {
-  if (!check(type))
-    return false;
+  if (!check(type)) return false;
   advance();
   return true;
 }
@@ -252,8 +251,7 @@ static int addUpValue(Compiler *compiler, uint8_t index, bool isLocal) {
 }
 
 static int resolveUpvalue(Compiler *compiler, Token *name) {
-  if (compiler->enclosing == NULL)
-    return -1;
+  if (compiler->enclosing == NULL) return -1;
 
   int local = resolveLocal(compiler->enclosing, name);
   if (local != -1) {
@@ -281,8 +279,7 @@ static void addLocal(Token name) {
 }
 
 static void declareVariable() {
-  if (current->scopeDepth == 0)
-    return;
+  if (current->scopeDepth == 0) return;
   Token *name = &parser.previous;
 
   for (int i = current->localCount - 1; i >= 0; i--) {
@@ -299,14 +296,12 @@ static void declareVariable() {
 static uint8_t parseVariable(const char *errorMessage) {
   consume(TOKEN_IDENTIFIER, errorMessage);
   declareVariable();
-  if (current->scopeDepth > 0)
-    return 0;
+  if (current->scopeDepth > 0) return 0;
   return identifierConstant(&parser.previous);
 }
 
 static void markInitialized() {
-  if (current->scopeDepth == 0)
-    return;
+  if (current->scopeDepth == 0) return;
   current->locals[current->localCount - 1].depth = current->scopeDepth;
 }
 
@@ -358,41 +353,41 @@ static void binary(bool canAssign) {
   parsePrecedence((Precedence)(rule->precedence + 1));
 
   switch (operatorType) {
-  case TOKEN_BANG_EQUAL:
-    emitBytes(OP_EQUAL, OP_NOT);
-    break;
+    case TOKEN_BANG_EQUAL:
+      emitBytes(OP_EQUAL, OP_NOT);
+      break;
 
-  case TOKEN_EQUAL_EQUAL:
-    emitByte(OP_EQUAL);
-    break;
+    case TOKEN_EQUAL_EQUAL:
+      emitByte(OP_EQUAL);
+      break;
 
-  case TOKEN_GREATER:
-    emitByte(OP_GREATER);
-    break;
-  case TOKEN_GREATER_EQUAL:
-    emitBytes(OP_LESS, OP_NOT);
-    break;
-  case TOKEN_LESS:
-    emitByte(OP_LESS);
-    break;
-  case TOKEN_LESS_EQUAL:
-    emitBytes(OP_GREATER, OP_NOT);
-    break;
+    case TOKEN_GREATER:
+      emitByte(OP_GREATER);
+      break;
+    case TOKEN_GREATER_EQUAL:
+      emitBytes(OP_LESS, OP_NOT);
+      break;
+    case TOKEN_LESS:
+      emitByte(OP_LESS);
+      break;
+    case TOKEN_LESS_EQUAL:
+      emitBytes(OP_GREATER, OP_NOT);
+      break;
 
-  case TOKEN_PLUS:
-    emitByte(OP_ADD);
-    break;
-  case TOKEN_MINUS:
-    emitByte(OP_SUBTRACT);
-    break;
-  case TOKEN_STAR:
-    emitByte(OP_MULTIPLY);
-    break;
-  case TOKEN_SLASH:
-    emitByte(OP_DIVIDE);
-    break;
-  default:
-    return; // unreachable
+    case TOKEN_PLUS:
+      emitByte(OP_ADD);
+      break;
+    case TOKEN_MINUS:
+      emitByte(OP_SUBTRACT);
+      break;
+    case TOKEN_STAR:
+      emitByte(OP_MULTIPLY);
+      break;
+    case TOKEN_SLASH:
+      emitByte(OP_DIVIDE);
+      break;
+    default:
+      return;  // unreachable
   }
 }
 
@@ -405,17 +400,17 @@ static void call(bool canAssign) {
 static void literal(bool canAssign) {
   UNUSED(canAssign);
   switch (parser.previous.type) {
-  case TOKEN_FALSE:
-    emitByte(OP_FALSE);
-    break;
-  case TOKEN_NIL:
-    emitByte(OP_NIL);
-    break;
-  case TOKEN_TRUE:
-    emitByte(OP_TRUE);
-    break;
-  default:
-    return; // Unreachable.
+    case TOKEN_FALSE:
+      emitByte(OP_FALSE);
+      break;
+    case TOKEN_NIL:
+      emitByte(OP_NIL);
+      break;
+    case TOKEN_TRUE:
+      emitByte(OP_TRUE);
+      break;
+    default:
+      return;  // Unreachable.
   }
 }
 
@@ -489,14 +484,14 @@ static void unary(bool canAssign) {
   TokenType operatorType = parser.previous.type;
   parsePrecedence(PREC_UNARY);
   switch (operatorType) {
-  case TOKEN_MINUS:
-    emitByte(OP_NEGATE);
-    break;
-  case TOKEN_BANG:
-    emitByte(OP_NOT);
-    break;
-  default:
-    return;
+    case TOKEN_MINUS:
+      emitByte(OP_NEGATE);
+      break;
+    case TOKEN_BANG:
+      emitByte(OP_NOT);
+      break;
+    default:
+      return;
   }
 }
 
@@ -584,7 +579,6 @@ static void block() {
 }
 
 static void function(FunctionType type) {
-
   Compiler compiler;
   initCompiler(&compiler, type);
   beginScope();
@@ -666,7 +660,6 @@ static void ifStatement() {
 }
 
 static void whileStatement() {
-
   int loopStart = currentChunk()->count;
   consume(TOKEN_LEFT_PAREN, "Expect '(' after 'while'.");
   expression();
@@ -682,7 +675,6 @@ static void whileStatement() {
 }
 
 static void forStatement() {
-
   beginScope();
 
   consume(TOKEN_LEFT_PAREN, "Expect '(' after 'for'.");
@@ -751,19 +743,18 @@ static void returnStatement() {
 static void synchronize() {
   parser.panicMode = false;
   while (parser.current.type != TOKEN_EOF) {
-    if (parser.previous.type == TOKEN_SEMICOLON)
-      return;
+    if (parser.previous.type == TOKEN_SEMICOLON) return;
     switch (parser.current.type) {
-    case TOKEN_CLASS:
-    case TOKEN_FUN:
-    case TOKEN_VAR:
-    case TOKEN_FOR:
-    case TOKEN_IF:
-    case TOKEN_WHILE:
-    case TOKEN_PRINT:
-    case TOKEN_RETURN:
-      return;
-    default:;
+      case TOKEN_CLASS:
+      case TOKEN_FUN:
+      case TOKEN_VAR:
+      case TOKEN_FOR:
+      case TOKEN_IF:
+      case TOKEN_WHILE:
+      case TOKEN_PRINT:
+      case TOKEN_RETURN:
+        return;
+      default:;
     }
     advance();
   }
@@ -779,8 +770,7 @@ static void declaration() {
   } else {
     statement();
   }
-  if (parser.panicMode)
-    synchronize();
+  if (parser.panicMode) synchronize();
 }
 static void statement() {
   if (match(TOKEN_PRINT)) {

@@ -22,15 +22,15 @@ TEST chunk_run_store_lines(void) {
   Chunk chunk;
   initChunk(&chunk);
 
-  addLine(&chunk, 1); // 1
-  addLine(&chunk, 1); // 2
-  addLine(&chunk, 2); // 3
-  addLine(&chunk, 3); // 4
-  addLine(&chunk, 4); // 5
-  addLine(&chunk, 4); // 6
-  addLine(&chunk, 4); // 7
-  addLine(&chunk, 5); // 8
-  addLine(&chunk, 6); // 9
+  addLine(&chunk, 1);  // 1
+  addLine(&chunk, 1);  // 2
+  addLine(&chunk, 2);  // 3
+  addLine(&chunk, 3);  // 4
+  addLine(&chunk, 4);  // 5
+  addLine(&chunk, 4);  // 6
+  addLine(&chunk, 4);  // 7
+  addLine(&chunk, 5);  // 8
+  addLine(&chunk, 6);  // 9
   ASSERT_EQ(1, getLine(&chunk, 0));
   ASSERT_EQ(1, getLine(&chunk, 1));
   ASSERT_EQ(2, getLine(&chunk, 2));

@@ -1,9 +1,10 @@
+#include <stdlib.h>
+#include <string.h>
+
 #include "lib/chunk.h"
 #include "lib/common.h"
 #include "lib/debug.h"
 #include "lib/vm.h"
-#include <stdlib.h>
-#include <string.h>
 
 static char *readFile(const char *path) {
   FILE *file = fopen(path, "rb");
@@ -47,10 +48,8 @@ static void runFile(const char *path) {
   char *source = readFile(path);
   InterpretResult result = interpret(source);
   free(source);
-  if (result == INTERPRET_COMPILE_ERROR)
-    exit(65);
-  if (result == INTERPRET_RUNTIME_ERROR)
-    exit(70);
+  if (result == INTERPRET_COMPILE_ERROR) exit(65);
+  if (result == INTERPRET_RUNTIME_ERROR) exit(70);
 }
 
 int main(int argc, char *argv[]) {

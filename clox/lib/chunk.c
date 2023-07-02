@@ -1,4 +1,5 @@
 #include "chunk.h"
+
 #include "vm.h"
 
 void initChunk(Chunk *chunk) {
@@ -20,8 +21,8 @@ void addLine(Chunk *chunk, int line) {
   }
 
   if (chunk->line_vec_count >
-      chunk->line_vec_capacity - 2) { // -1, -2 both will work fine here. since
-                                      // we always increase by atleast two.
+      chunk->line_vec_capacity - 2) {  // -1, -2 both will work fine here. since
+                                       // we always increase by atleast two.
     int oldCapacity = chunk->line_vec_capacity;
 
     // Due to GROW_CAPACITY guarantees, we'll atleast increase capacity by 2.
@@ -45,7 +46,7 @@ int getLine(Chunk *chunk, int idx) {
       // - 1], org_idx);
       return chunk->lines[(block_idx * 2) - 1];
     }
-    idx -= chunk->lines[(block_idx * 2) - 2]; // move to next block
+    idx -= chunk->lines[(block_idx * 2) - 2];  // move to next block
   }
   // There's no more blocks to check
   return -1;
@@ -72,8 +73,7 @@ int addConstant(Chunk *chunk, Value value) {
 }
 
 void addConstantAddress(Chunk *chunk, int address, int line) {
-
-  if (address < 256) { // can fit in regular OP_CONSTANT (8 bit)
+  if (address < 256) {  // can fit in regular OP_CONSTANT (8 bit)
     writeChunk(chunk, OP_CONSTANT, line);
     writeChunk(chunk, address, line);
     return;
