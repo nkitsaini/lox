@@ -1,5 +1,3 @@
-#include "compiler.h"
-
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,6 +5,7 @@
 
 #include "chunk.h"
 #include "common.h"
+#include "compiler.h"
 #include "object.h"
 #include "scanner.h"
 #include "value.h"
@@ -397,6 +396,17 @@ static void call(bool canAssign) {
   emitBytes(OP_CALL, argCount);
 }
 
+static void dot(bool canAssign) {
+  consume(TOKEN_IDENTIFIER, "Expect property name after '.'.");
+  uint8_t name = identifierConstant(&parser.previous);
+  if (canAssign && match(TOKEN_EQUAL)) {
+    expression();
+    emitBytes(OP_SET_PROPERTY, name);
+  } else {
+    emitBytes(OP_GET_PROPERTY, name);
+  }
+}
+
 static void literal(bool canAssign) {
   UNUSED(canAssign);
   switch (parser.previous.type) {
@@ -507,7 +517,7 @@ ParseRule rules[] = {
     [TOKEN_LEFT_BRACE] = {NULL, NULL, PREC_NONE},
     [TOKEN_RIGHT_BRACE] = {NULL, NULL, PREC_NONE},
     [TOKEN_COMMA] = {NULL, NULL, PREC_NONE},
-    [TOKEN_DOT] = {NULL, NULL, PREC_NONE},
+    [TOKEN_DOT] = {NULL, dot, PREC_CALL},
     [TOKEN_MINUS] = {unary, binary, PREC_TERM},
     [TOKEN_PLUS] = {NULL, binary, PREC_TERM},
     [TOKEN_SEMICOLON] = {NULL, NULL, PREC_NONE},
@@ -611,7 +621,7 @@ static void classDeclaration() {
   consume(TOKEN_IDENTIFIER, "Expect class name.");
   uint8_t nameConstant = identifierConstant(&parser.previous);
   declareVariable();
-  emitByte(OP_CLASS, nameConstant);
+  emitBytes(OP_CLASS, nameConstant);
   defineVariable(nameConstant);
 
   consume(TOKEN_LEFT_BRACE, "Expect '{' before class body.");

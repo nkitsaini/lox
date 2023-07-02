@@ -1,11 +1,10 @@
-#include "memory.h"
-
 #include <memory.h>
 #include <stdlib.h>
 
 #include "backtrace.h"
 #include "chunk.h"
 #include "compiler.h"
+#include "memory.h"
 #include "object.h"
 #include "table.h"
 #include "value.h"
@@ -82,6 +81,12 @@ static void blackenObject(Obj *object) {
       markObject((Obj *)klass->name);
       break;
     }
+    case OBJ_INSTANCE: {
+      ObjInstance *instance = (ObjInstance *)object;
+      markObject((Obj *)instance->klass);
+      markTable(&instance->fields);
+      break;
+    }
     case OBJ_CLOSURE: {
       ObjClosure *closure = (ObjClosure *)object;
       markObject((Obj *)closure->function);
@@ -124,6 +129,12 @@ static void freeObject(Obj *object) {
       ObjFunction *function = (ObjFunction *)object;
       freeChunk(&function->chunk);
       FREE(ObjFunction, object);
+      break;
+    }
+    case OBJ_INSTANCE: {
+      ObjInstance *instance = (ObjInstance *)object;
+      freeTable(&instance->fields);
+      FREE(ObjInstance, object);
       break;
     }
     case OBJ_CLOSURE: {

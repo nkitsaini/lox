@@ -1,11 +1,10 @@
-#include "object.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "chunk.h"
 #include "memory.h"
+#include "object.h"
 #include "table.h"
 #include "value.h"
 #include "vm.h"
@@ -65,6 +64,13 @@ ObjFunction *newFunction() {
   function->upvalueCount = 0;
   initChunk(&function->chunk);
   return function;
+}
+
+ObjInstance *newInstance(ObjClass *klass) {
+  ObjInstance *instance = ALLOCATE_OBJ(ObjInstance, OBJ_INSTANCE);
+  instance->klass = klass;
+  initTable(&instance->fields);
+  return instance;
 }
 
 ObjNative *newNative(NativeFn function) {
@@ -127,6 +133,9 @@ void printObject(Value value) {
       break;
     case OBJ_NATIVE:
       printf("<native fn>");
+      break;
+    case OBJ_INSTANCE:
+      printf("%s instance", AS_INSTANCE(value)->klass->name->chars);
       break;
     case OBJ_UPVALUE:
       // Can never be called by user
