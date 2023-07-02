@@ -1,5 +1,3 @@
-#include "vm.h"
-
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -14,6 +12,7 @@
 #include "object.h"
 #include "string.h"
 #include "value.h"
+#include "vm.h"
 
 #ifdef DEBUG_SLOW_EXECUTION
 #include "time_util.h"
