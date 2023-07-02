@@ -1,5 +1,5 @@
 # clox
-C implementation of lox language (WIP)
+C implementation of lox language
 
 ## Tools used
 - Scripts: https://github.com/casey/just
