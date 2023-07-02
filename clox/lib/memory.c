@@ -76,6 +76,12 @@ static void blackenObject(Obj *object) {
   printf("\n");
 #endif
   switch (object->type) {
+  case OBJ_CLASS: {
+    ObjClass *klass = (ObjClass *)object;
+    // QUEST: Why not mark class itself?
+    markObject((Obj *)klass->name);
+    break;
+  }
   case OBJ_CLOSURE: {
     ObjClosure *closure = (ObjClosure *)object;
     markObject((Obj *)closure->function);
@@ -132,6 +138,9 @@ static void freeObject(Obj *object) {
   }
   case OBJ_UPVALUE: {
     FREE(ObjUpvalue, object);
+  }
+  case OBJ_CLASS: {
+    FREE(ObjClass, object);
   }
   }
 }

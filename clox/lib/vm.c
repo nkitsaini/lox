@@ -415,6 +415,10 @@ static InterpretResult run() {
       // frame->ip += 2;
       break;
     }
+    case OP_CLASS: {
+      push(OBJ_VAL(newClass(READ_STRING())));
+      break;
+    }
     }
   }
 
