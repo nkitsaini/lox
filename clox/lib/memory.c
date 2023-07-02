@@ -160,13 +160,19 @@ static void freeObject(Obj *object) {
     }
     case OBJ_UPVALUE: {
       FREE(ObjUpvalue, object);
+      break;
     }
     case OBJ_CLASS: {
       ObjClass *klass = (ObjClass *)object;
       freeTable(&klass->methods);
       FREE(ObjClass, object);
+      break;
     }
   }
+
+#ifdef DEBUG_LOG_GC
+  printf("%p freed\n", (void *)object);
+#endif
 }
 
 static void markRoots() {
@@ -185,6 +191,7 @@ static void markRoots() {
 
   markTable(&vm.globals);
   markCompilerRoots();
+  markObject((Obj *)vm.initString);
 }
 
 static void traceReferences() {

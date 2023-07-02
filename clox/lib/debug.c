@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdio.h>
 
 #include "chunk.h"
@@ -12,7 +13,7 @@ static int simpleInstruction(const char *name, int offset) {
 
 static int byteInstructions(const char *name, Chunk *chunk, int offset) {
   uint8_t slot = chunk->code[offset + 1];
-  printf("&-16s %4d\n", name, slot);
+  printf("%-16s %4d\n", name, slot);
   return offset + 2;
 }
 
@@ -30,6 +31,15 @@ static int constantInstruction(const char *name, Chunk *chunk, int offset) {
   printValue(chunk->constants.values[constant]);
   printf("\n");
   return offset + 2;
+}
+
+static int invokeInstruction(const char *name, Chunk *chunk, int offset) {
+  uint8_t constant = chunk->code[offset + 1];
+  uint8_t argCount = chunk->code[offset + 2];
+  printf("%-16s (%d args) %4d '", name, argCount, constant);
+  printValue(chunk->constants.values[constant]);
+  printf("'\n");
+  return offset + 3;
 }
 
 static int constantLongInstruction(const char *name, Chunk *chunk, int offset) {
@@ -124,6 +134,8 @@ int disassembleInstruction(Chunk *chunk, int offset) {
       return constantLongInstruction("OP_CONSTANT_LONG", chunk, offset);
     case OP_CALL:
       return byteInstructions("OP_CALL", chunk, offset);
+    case OP_SUPER_INVOKE:
+      return invokeInstruction("OP_SUPER_INVOKE", chunk, offset);
     case OP_CLOSURE: {
       offset++;
       uint8_t constant = chunk->code[offset];
@@ -141,8 +153,14 @@ int disassembleInstruction(Chunk *chunk, int offset) {
 
       return offset;
     }
+    case OP_GET_SUPER:
+      return constantInstruction("OP_GET_SUPER", chunk, offset);
+    case OP_INHERIT:
+      return simpleInstruction("OP_INHERIT", offset);
     case OP_METHOD:
       return constantInstruction("OP_METHOD", chunk, offset);
+    case OP_INVOKE:
+      return invokeInstruction("OP_INVOKE", chunk, offset);
     default:
       printf("Unknown opcode %d\n", instruction);
       return offset + 1;
