@@ -9,6 +9,11 @@ build-release:
 build-debug:
 	gcc -g -Wall -Wextra main.c lib/*.c -o lox
 
+build-profile:
+	# zig cc -pg -Wall -Wextra main.c lib/*.c -o lox-perf
+	cc -pg -Wall -Wextra main.c lib/*.c -o lox-perf
+
+
 debug-repl: build-debug
 	gdb --args ./lox repl.lox
 
@@ -23,6 +28,9 @@ run: build
 	./lox
 
 run-file FILE: build
+	./lox {{FILE}}
+
+run-file-release FILE: build-release
 	./lox {{FILE}}
 
 

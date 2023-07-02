@@ -2,7 +2,12 @@
 *.gch
 vgcore.*
 lox
+lox-perf
 test
 repl.lox
 .cache
 repls
+gmon.out
+*.perf
+perf.data.*
+perf.data
