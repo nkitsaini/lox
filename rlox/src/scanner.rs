@@ -58,6 +58,7 @@ pub enum TokenType {
 #[derive(Clone, Copy, Debug)]
 pub struct Token<'a> {
     pub ty: TokenType,
+    // the lifetime will be same as the source code
     pub string: &'a str,
     pub line: usize,
 }

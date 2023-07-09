@@ -6,18 +6,18 @@ use smallvec;
 
 const STACK_MAX: usize = 256;
 
-pub struct VM<'a, 'b, WS: Write, WE: Write> {
-    chunk: Chunk<'a>,
+pub struct VM<'b, WS: Write, WE: Write> {
+    chunk: Chunk,
 
     // Huh, the book says looking by index is slower them
     // looking by index. Why could that be? Due to additions?
     ip: usize,
 
-    stack: smallvec::SmallVec<[Value<'a>; STACK_MAX]>,
+    stack: smallvec::SmallVec<[Value; STACK_MAX]>,
 
-    strings: HashTable<'a>,
+    strings: HashTable,
 
-    globals: HashTable<'a>,
+    globals: HashTable,
 
     stdout: &'b mut WS,
     stderr: &'b mut WE,
@@ -56,8 +56,8 @@ macro_rules! binary_op {
     }};
 }
 
-impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
-    pub fn new(chunk: Chunk<'a>, stdout: &'b mut WS, stderr: &'b mut WE) -> Self {
+impl<'a, 'b, WS: Write, WE: Write> VM<'b, WS, WE> {
+    pub fn new(chunk: Chunk, stdout: &'b mut WS, stderr: &'b mut WE) -> Self {
         Self::new_with_strings(chunk, HashTable::new(), stdout, stderr)
     }
 
@@ -66,8 +66,8 @@ impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
     }
 
     pub fn new_with_strings(
-        chunk: Chunk<'a>,
-        strings: HashTable<'a>,
+        chunk: Chunk,
+        strings: HashTable,
         stdout: &'b mut WS,
         stderr: &'b mut WE,
     ) -> Self {
@@ -93,7 +93,7 @@ impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
         self.run()
     }
 
-    fn peek(&self, distance: usize) -> Value<'a> {
+    fn peek(&self, distance: usize) -> Value {
         return self
             .stack
             .get(self.stack.len() - 1 - distance)
@@ -246,7 +246,7 @@ impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
         }
     }
 
-    fn read_constant(&self, location: u8) -> Value<'a> {
+    fn read_constant(&self, location: u8) -> Value {
         return self.chunk.constants[location as usize].clone();
     }
 
@@ -270,7 +270,7 @@ impl<'a, 'b, WS: Write, WE: Write> VM<'a, 'b, WS, WE> {
         self.stack.push(Value::Object(res));
     }
 
-    fn allocate_string(&mut self, val: String) -> Rc<LoxObject<'a>> {
+    fn allocate_string(&mut self, val: String) -> Rc<LoxObject> {
         let lox_str = LoxObject::new_string(val);
         let entry = self.strings.find_string(&lox_str).clone();
         if let Some(x) = entry {

@@ -1,6 +1,6 @@
 use crate::prelude::Value;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub enum OpCode {
     Return,
     // TODO(memory): This makes every opcode consume 2 bytes.
@@ -35,12 +35,14 @@ pub enum OpCode {
 }
 
 type LineNo = usize;
-pub struct Chunk<'a> {
+
+#[derive(Debug, Clone)]
+pub struct Chunk {
     pub code: Vec<(OpCode, LineNo)>,
-    pub constants: Vec<Value<'a>>,
+    pub constants: Vec<Value>,
 }
 
-impl<'a> Chunk<'a> {
+impl Chunk {
     pub fn new() -> Self {
         return Self {
             code: vec![],
@@ -53,7 +55,7 @@ impl<'a> Chunk<'a> {
     }
 
     /// Add constant without any opcode
-    pub fn add_constant(&mut self, value: Value<'a>) -> u8 {
+    pub fn add_constant(&mut self, value: Value) -> u8 {
         self.constants.push(value);
         return (self.constants.len() - 1) as u8;
     }

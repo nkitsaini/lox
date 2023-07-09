@@ -5,12 +5,12 @@ use crate::{prelude::Value, value::LoxObject};
 const TABLE_MAX_LOAD: f32 = 0.75;
 
 #[derive(Debug)]
-pub struct Entry<'a> {
-    key: Option<Rc<LoxObject<'a>>>,
-    value: Value<'a>,
+pub struct Entry {
+    key: Option<Rc<LoxObject>>,
+    value: Value,
 }
 
-impl<'a> Entry<'a> {
+impl Entry {
     pub fn all_none() -> Self {
         Entry {
             key: None,
@@ -19,13 +19,13 @@ impl<'a> Entry<'a> {
     }
 }
 #[derive(Debug)]
-pub struct HashTable<'a> {
+pub struct HashTable {
     /// Total filled entries in table
     count: usize,
-    entries: Vec<Entry<'a>>,
+    entries: Vec<Entry>,
 }
 
-impl<'a> HashTable<'a> {
+impl HashTable {
     pub fn new() -> Self {
         return HashTable {
             count: 0,
@@ -34,7 +34,7 @@ impl<'a> HashTable<'a> {
     }
     /// Returns `true` if a new key is added
     /// `false` is existing key is updated
-    pub fn set(&mut self, key: Rc<LoxObject<'a>>, value: Value<'a>) -> bool {
+    pub fn set(&mut self, key: Rc<LoxObject>, value: Value) -> bool {
         // TODO(perf): Control the vector capacity grow instead of looking at len
         if self.count as f32 + 1.0 > self.entries.len() as f32 * TABLE_MAX_LOAD {
             let old_capacity = self.entries.len();
@@ -56,7 +56,7 @@ impl<'a> HashTable<'a> {
         return is_new_key;
     }
 
-    pub fn get(&mut self, key: &Rc<LoxObject<'a>>) -> Option<&mut Value<'a>> {
+    pub fn get(&mut self, key: &Rc<LoxObject>) -> Option<&mut Value> {
         if self.count == 0 {
             return None;
         }
@@ -67,7 +67,7 @@ impl<'a> HashTable<'a> {
         None
     }
 
-    pub fn delete(&mut self, key: &Rc<LoxObject<'a>>) -> bool {
+    pub fn delete(&mut self, key: &Rc<LoxObject>) -> bool {
         if self.count == 0 {
             return false;
         }
@@ -86,7 +86,7 @@ impl<'a> HashTable<'a> {
         self.entries.clear();
     }
 
-    fn find_entry<'b>(entries: &'b mut [Entry<'a>], key: &Rc<LoxObject>) -> &'b mut Entry<'a> {
+    fn find_entry<'b>(entries: &'b mut [Entry], key: &Rc<LoxObject>) -> &'b mut Entry {
         let mut index = key.as_string().unwrap().1 % entries.len() as u32;
 
         let mut tombstone_index = None;
@@ -149,7 +149,7 @@ impl<'a> HashTable<'a> {
         }
     }
 
-    pub fn find_string(&self, string: &LoxObject) -> Option<Rc<LoxObject<'a>>> {
+    pub fn find_string(&self, string: &LoxObject) -> Option<Rc<LoxObject>> {
         let value = string.as_string().unwrap();
         if self.count == 0 {
             return None;

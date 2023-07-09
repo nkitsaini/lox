@@ -1,6 +1,8 @@
 use enum_kinds;
 use std::{io::Write, rc::Rc};
 
+use crate::prelude::Chunk;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ValueType {
     Bool,
@@ -11,38 +13,40 @@ pub enum ValueType {
 
 #[derive(Debug, Clone, enum_as_inner::EnumAsInner, enum_kinds::EnumKind)]
 #[enum_kind(LoxObjectKind)]
-pub enum LoxObject<'a> {
+pub enum LoxObject {
     /// A Lox String can either be interned. Where it'll be shared across all
     /// Or it can be an intermediate result like in (a+b+c) result of a+b is not important
     String {
         value: String,
         hash: u32,
     },
-    Random(&'a u32),
+    Function {
+        chunk: Chunk,
+    },
 }
 
-impl<'a> LoxObject<'a> {
-    pub fn new_string(value: String) -> LoxObject<'a> {
+impl LoxObject {
+    pub fn new_string(value: String) -> LoxObject {
         let hash = hash_string(&value);
         LoxObject::String { value, hash }
     }
 }
 
-impl<'a> LoxObject<'a> {
+impl LoxObject {
     pub fn kind(&self) -> LoxObjectKind {
         LoxObjectKind::from(self)
     }
 }
 
 #[derive(Debug, Clone, enum_as_inner::EnumAsInner)]
-pub enum Value<'a> {
+pub enum Value {
     Bool(bool),
     Number(f64),
     Nil,
-    Object(Rc<LoxObject<'a>>),
+    Object(Rc<LoxObject>),
 }
 
-impl<'a> PartialEq<Value<'a>> for Value<'a> {
+impl PartialEq<Value> for Value {
     fn eq(&self, other: &Value) -> bool {
         if self.get_type() != other.get_type() {
             return false;
@@ -65,7 +69,7 @@ impl<'a> PartialEq<Value<'a>> for Value<'a> {
         }
     }
 }
-impl<'a> Value<'a> {
+impl Value {
     pub fn get_type(&self) -> ValueType {
         match self {
             Self::Bool(_) => ValueType::Bool,
@@ -82,7 +86,7 @@ pub trait ValuePrinter {
     fn print<W: Write>(&self, writer: &mut W);
 }
 
-impl<'a> ValuePrinter for Value<'a> {
+impl ValuePrinter for Value {
     fn print<W: Write>(&self, writer: &mut W) {
         use Value::*;
         let obj = match self {

@@ -21,8 +21,8 @@ pub struct Compiler<'a, 'b, WE: Write> {
     previous: Option<Token<'a>>,
     had_error: bool,
     panic_mode: bool,
-    chunk: Chunk<'a>,
-    strings: HashTable<'a>,
+    chunk: Chunk,
+    strings: HashTable,
 
     locals: smallvec::SmallVec<[Local<'a>; U8_COUNT]>,
     scope_depth: usize,
@@ -85,7 +85,7 @@ struct ParseRule<'a, 'b, WE: Write> {
 }
 
 impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
-    pub fn new(source: &'a str, strings: HashTable<'a>, stderr: &'b mut WE) -> Self {
+    pub fn new(source: &'a str, strings: HashTable, stderr: &'b mut WE) -> Self {
         Compiler {
             scanner: Scanner::new(source),
             current: None,
@@ -104,9 +104,9 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
 
     pub fn compile(
         source: &'a str,
-        strings: HashTable<'a>,
+        strings: HashTable,
         stderr: &'b mut WE,
-    ) -> Option<(Chunk<'a>, HashTable<'a>)> {
+    ) -> Option<(Chunk, HashTable)> {
         let mut compiler = Self::new(source, strings, stderr);
         compiler.advance();
         while !compiler.match_(Eof) {
@@ -373,7 +373,7 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         self.named_variable(can_assign, self.previous.unwrap());
     }
 
-    fn allocate_string(&mut self, val: std::string::String) -> Rc<LoxObject<'a>> {
+    fn allocate_string(&mut self, val: std::string::String) -> Rc<LoxObject> {
         let lox_str = LoxObject::new_string(val);
         let entry = self.strings.find_string(&lox_str).clone();
         if let Some(x) = entry {
@@ -608,7 +608,7 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         }
     }
 
-    fn make_constant(&mut self, value: Value<'a>) -> u8 {
+    fn make_constant(&mut self, value: Value) -> u8 {
         if self.chunk.constants.len() == u8::MAX as usize {
             self.error("Too many constants in one chunk.");
             // TOOD: rustic way
@@ -617,7 +617,7 @@ impl<'a, 'b, WE: Write> Compiler<'a, 'b, WE> {
         self.chunk.add_constant(value)
     }
 
-    fn emit_constant(&mut self, value: Value<'a>) {
+    fn emit_constant(&mut self, value: Value) {
         let location = self.make_constant(value);
         self.emit_op(OpCode::Constant { location });
     }
